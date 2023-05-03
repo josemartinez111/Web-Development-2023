@@ -1,0 +1,20 @@
+:root {
+  --theme-yellow: #f6cd25;
+  --theme-red: #dc163b;
+}
+
+body {
+  font-family: "Poppins", serif;
+  margin: 0;
+  background: #eee;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+h1, h2, h3, h4 {
+  font-family: "Geo", serif;
+  font-weight: bold;
+  margin: 0;
+  font-size: 1.8em;
+}
