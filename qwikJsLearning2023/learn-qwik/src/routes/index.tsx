@@ -61,6 +61,7 @@ export default component$(() => {
 			<hr />
 			
 			{/* braces are needed for dynamic code */ }
+			{/* TEST COMMIT */ }
 			<div class="spacer">
 				<h1>List of Blog post</h1>
 				{ blogList.map((blog: IBlog) => (
