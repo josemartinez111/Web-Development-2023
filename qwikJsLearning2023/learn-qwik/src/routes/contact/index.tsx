@@ -6,7 +6,7 @@ import {
 	useSignal, useStore,
 	useStylesScoped$,
 } from "@builder.io/qwik"
-import ContactStyles from "./contact.module.css?inline"
+import ContactStyles from "./contact.css?inline"
 // _______________________________________________
 
 export default component$(() => {

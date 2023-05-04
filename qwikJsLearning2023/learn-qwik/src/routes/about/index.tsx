@@ -1,11 +1,22 @@
 // file: routes/about/index.tsx
 // _______________________________________________
-import { component$, useStylesScoped$ } from "@builder.io/qwik"
-import AboutStyles from "./about.module.css?inline" // remember to add the `?inline`
+import {
+	$,
+	component$,
+	useSignal, useStyles$,
+} from "@builder.io/qwik"
+import Modal from "~/components/modal/modal";
+import AboutStyles from "./about.css?inline" // remember to add the `?inline`
 // _______________________________________________
 
 export default component$(() => {
-	useStylesScoped$(AboutStyles)
+	useStyles$(AboutStyles)
+	
+	const isModalVisible = useSignal<boolean>(false);
+	
+	const openModal = $(() => {
+		return isModalVisible.value = true;
+	})
 	
 	return (
 		<article>
@@ -30,6 +41,24 @@ export default component$(() => {
 				voluptatibus
 			</p>
 			
+			{/* open modal button */ }
+			<button onClick$={ openModal }>
+				Open Modal
+			</button>
+			
+			{/* conditionally render modal */ }
+			{ isModalVisible.value && (
+				<Modal>
+					<div q:slot="content">
+						<h2>great News!!!</h2>
+						<p>Lorem ipsum dolor sit amet</p>
+					</div>
+					
+					<div q:slot="footer">
+						<button>Sign Up Now</button>
+					</div>
+				</Modal>
+			) }
 		</article>
 	)
 })
