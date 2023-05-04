@@ -24,6 +24,14 @@ export default component$(() => {
 		.spacer {
 	    margin-top: 80px;
 		}
+		
+		.left-btn {
+			margin-right: 10px;
+			margin-left: 20px;
+		}
+		.btn-bottom {
+			margin-left: 20px;
+		}
 	`)
 	
 	const peach: IPerson = {
@@ -59,7 +67,10 @@ export default component$(() => {
 			<hr />
 			
 			{/* example of click-events */ }
-			<button onClick$={ () => name.value = "luigi" }>
+			<button
+				class="left-btn"
+				onClick$={ () => name.value = "luigi" }
+			>
 				Click me
 			</button>
 			
@@ -71,6 +82,7 @@ export default component$(() => {
 			{/* braces are needed for dynamic code */ }
 			<div class="spacer">
 				<h1>List of Blog post</h1>
+				{/* mapping through our list */}
 				{ blogList.map((blog: IBlog) => (
 					<ul key={ blog.id }>
 					<li>ID: { blog.id } || Title: { blog.title }</li>
@@ -78,7 +90,10 @@ export default component$(() => {
 				)) }
 			</div>
 			
-			<button onClick$={ () => blogList.pop() }>
+			<button
+				class="btn-bottom"
+				onClick$={ () => blogList.pop() }
+			>
 				Remove Blog From List
 			</button>
 			<hr />
