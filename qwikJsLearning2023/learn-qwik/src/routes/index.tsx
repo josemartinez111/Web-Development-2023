@@ -1,5 +1,6 @@
 import {
-	component$,
+	$,
+	component$, QRL,
 	useSignal,
 	useStore,
 	useStylesScoped$,
@@ -44,6 +45,11 @@ export default component$(() => {
 	const person = useStore<IPerson>(peach);
 	const blogList = useStore<Array<IBlog>>(blogs)
 	
+	const changePersonData: QRL<() => void> = $(() => {
+		person.name = "Bowser";
+		person.age = 43;
+	})
+	
 	return (
 		<div>
       <h2>Health check...</h2>
@@ -53,15 +59,16 @@ export default component$(() => {
 			<hr />
 			
 			{/* example of click-events */ }
-			<button onClick$={ () => name.value = "luigi" }>Click me</button>
-			<button
-				onClick$={ () => person.name = "bowser" }>
+			<button onClick$={ () => name.value = "luigi" }>
+				Click me
+			</button>
+			
+			<button onClick$={ changePersonData }>
 				Click me too
 			</button>
 			<hr />
 			
 			{/* braces are needed for dynamic code */ }
-			{/* TEST COMMIT */ }
 			<div class="spacer">
 				<h1>List of Blog post</h1>
 				{ blogList.map((blog: IBlog) => (
@@ -70,6 +77,10 @@ export default component$(() => {
 				</ul>
 				)) }
 			</div>
+			
+			<button onClick$={ () => blogList.pop() }>
+				Remove Blog From List
+			</button>
 			<hr />
 			
     </div>
