@@ -1,38 +1,25 @@
 // file: routes/contact/index.tsx
 // _______________________________________________
 import {
-	$,
 	component$,
-	useSignal, useStore,
 	useStylesScoped$,
 } from "@builder.io/qwik"
+import { useContact } from "~/routes/contact/composables";
 import ContactStyles from "./contact.css?inline"
 // _______________________________________________
 
 export default component$(() => {
 	useStylesScoped$(ContactStyles)
 	
-	const isFormVisible = useSignal<boolean>(false);
-	const formState = useStore({ name: '', message: '' })
+	const {
+		showForm,
+		trackName,
+		trackMessage,
+		submitForm,
+		formState,
+		isFormVisible,
+	} = useContact()
 	
-	const showForm = $(() => {
-		return isFormVisible.value = true;
-	})
-	
-	const trackName = $((e: Event) => {
-		return formState.name = (e.target as HTMLInputElement).value;
-	})
-	
-	const trackMessage = $((e: Event) => {
-		return formState.message = (e.target as HTMLInputElement).value;
-	})
-	
-	const submitForm = $(() => {
-		console.log(`Name: ${formState.name}\nMessage: ${formState.message}`)
-		// reset the state when the form is submitted
-		formState.name = '';
-		formState.message = '';
-	})
 	
 	return (
 		<article>
@@ -53,14 +40,14 @@ export default component$(() => {
 			{ isFormVisible.value && (
 				<form
 					preventdefault:submit
-					onSubmit$={submitForm}
+					onSubmit$={ submitForm }
 				>
 				{/* name */ }
 					<label>
 					<span>Your name:</span>
 					<input
 						type="text"
-						value={formState.name} // two-way biding
+						value={ formState.name } // two-way biding
 						onInput$={ trackName }
 					/>
 				</label>
@@ -68,14 +55,14 @@ export default component$(() => {
 					<label>
 					<span>Your message:</span>
 					<textarea
-						value={formState.message} // two-way biding
+						value={ formState.message } // two-way biding
 						onInput$={ trackMessage }
 					/>
 				</label>
 					{/* send button */ }
 					<button>Send</button>
 					
-					{/* output of tracked form-state */}
+					{/* output of tracked form-state */ }
 					<p>Form name: { formState.name }</p>
 					<p>Form message: { formState.message }</p>
 				</form>
