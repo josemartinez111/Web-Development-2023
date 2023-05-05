@@ -1,18 +1,33 @@
 // file: components/modal/modal.tsx
 // _______________________________________________
 
-import { component$, Slot, useStylesScoped$ } from "@builder.io/qwik";
+import { component$, QRL, Slot, useStylesScoped$ } from "@builder.io/qwik";
 import ModalStyles from "./modal.css?inline"
 // _______________________________________________
 
+interface ModalProps {
+	size: 'sm' | 'lg'
+	isFrosted?: boolean
+	closeModal: QRL<() => boolean>
+}
+// _______________________________________________
 
-export default component$(() => {
+
+export const ModalComponent = component$<ModalProps>(({
+	size,
+	isFrosted,
+	closeModal,
+}) => {
 	useStylesScoped$(ModalStyles)
 	
 	return (
-		<div class="modal">
+		<div class={ `modal ${ size } ${ isFrosted && 'frosted' }` }>
 			<div class="modal-content">
-				<div class="close">Close</div>
+				<div
+					class="close"
+					onClick$={ closeModal }
+				>Close
+				</div>
 				{/* main-content */ }
 				<main class="main-content">
 					<Slot name="content" />

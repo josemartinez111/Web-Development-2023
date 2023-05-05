@@ -2,7 +2,7 @@
 import { $, useSignal, useStore } from "@builder.io/qwik";
 // _______________________________________________
 
-export const useContact = () => {
+export const useContactComposables = () => {
 	const isFormVisible = useSignal<boolean>(false);
 	const formState = useStore({ name: '', message: '' })
 	

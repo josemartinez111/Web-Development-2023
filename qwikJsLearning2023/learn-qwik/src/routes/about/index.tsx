@@ -5,7 +5,7 @@ import {
 	component$,
 	useSignal, useStyles$,
 } from "@builder.io/qwik"
-import Modal from "~/components/modal/modal";
+import { ModalComponent } from "~/components/modal/modal";
 import AboutStyles from "./about.css?inline" // remember to add the `?inline`
 // _______________________________________________
 
@@ -16,6 +16,10 @@ export default component$(() => {
 	
 	const openModal = $(() => {
 		return isModalVisible.value = true;
+	})
+	
+	const closeModal = $(() => {
+		return isModalVisible.value = false;
 	})
 	
 	return (
@@ -48,16 +52,25 @@ export default component$(() => {
 			
 			{/* conditionally render modal */ }
 			{ isModalVisible.value && (
-				<Modal>
+				<ModalComponent
+					size="sm"
+					isFrosted={ true }
+					closeModal={ closeModal }
+				>
 					<div q:slot="content">
-						<h2>great News!!!</h2>
-						<p>Lorem ipsum dolor sit amet</p>
+						<h2>great News!!</h2>
+						<p>Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet,
+						   consectetur adipisicing elit. Amet culpa delectus, eos
+						   hic ipsum officiis soluta voluptatibus. Aliquam asperiores
+						   corporis earum, enim error, expedita laborum neque quae quo
+						   soluta vero.
+						</p>
 					</div>
 					
 					<div q:slot="footer">
 						<button>Sign Up Now</button>
 					</div>
-				</Modal>
+				</ModalComponent>
 			) }
 		</article>
 	)

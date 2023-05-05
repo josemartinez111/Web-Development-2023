@@ -4,7 +4,8 @@ import {
 	component$,
 	useStylesScoped$,
 } from "@builder.io/qwik"
-import { useContact } from "~/routes/contact/composables";
+import { FormComponent } from "~/components/form/form";
+import { useContactComposables } from "~/routes/contact/composables";
 import ContactStyles from "./contact.css?inline"
 // _______________________________________________
 
@@ -18,7 +19,7 @@ export default component$(() => {
 		submitForm,
 		formState,
 		isFormVisible,
-	} = useContact()
+	} = useContactComposables()
 	
 	
 	return (
@@ -38,34 +39,12 @@ export default component$(() => {
 			
 			{/* FORM */ }
 			{ isFormVisible.value && (
-				<form
-					preventdefault:submit
-					onSubmit$={ submitForm }
-				>
-				{/* name */ }
-					<label>
-					<span>Your name:</span>
-					<input
-						type="text"
-						value={ formState.name } // two-way biding
-						onInput$={ trackName }
-					/>
-				</label>
-					{/* message */ }
-					<label>
-					<span>Your message:</span>
-					<textarea
-						value={ formState.message } // two-way biding
-						onInput$={ trackMessage }
-					/>
-				</label>
-					{/* send button */ }
-					<button>Send</button>
-					
-					{/* output of tracked form-state */ }
-					<p>Form name: { formState.name }</p>
-					<p>Form message: { formState.message }</p>
-				</form>
+				<FormComponent
+					submitForm={ submitForm }
+					formState={ formState }
+					trackName={ trackName }
+					trackMessage={ trackMessage }
+				/>
 			) }
 		</article>
 	)
