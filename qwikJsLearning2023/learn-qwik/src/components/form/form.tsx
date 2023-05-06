@@ -9,9 +9,14 @@ import {
 import FormStyles from "./form.css?inline"
 // _______________________________________________
 
+type FormState = & {
+	name: string
+	message: string
+}
+
 interface FormComponentProps {
 	submitForm: PropFunction<() => void>
-	formState: { name: string; message: string }
+	formState: FormState
 	trackName: PropFunction<(e: Event) => string>
 	trackMessage: PropFunction<(e: Event) => string>
 	// submitForm: QRL<() => void>
