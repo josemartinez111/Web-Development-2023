@@ -1,14 +1,20 @@
 // file: components/modal/modal.tsx
 // _______________________________________________
 
-import { component$, QRL, Slot, useStylesScoped$ } from "@builder.io/qwik";
+import {
+	component$,
+	PropFunction,
+	Slot,
+	useStylesScoped$,
+} from "@builder.io/qwik";
 import ModalStyles from "./modal.css?inline"
 // _______________________________________________
 
 interface ModalProps {
 	size: 'sm' | 'lg'
 	isFrosted?: boolean
-	closeModal: QRL<() => boolean>
+	closeModal: PropFunction<() => boolean>
+	//closeModal: QRL<() => boolean>
 }
 // _______________________________________________
 

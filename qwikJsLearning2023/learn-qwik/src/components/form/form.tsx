@@ -1,15 +1,23 @@
 // file: components/form/form_component.tsx
 // _______________________________________________
 
-import { component$, QRL, useStylesScoped$ } from "@builder.io/qwik";
+import {
+	component$,
+	PropFunction,
+	useStylesScoped$,
+} from "@builder.io/qwik";
 import FormStyles from "./form.css?inline"
 // _______________________________________________
 
 interface FormComponentProps {
-	submitForm: QRL<() => void>
+	submitForm: PropFunction<() => void>
 	formState: { name: string; message: string }
-	trackName: QRL<(e: Event) => string>
-	trackMessage: QRL<(e: Event) => string>
+	trackName: PropFunction<(e: Event) => string>
+	trackMessage: PropFunction<(e: Event) => string>
+	// submitForm: QRL<() => void>
+	// trackName: QRL<(e: Event) => string>
+	// trackMessage: QRL<(e: Event) => string>
+	
 }
 // _______________________________________________
 
