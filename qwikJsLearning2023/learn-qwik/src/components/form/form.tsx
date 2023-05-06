@@ -9,7 +9,7 @@ import {
 import FormStyles from "./form.css?inline"
 // _______________________________________________
 
-type FormState = & {
+type FormState = {
 	name: string
 	message: string
 }
