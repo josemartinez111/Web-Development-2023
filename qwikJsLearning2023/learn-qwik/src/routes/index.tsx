@@ -1,19 +1,30 @@
 import {
 	$,
-	component$, QRL,
+	component$,
 	useSignal,
 	useStore,
 	useStylesScoped$,
 } from '@builder.io/qwik';
-import type { DocumentHead } from '@builder.io/qwik-city';
+import type { DocumentHead, RequestHandler } from '@builder.io/qwik-city';
 // _______________________________________________
 
-interface IPerson {
+interface BlogData {
+	id: string
+	title: string
+	content: string
+}
+
+export const getBlogPost: RequestHandler<Array<BlogData>> = () => {
+	
+}
+// _______________________________________________
+
+interface Person {
 	name: string;
 	age: number;
 }
 
-interface IBlog {
+interface BlogDummyData {
 	id: number;
 	title: string;
 }
@@ -34,12 +45,12 @@ export default component$(() => {
 		}
 	`)
 	
-	const peach: IPerson = {
+	const peach: Person = {
 		name: "peach",
 		age: 30,
 	}
 	
-	const blogs: Array<IBlog> = [
+	const blogs: Array<BlogDummyData> = [
 		{ id: 1, title: "first blog" },
 		{ id: 2, title: "second blog" },
 		{ id: 3, title: "third blog" },
@@ -50,10 +61,10 @@ export default component$(() => {
 	// use this for objects, if you use `useSignal` with an object,
 	// when you try to update the state with an event, you will
 	// lose the reactivity and the state will not change
-	const person = useStore<IPerson>(peach);
-	const blogList = useStore<Array<IBlog>>(blogs)
+	const person = useStore<Person>(peach);
+	const blogList = useStore<Array<BlogDummyData>>(blogs)
 	
-	const changePersonData: QRL<() => void> = $(() => {
+	const changePersonData = $(() => {
 		person.name = "Bowser";
 		person.age = 43;
 	})
@@ -82,8 +93,8 @@ export default component$(() => {
 			{/* braces are needed for dynamic code */ }
 			<div class="spacer">
 				<h1>List of Blog post</h1>
-				{/* mapping through our list */}
-				{ blogList.map((blog: IBlog) => (
+				{/* mapping through our list */ }
+				{ blogList.map((blog: BlogDummyData) => (
 					<ul key={ blog.id }>
 					<li>ID: { blog.id } || Title: { blog.title }</li>
 				</ul>
