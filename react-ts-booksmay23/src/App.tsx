@@ -7,20 +7,32 @@ import { v4 as uuidv4 } from "uuid";
 // _______________________________________________
 
 const App = (): ReactElement => {
-	const [books, setBooks] = useState<Array<BookType>>([])
+	const [books, setBooks] = useState<Array<BookType>>([]);
+	
+	const deleteBookByID = (id: string): void => {
+		// filter through the list of books
+		const updatedBooks: BookType[] = books.filter((book: BookType) => {
+			return book.id !== id;
+		});
+		
+		setBooks(updatedBooks);
+	};
 	
 	const createBook = (title: string) => {
 		const updatedBookList: Array<BookType> = [
 			...books,
 			{ id: uuidv4(), title } satisfies BookType,
-		]
+		];
 		
-		setBooks(updatedBookList)
-	}
+		setBooks(updatedBookList);
+	};
 	
 	return (
 		<div className="app">
-			<BookList books={ books } />
+			<BookList
+				books={ books }
+				onDelete={ deleteBookByID }
+			/>
 			<BookCreate onCreate={ createBook } />
 		</div>
 	);
