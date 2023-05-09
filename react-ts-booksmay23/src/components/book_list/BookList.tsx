@@ -6,16 +6,18 @@ import { ReactElement } from 'react';
 
 interface BookListProps {
 	books: BookType[];
+	onDelete: (id: string) => void;
 }
 // _______________________________________________
 
-const BookList = ({ books }: BookListProps): ReactElement => {
-	const renderedBooks = books?.map((book: BookType) => (
+const BookList = ({ books, onDelete }: BookListProps): ReactElement => {
+	const renderedBooks = books.map((book: BookType) => (
 		<BookShow
+			onDelete={ onDelete }
 			key={ book.id }
 			book={ book }
 		/>
-	))
+	));
 	
 	return (
 		<div className="book-list">
