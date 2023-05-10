@@ -9,6 +9,15 @@ import { v4 as uuidv4 } from "uuid";
 const App = (): ReactElement => {
 	const [books, setBooks] = useState<Array<BookType>>([]);
 	
+	const editBookByID = (id: string, newTitle: string): void => {
+		const updatedBookList = books.map((book: BookType) => {
+			if (book.id === id) return { ...book, title: newTitle };
+			return book;
+		});
+		
+		setBooks(updatedBookList);
+	};
+	
 	const deleteBookByID = (id: string): void => {
 		// filter through the list of books
 		const updatedBooks: BookType[] = books.filter((book: BookType) => {
@@ -26,12 +35,16 @@ const App = (): ReactElement => {
 		
 		setBooks(updatedBookList);
 	};
-	
+	// _______________________________________________
 	return (
 		<div className="app">
+			{/* title of app */}
+			<h1>Reading List</h1>
+			{/* book-list */}
 			<BookList
 				books={ books }
 				onDelete={ deleteBookByID }
+				onEdit={ editBookByID }
 			/>
 			<BookCreate onCreate={ createBook } />
 		</div>
