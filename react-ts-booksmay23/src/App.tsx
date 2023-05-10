@@ -3,11 +3,12 @@ import BookCreate from "@/components/book_create/BookCreate.tsx";
 import BookList from "@/components/book_list/BookList.tsx";
 import { BookType } from "@/types/BookType.ts";
 import { handleAxiosError } from "@/types/CustomErrorUtils.ts";
-import { ReactElement, useEffect, useState } from 'react';
+import { ReactElement, useCallback, useEffect, useState } from 'react';
 import axios from 'axios';
-import { Simulate } from "react-dom/test-utils";
-import error = Simulate.error;
 //import { v4 as uuidv4 } from "uuid";
+// _______________________________________________
+
+const BASE_URL: string = import.meta.env.VITE_APP_BASE_URL as string;
 // _______________________________________________
 
 const App = (): ReactElement => {
@@ -16,14 +17,13 @@ const App = (): ReactElement => {
 	// _______________________________________________
 	// CREATE ################################
 	const createBook = async (title: string): Promise<void> => {
-		const postURL: URL = new URL("http://localhost:3001/books");
 		const postRequestBody = {
 			title: title,
 		};
 		
 		try {
 			const response = await axios.post<BookType>(
-				postURL.toString(),
+				BASE_URL,
 				postRequestBody,
 			);
 			
@@ -41,17 +41,21 @@ const App = (): ReactElement => {
 	};
 	
 	// READ ################################
-	const fetchAllBooks = async (): Promise<void> => {
-		const getURL: URL = new URL("http://localhost:3001/books");
+	// useCallback returns a memoized version of fetchAllBooks
+	// that only changes if one of its dependencies changes.
+	// Since the dependency array is empty, the returned function
+	// never changes, regardless of re-renders.
+	const fetchAllBooks = useCallback(async (): Promise<void> => {
 		
 		try {
-			const response = await axios.get<Array<BookType>>(getURL.toString());
+			const response = await axios.get<Array<BookType>>(BASE_URL.toString());
 			setBooks(response.data);
 		} catch ( error: unknown ) {
 			if (axios.isAxiosError(error)) handleAxiosError(error);
 			console.error("An unexpected error occurred:", error);
 		}
-	};
+		// even though
+	}, []);
 	
 	// componentDidMount: useEffect hook is using an empty
 	// array [] as its dependency list, which means the effect
@@ -60,30 +64,56 @@ const App = (): ReactElement => {
 	// development mode & using <React.StrictMode> the useEffect
 	// will actually run twice
 	useEffect(() => {
-		fetchAllBooks()
-			.catch((error: unknown) => {
-			console.error(error);
-		})
-	}, [])
+		fetchAllBooks().then();
+		// pass the function even though it doesn't change to quiet down es-lint
+	}, [fetchAllBooks]);
 	
 	// UPDATE ################################
-	const editBookByID = (id: string, newTitle: string): void => {
-		const updatedBookList = books.map((book: BookType) => {
-			if (book.id === id) return { ...book, title: newTitle };
-			return book;
-		});
+	const editBookByID = async (id: string, newTitle: string): Promise<void> => {
+		const putURL = `${ BASE_URL }${ id }`;
 		
-		setBooks(updatedBookList);
+		const putRequestBody = {
+			title: newTitle,
+		};
+		
+		try {
+			const response = await axios.put(putURL, putRequestBody);
+			//setBooks(response.data);
+			console.log("response data:", response);
+			
+			const updatedBookList = books.map((book: BookType) => {
+				// Here we're creating a new object that combines the properties of
+				// the existing `book` with the properties from the updated `book`.
+				// The order is important here: because we put `...book` first,
+				// it spreads all the existing book properties into this new object.
+				// Then, `...response.data` spreads the properties of the updated book
+				// into the new object. If there are any properties in the updated book
+				// that have the same name as properties in the existing book, the updated
+				// book's properties will overwrite the existing ones. This is how we make
+				// sure the updated properties from the server are reflected in the local state.
+				// The beauty of this approach is that it doesn't matter if we later decide to
+				// add more properties to our books (like a `pages` property, for example). As
+				// long as the server response includes those new properties when we update a
+				// book, this code will automatically include them in the local state.
+				if (book.id === id) return { ...book, ...response.data };
+				return book;
+			});
+			
+			setBooks(updatedBookList);
+		} catch ( error: unknown ) {
+			if (axios.isAxiosError(error)) handleAxiosError(error);
+			console.error("An unexpected error occurred:", error);
+		}
 	};
 	
 	// DELETE ################################
 	const deleteBookByID = (id: string): void => {
 		// filter through the list of books
-		const updatedBooks: BookType[] = books.filter((book: BookType) => {
-			return book.id !== id;
-		});
+		const updatedBookList: BookType[] = books.filter((book: BookType) => (
+			book.id !== id
+		));
 		
-		setBooks(updatedBooks);
+		setBooks(updatedBookList);
 	};
 	// _______________________________________________
 	return (
