@@ -1,50 +1,48 @@
-/** BookEdit.tsx */
-import { ReactElement } from "react"
-/* ⚫️⚫️________________________________________________ */
+// FILE: BookEdit.tsx
+import { BookType } from "@/types/BookType.ts";
+import {
+	FormEventType,
+	InputEventType,
+} from "@/types/CustomEventTypes.ts";
+import { ReactElement, useState } from 'react';
+// _______________________________________________
 
-type BookEditProps = {
-	mockProp?: string
+interface BookEditProps {
+	book: BookType;
+	onSubmit: (id: string, title: string) => void;
 }
+// _______________________________________________
 
-/// ___ <> styles <> ___
-const customStyles = {
-	backgroundColor: "#2f323a",
-	marginTop: "5rem",
-	padding: "0",
-	width: "100%",
-	borderRadius: "15px",
+const BookEdit = ({ book, onSubmit }: BookEditProps): ReactElement => {
+	// book.title will add what ever the current title
+	// is to the edit component when the user presses edit
+	const [title, setTitle] = useState<string>(book.title);
 	
-	h1: {
-		padding: "55px",
-		fontFamily: "Liberation Mono for Powerline",
-		color: "mediumpurple",
-		fontSize: "2.2rem",
-		display: "grid",
-		placeItems: "center",
-	},
-}
-/* ⚫️⚫️________________________________________________ */
-
-const BookEditComponent = ({ mockProp = 'BookEditComponent' }: BookEditProps): ReactElement => {
+	const handleSubmit = (event: FormEventType) => {
+		event.preventDefault();
+		onSubmit(book.id, title);
+		console.log("New title is:", title);
+	};
 	
-	// ⚫️⚫️ functions _________________
-	
-	
-	// ⚫️⚫️________________________________________________
+	const handleChange = (event: InputEventType) => {
+		setTitle(event.target.value);
+	};
+	// _______________________________________________
 	return (
-		//==== <>fragment</> ====
-		<div style={ customStyles }>
-        <h1 style={ customStyles.h1 }>
-        @{ mockProp }
-        </h1>
-    </div>
-	)
-	// ⚫️⚫️☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰
-}
-// ⚫️⚫️☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰
+		<form onSubmit={ handleSubmit } className="book-edit">
+			<label>Title</label>
+			<input
+				className="input"
+				type="text"
+				value={ title }
+				onChange={ handleChange }
+			/>
+			<button className="button is-primary">
+				Save
+			</button>
+		</form>
+	);
+};
+// _______________________________________________
 
-// BookEditComponent.defaultProps = {
-//    mockProp: "text default value",
-// }
-// ⚫️⚫️___________________________________________________
-export default BookEditComponent
+export default BookEdit;
