@@ -1,6 +1,6 @@
 import { component$ } from '@builder.io/qwik';
 import { Link } from "@builder.io/qwik-city";
-import styles from './header.module.css';
+import styles from '~/components/header/header.module.css';
 
 export default component$(() => {
 	return (

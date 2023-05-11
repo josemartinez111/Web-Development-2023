@@ -48,7 +48,7 @@ const App = (): ReactElement => {
 	const fetchAllBooks = useCallback(async (): Promise<void> => {
 		
 		try {
-			const response = await axios.get<Array<BookType>>(BASE_URL.toString());
+			const response = await axios.get<Array<BookType>>(BASE_URL);
 			setBooks(response.data);
 		} catch ( error: unknown ) {
 			if (axios.isAxiosError(error)) handleAxiosError(error);
@@ -107,7 +107,10 @@ const App = (): ReactElement => {
 	};
 	
 	// DELETE ################################
-	const deleteBookByID = (id: string): void => {
+	const deleteBookByID = async (id: string): Promise<void> => {
+		const deleteURL = `${ BASE_URL }${ id }`;
+		await axios.delete(deleteURL)
+		
 		// filter through the list of books
 		const updatedBookList: BookType[] = books.filter((book: BookType) => (
 			book.id !== id

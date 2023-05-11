@@ -4,7 +4,7 @@ import {
 	component$,
 	useStylesScoped$,
 } from "@builder.io/qwik"
-import { FormComponent } from "~/components/form/form";
+import { Form } from "~/components/form/form";
 import { useContactComposables } from "~/routes/contact/composables";
 import ContactStyles from "./contact.css?inline"
 // _______________________________________________
@@ -39,7 +39,7 @@ export default component$(() => {
 			
 			{/* FORM */ }
 			{ isFormVisible.value && (
-				<FormComponent
+				<Form
 					submitForm={ submitForm }
 					formState={ formState }
 					trackName={ trackName }

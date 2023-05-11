@@ -1,20 +1,3 @@
 {
-  "books": [
-    {
-      "title": "Test Book",
-      "id": 1
-    },
-    {
-      "title": "Test Book 2 updated",
-      "id": 2
-    },
-    {
-      "title": "Test Book 3",
-      "id": 3
-    },
-    {
-      "title": "Test Book",
-      "id": 4
-    }
-  ]
+  "books": []
 }
