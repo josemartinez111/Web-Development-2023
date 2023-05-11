@@ -117,6 +117,19 @@ const App = (): ReactElement => {
 		));
 		
 		setBooks(updatedBookList);
+		
+		/**
+		* isLoading, isError, and error are destructured directly from the object
+		* that useQuery returns. This object includes:
+		* data: The data fetched by your query function (fetchAllBooksService in this case).
+		* isLoading: A boolean that is true if the query is in a "loading"
+		* state (i.e., the query is in progress).
+		* isError: A boolean that is true if the query encountered an error.
+		* error: The actual Error object if the query encountered an error.
+		* So isLoading is provided by react-query, not something that is explicitly
+		*  returned from useFetchAllBooks. But since useFetchAllBooks returns the result
+		*  of useQuery, you have access to isLoading and the other properties in your component.
+		* */
 	};
 	// _______________________________________________
 	return (
