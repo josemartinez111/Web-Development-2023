@@ -1,7 +1,8 @@
 // FILE: BookList.tsx
 import BookShow from "@/components/book_show/BookShow.tsx";
+import { BooksContext } from "@/context/books.ts";
 import { BookType } from "@/types/BookType.ts";
-import { ReactElement } from 'react';
+import { ReactElement, useContext } from 'react';
 // _______________________________________________
 
 interface BookListProps {
@@ -12,6 +13,8 @@ interface BookListProps {
 // _______________________________________________
 
 const BookList = ({ books, onDelete, onEdit }: BookListProps): ReactElement => {
+	const { count, incrementCount } = useContext(BooksContext);
+	
 	const renderedBooks = books.map((book: BookType) => (
 		<BookShow
 			onDelete={ onDelete }
@@ -23,6 +26,12 @@ const BookList = ({ books, onDelete, onEdit }: BookListProps): ReactElement => {
 	
 	return (
 		<div className="book-list">
+			<h1>Displaying count { count }</h1>
+			{/* increment count button */ }
+			<button onClick={ incrementCount }>
+				Increment Count
+			</button>
+			{/* rendering book-list */ }
 			{ renderedBooks }
 		</div>
 	);
