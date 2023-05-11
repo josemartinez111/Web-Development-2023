@@ -19,7 +19,7 @@ interface ModalProps {
 // _______________________________________________
 
 
-export const ModalComponent = component$<ModalProps>(({
+export const Modal = component$<ModalProps>(({
 	size,
 	isFrosted,
 	closeModal,

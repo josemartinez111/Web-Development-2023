@@ -26,7 +26,7 @@ interface FormComponentProps {
 }
 // _______________________________________________
 
-export const FormComponent = component$<FormComponentProps>(({
+export const Form = component$<FormComponentProps>(({
 	submitForm,
 	formState,
 	trackName,
