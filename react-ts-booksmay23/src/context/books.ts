@@ -1,19 +1,32 @@
 // FILE: context/books.ts
 // _______________________________________________
 
+import { BookType } from "@/types/BookType.ts";
 import { createContext } from "react";
 // _______________________________________________
 
 export interface BooksContextType {
-	count: number;
-	incrementCount?: () => void;
+	books: Array<BookType>;
+	fetchAllBooks: () => Promise<void>;
+	createBook: (title: string) => Promise<void>;
+	editBookByID: (id: string, newTitle: string) => Promise<void>;
+	deleteBookByID: (id: string) => Promise<void>;
 }
 // _______________________________________________
 
 export const BooksContext = createContext<BooksContextType>({
-	count: 0,
-	incrementCount: () => {
-		console.warn("(incrementCount) function called from BooksContext before being initialized.");
+	books: [],
+	fetchAllBooks: async () => {
+		console.warn("(fetchAllBooks) from BooksContext before being initialized");
+	},
+	createBook: async (title: string) => {
+		console.warn(`(createBook) from BooksContext before being initialized: ${title}`);
+	},
+	editBookByID: async (id: string, newTitle: string) => {
+		console.warn(`(editBookByID) from BooksContext before being initialized: ${id}|${newTitle}`);
+	},
+	deleteBookByID: async (id: string) => {
+		console.warn(`deleteBookByID from BooksContext before being initialized: ${id}`);
 	},
 });
 // _______________________________________________
