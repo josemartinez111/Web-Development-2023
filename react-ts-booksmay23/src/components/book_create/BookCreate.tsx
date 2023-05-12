@@ -1,16 +1,16 @@
 // FILE: BookCreate.tsx
+import { useBookContext } from "@/hooks/UseBookContext.ts";
 // _______________________________________________
-import { BooksContext } from "@/context/books.ts";
 import {
 	FormEventType,
 	InputEventType,
 } from "@/types/CustomEventTypes.ts";
-import { ReactElement, useState, useContext } from 'react';
+import { ReactElement, useState } from 'react';
 // _______________________________________________
 
 const BookCreate = (): ReactElement => {
 	const [title, setTitle] = useState<string>('');
-	const { createBook } = useContext(BooksContext);
+	const { createBook } = useBookContext();
 	
 	// _______________________________________________
 	const handleSubmit = (event: FormEventType) => {

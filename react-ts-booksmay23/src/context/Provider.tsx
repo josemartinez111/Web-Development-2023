@@ -1,5 +1,5 @@
 // FILE: Provider.tsx
-import { BooksContext } from "@/context/books.ts";
+import { BooksContext } from "@/context/BooksContext.ts";
 import { BookType } from "@/types/BookType.ts";
 import { handleAxiosError } from "@/types/CustomErrorUtils.ts";
 import { WithChildren } from "@/types/WithChildren.ts";
