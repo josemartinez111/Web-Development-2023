@@ -1,30 +1,30 @@
 // FILE: BookShow.tsx
 import BookEdit from "@/components/book_edit/BookEdit.tsx";
+import { useBookContext } from "@/hooks/UseBookContext.ts";
 import { BookType } from "@/types/BookType.ts";
 import { ReactElement, useState } from 'react';
 // _______________________________________________
 
 interface BookShowProps {
 	book: BookType;
-	onDelete: (id: string) => void;
-	onEdit: (id: string, title: string) => void;
 }
 // _______________________________________________
 
-const BookShow = ({ book, onDelete, onEdit }: BookShowProps): ReactElement => {
+const BookShow = ({ book }: BookShowProps): ReactElement => {
 	const [showEdit, setShowEdit] = useState<boolean>(false);
-	
+	const { deleteBookByID } = useBookContext();
+	// _______________________________________________
 	const handleDeleteClick = () => {
-		onDelete(book.id);
+		// async function
+		deleteBookByID(book.id).then();
 	};
 	
 	const handleEditClick = () => {
 		setShowEdit(!showEdit);
 	};
-	
-	const handleSubmit = (id: string, newTitle: string) => {
+	// needs to know when to display the `BookShow` component
+	const handleSubmit = () => {
 		setShowEdit(false);
-		onEdit(id, newTitle);
 	};
 	
 	// logic to conditionally render markup
@@ -42,10 +42,10 @@ const BookShow = ({ book, onDelete, onEdit }: BookShowProps): ReactElement => {
 	// _______________________________________________
 	return (
 		<div className="book-show">
-			{/* image */}
+			{/* image */ }
 			<img
 				alt="books"
-				src={ `https://picsum.photos/seed/${book.title}/300/200` }
+				src={ `https://picsum.photos/seed/${ book.title }/300/200` }
 			/>
 			
 			<div>{ content }</div>

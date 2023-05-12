@@ -1,32 +1,31 @@
-	// FILE: BookCreate.tsx
-	import {
+// FILE: BookCreate.tsx
+// _______________________________________________
+import { BooksContext } from "@/context/books.ts";
+import {
 	FormEventType,
-		InputEventType,
+	InputEventType,
 } from "@/types/CustomEventTypes.ts";
-import { ReactElement, useState } from 'react';
+import { ReactElement, useState, useContext } from 'react';
 // _______________________________________________
 
-interface BookCreateProps {
-	onCreate: (title: string) => void;
-}
-// _______________________________________________
-
-const BookCreate = ({ onCreate }: BookCreateProps): ReactElement => {
+const BookCreate = (): ReactElement => {
 	const [title, setTitle] = useState<string>('');
+	const { createBook } = useContext(BooksContext);
 	
-	// event handler
+	// _______________________________________________
 	const handleSubmit = (event: FormEventType) => {
 		// prevents the page from reloading when submitting the form
-		console.log("New title added:", title)
+		console.log("New title added:", title);
 		event.preventDefault();
-		onCreate(title);
+		// async function
+		createBook(title).then();
 		// after the form is submitted empty out the state
-		setTitle("")
-	}
+		setTitle("");
+	};
 	
 	const handleChange = (event: InputEventType) => {
 		setTitle(event.target.value);
-	}
+	};
 	
 	return (
 		<div className="book-create">
