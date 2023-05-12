@@ -1,7 +1,7 @@
 // FILE: hooks/UseBookContext.ts
 // _______________________________________________
 
-import { BooksContext } from "@/context/books.ts";
+import { BooksContext } from "@/context/BooksContext.ts";
 import { useContext } from "react";
 // _______________________________________________
 
