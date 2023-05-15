@@ -1,7 +1,7 @@
+import Header from "~/components/header/header";
 import { component$, Slot } from '@builder.io/qwik';
 import { routeLoader$ } from '@builder.io/qwik-city';
 import React from "react";
-import Header from "~/components/header/header";
 
 
 export const useServerTimeLoader = routeLoader$(() => {

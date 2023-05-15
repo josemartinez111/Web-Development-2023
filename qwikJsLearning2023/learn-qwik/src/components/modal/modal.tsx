@@ -7,13 +7,13 @@ import {
 	Slot,
 	useStylesScoped$,
 } from "@builder.io/qwik";
-import ModalStyles from "./modal.css?inline"
+import ModalStyles from "./modal.css?inline";
 // _______________________________________________
 
 interface ModalProps {
-	size: 'sm' | 'lg'
-	isFrosted?: boolean
-	closeModal: PropFunction<() => boolean>
+	size: 'sm' | 'lg';
+	isFrosted?: boolean;
+	closeModal: PropFunction<() => boolean>;
 	//closeModal: QRL<() => boolean>
 }
 // _______________________________________________
@@ -24,7 +24,7 @@ export const Modal = component$<ModalProps>(({
 	isFrosted,
 	closeModal,
 }) => {
-	useStylesScoped$(ModalStyles)
+	useStylesScoped$(ModalStyles);
 	
 	return (
 		<div class={ `modal ${ size } ${ isFrosted && 'frosted' }` }>
@@ -44,6 +44,6 @@ export const Modal = component$<ModalProps>(({
 				</footer>
 			</div>
 		</div>
-	)
-})
+	);
+});
 // _______________________________________________

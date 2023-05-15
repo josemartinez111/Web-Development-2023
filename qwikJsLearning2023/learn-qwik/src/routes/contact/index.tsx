@@ -1,11 +1,11 @@
 // file: routes/contact/index.tsx
+import { Form } from "~/components/form/form";
+import { useContactComposables } from "~/routes/contact/composables";
 // _______________________________________________
 import {
 	component$,
 	useStylesScoped$,
 } from "@builder.io/qwik"
-import { Form } from "~/components/form/form";
-import { useContactComposables } from "~/routes/contact/composables";
 import ContactStyles from "./contact.css?inline"
 // _______________________________________________
 
@@ -40,10 +40,10 @@ export default component$(() => {
 			{/* FORM */ }
 			{ isFormVisible.value && (
 				<Form
-					submitForm={ submitForm }
+					submitForm$={ submitForm }
 					formState={ formState }
-					trackName={ trackName }
-					trackMessage={ trackMessage }
+					trackName$={ trackName }
+					trackMessage$={ trackMessage }
 				/>
 			) }
 		</article>
