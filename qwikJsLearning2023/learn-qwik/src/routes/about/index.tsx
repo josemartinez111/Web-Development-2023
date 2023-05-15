@@ -4,23 +4,23 @@ import {
 	$,
 	component$,
 	useSignal, useStyles$,
-} from "@builder.io/qwik"
+} from "@builder.io/qwik";
+import AboutStyles from "./about.css?inline"; // remember to add the `?inline`
 import { Modal } from "~/components/modal/modal";
-import AboutStyles from "./about.css?inline" // remember to add the `?inline`
 // _______________________________________________
 
 export default component$(() => {
-	useStyles$(AboutStyles)
+	useStyles$(AboutStyles);
 	
 	const isModalVisible = useSignal<boolean>(false);
 	
 	const openModal = $(() => {
 		return isModalVisible.value = true;
-	})
+	});
 	
 	const closeModal = $(() => {
 		return isModalVisible.value = false;
-	})
+	});
 	
 	return (
 		<article>
@@ -73,6 +73,6 @@ export default component$(() => {
 				</Modal>
 			) }
 		</article>
-	)
-})
+	);
+});
 // _______________________________________________

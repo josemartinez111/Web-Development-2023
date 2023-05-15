@@ -1,12 +1,8 @@
 // file: components/form/form_component.tsx
 // _______________________________________________
 
-import {
-	component$,
-	PropFunction,
-	useStylesScoped$,
-} from "@builder.io/qwik";
-import FormStyles from "./form.css?inline"
+import { component$, useStylesScoped$ } from "@builder.io/qwik";
+import FormStyles from "./form.css?inline";
 // _______________________________________________
 
 type FormState = {
@@ -15,10 +11,10 @@ type FormState = {
 }
 
 interface FormComponentProps {
-	submitForm: PropFunction<() => void>
-	formState: FormState
-	trackName: PropFunction<(e: Event) => string>
-	trackMessage: PropFunction<(e: Event) => string>
+	submitForm$: () => void;
+	formState: FormState;
+	trackName$: (e: Event) => string;
+	trackMessage$: (e: Event) => string;
 	// submitForm: QRL<() => void>
 	// trackName: QRL<(e: Event) => string>
 	// trackMessage: QRL<(e: Event) => string>
@@ -27,17 +23,17 @@ interface FormComponentProps {
 // _______________________________________________
 
 export const Form = component$<FormComponentProps>(({
-	submitForm,
+	submitForm$,
 	formState,
-	trackName,
-	trackMessage,
+	trackName$,
+	trackMessage$,
 }) => {
-	useStylesScoped$(FormStyles)
+	useStylesScoped$(FormStyles);
 	
 	return (
 		<form
 			preventdefault:submit
-			onSubmit$={ submitForm }
+			onSubmit$={ submitForm$ }
 		>
 				{/* name */ }
 			<label>
@@ -45,7 +41,7 @@ export const Form = component$<FormComponentProps>(({
 					<input
 						type="text"
 						value={ formState.name } // two-way biding
-						onInput$={ trackName }
+						onInput$={ trackName$ }
 					/>
 				</label>
 			{/* message */ }
@@ -53,7 +49,7 @@ export const Form = component$<FormComponentProps>(({
 					<span>Your message:</span>
 					<textarea
 						value={ formState.message } // two-way biding
-						onInput$={ trackMessage }
+						onInput$={ trackMessage$ }
 					/>
 				</label>
 			{/* send button */ }
@@ -63,6 +59,6 @@ export const Form = component$<FormComponentProps>(({
 			<p>Form name: { formState.name }</p>
 					<p>Form message: { formState.message }</p>
 				</form>
-	)
-})
+	);
+});
 // _______________________________________________
