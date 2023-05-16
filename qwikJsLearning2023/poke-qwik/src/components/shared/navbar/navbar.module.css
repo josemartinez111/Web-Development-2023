@@ -2,6 +2,10 @@ header {
     background-color: var(--theme-blue);
 }
 
+header {
+    @apply shadow-lg shadow-gray-700
+}
+
 nav {
     display: flex;
     padding: 10px;
