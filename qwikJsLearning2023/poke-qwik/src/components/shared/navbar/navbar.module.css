@@ -1,0 +1,49 @@
+header {
+    background-color: var(--theme-blue);
+}
+
+nav {
+    display: flex;
+    padding: 10px;
+    max-width: 1260px;
+    margin: 0 auto;
+    align-items: center;
+}
+
+nav img {
+    width: 60px;
+    height: 60px;
+}
+nav h1 {
+    margin-left: 10px;
+    margin-right: auto;
+    font-weight: bold;
+    font-size: 2em;
+}
+nav li {
+    display: inline-block;
+    margin-left: 10px;
+}
+nav a {
+    color: white;
+    text-decoration: none;
+    padding: 4px 8px;
+    border-radius: 4px;
+}
+nav a:hover {
+    background-color: white;
+    color: #111;
+}
+
+.container {
+    max-width: 1260px;
+    margin: 40px auto;
+    padding: 10px;
+}
+
+footer {
+    background: #ddd;
+    padding: 20px;
+    text-align: center;
+    flex-grow: 1;
+}
