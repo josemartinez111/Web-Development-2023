@@ -14,7 +14,7 @@ export const NavBar = component$(() => {
 	// _______________________________________________
 	return (
 		<header class={ styles.header }>
-			<nav class="shadow-lg shadow-gray-700">
+			<nav>
         {/* logo-image */ }
 	      <img src="/bulbasaur_transparent.png" alt="LOGO" />
 	      {/* site title in navbar */ }
