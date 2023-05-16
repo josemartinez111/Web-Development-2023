@@ -1,3 +1,11 @@
+/**
+ * Tailwind CSS imports
+ * View the full documentation at https://tailwindcss.com
+ */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 :root {
   --theme-yellow: #f6cd25;
   --theme-red: #dc163b;
@@ -28,15 +36,3 @@ button {
   cursor: pointer;
   font-family: "Poppins", sans-serif;
 }
-
-
-
-
-
-
-
-
-
-
-
-
