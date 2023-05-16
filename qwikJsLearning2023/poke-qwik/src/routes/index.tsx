@@ -4,20 +4,16 @@
 
 import { $, component$, useSignal } from '@builder.io/qwik';
 import type { DocumentHead } from '@builder.io/qwik-city';
+import { PokemonImage } from "~/components/pokemons/pokemon-image";
 // _______________________________________________
 
 export default component$(() => {
 	const pokemonID = useSignal<number>(1);
 	
 	// _________________ functions ___________________
-	const increase = $(() => (
-		pokemonID.value++
-	));
-	
-	const decrease = $(() => {
-		return pokemonID.value === 0
-			? 0 
-			: pokemonID.value--;
+	const changePokemonByID = $((value: number) => {
+		if ((pokemonID.value + value) <= 0) return;
+		pokemonID.value += value;
 	});
 	// _______________________________________________
 	return (
@@ -30,20 +26,12 @@ export default component$(() => {
 				{ pokemonID }
 			</span>
 			
-			{/* create Pokémon image */ }
-			<div class="mt-2">
-				<button
-					onClick$={ decrease }
-					class="btn btn-primary mr-2"
-				>Previous
-				</button>
-				
-				<button
-					onClick$={ increase }
-					class="btn btn-primary"
-				>Next
-				</button>
-			</div>
+			{/* pokemon-image-component */ }
+			<PokemonImage
+				id={ pokemonID.value }
+				changePokemon$={ changePokemonByID }
+				size={ 350 }
+			/>
     </>
 	);
 });
