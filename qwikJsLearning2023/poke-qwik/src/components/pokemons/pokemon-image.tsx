@@ -19,15 +19,16 @@ export const PokemonImage = component$(({
 	changePokemon$,
 	size = 200,
 }: PokemonImageProps) => {
-	const previousImage = useSignal(false)
+	const isImageFlipped = useSignal(false);
 	
-	let IMG_URL = `${ BASE_URL }/${ id }.png`;
-	if (previousImage.value) IMG_URL = `${ BASE_URL }/back/${ id }.png`;
+	const IMG_URL = isImageFlipped.value
+		? `${ BASE_URL }/back/${ id }.png`
+		: `${ BASE_URL }/${ id }.png`;
 	// _________________ [functions] ___________________
 	
 	const flipImage = $(() => (
-		previousImage.value = !previousImage.value
-	))
+		isImageFlipped.value = !isImageFlipped.value
+	));
 	// _______________________________________________
 	return (
 		<>
