@@ -35,7 +35,7 @@ export default component$(() => {
     </>
 	);
 });
-
+// _______________________________________________
 export const head: DocumentHead = {
 	title: 'Poke-Qwik',
 	meta: [
@@ -45,3 +45,4 @@ export const head: DocumentHead = {
 		},
 	],
 };
+// _______________________________________________
