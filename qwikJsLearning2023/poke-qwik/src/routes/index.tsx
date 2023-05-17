@@ -22,7 +22,7 @@ export default component$(() => {
         Search Pokemon
       </span>
 			
-			<span class="text-9xl text-white">
+			<span class="text-7xl text-white mb-5">
 				{ pokemonID }
 			</span>
 			
@@ -30,7 +30,7 @@ export default component$(() => {
 			<PokemonImage
 				id={ pokemonID.value }
 				changePokemon$={ changePokemonByID }
-				size={ 350 }
+				size={ 300 }
 			/>
     </>
 	);
