@@ -35,9 +35,13 @@ nav a {
     border-radius: 4px;
 }
 nav a:hover {
-    background-color: white;
-    color: #111;
+    color: white;
+    text-decoration: none;
+    box-shadow: 0 0 10px white, 0 0 5px white; /* adjust for desired glow effect */
+    border-radius: 15px; /* adjust for desired roundness */
+    transition: all 0.2s ease-in-out; /* smooth transition */
 }
+
 
 .container {
     max-width: 1260px;
