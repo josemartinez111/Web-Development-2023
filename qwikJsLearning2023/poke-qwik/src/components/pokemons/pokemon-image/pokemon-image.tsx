@@ -2,15 +2,15 @@
 // _________________________________________
 // _________________________________________
 
-import { component$, useSignal, useTask$ } from '@builder.io/qwik';
+import { $, component$, useSignal, useTask$ } from '@builder.io/qwik';
 // _________________________________________
 
 interface PokemonImageProps {
-	id: number;
+	id: number | string;
 	size?: number;
-	changePokemon$: (value: number) => void;
-	isPokemonVisible: boolean;
-	isFlipped: boolean;
+	changePokemon$?: (value: number) => void;
+	isPokemonVisible?: boolean;
+	isFlipped?: boolean;
 }
 
 const BASE_URL = new URL("https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon");
@@ -26,7 +26,7 @@ export const PokemonImage = component$(({
 	
 	const customImgInlineStyles = [{
 		"hidden": !isImageLoaded.value,
-		"brightness-0": !isPokemonVisible,
+		"brightness-0": isPokemonVisible,
 	}, "transition-all"];
 	
 	const IMG_URL = isFlipped
@@ -38,6 +38,14 @@ export const PokemonImage = component$(({
 		track(() => id);
 		isImageLoaded.value = false;
 	});
+	
+	const simulateAPIFetch = $(() => {
+		// simulate it loading
+		setTimeout(() => {
+			return isImageLoaded.value = true;
+		}, 1000);
+	});
+	
 	// _______________________________________________
 	return (
 		<>
@@ -46,7 +54,7 @@ export const PokemonImage = component$(({
 				{/* conditionally-render the image component if loading is complete  */ }
 				{
 					!isImageLoaded.value &&
-          <span class="text-white font-bold text-1xl"
+          <span class="text-white font-mono text-1xl"
           >Loading...
 					</span>
 				}
@@ -56,12 +64,7 @@ export const PokemonImage = component$(({
 					class={ customImgInlineStyles }
 					style={ { width: `${ size }px` } }
 					src={ IMG_URL }
-					onLoad$={ () => {
-						// simulate it loading
-						setTimeout(() => {
-							return isImageLoaded.value = true;
-						}, 2000);
-					} }
+					onLoad$={ () => simulateAPIFetch() }
 				/>
 			</div>
 		</>

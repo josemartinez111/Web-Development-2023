@@ -5,15 +5,18 @@
 import { $, component$, useSignal } from '@builder.io/qwik';
 import { useNavigate } from "@builder.io/qwik-city";
 import type { DocumentHead } from '@builder.io/qwik-city';
-import { PokemonImage } from "~/components/pokemons/pokemon-image";
+import { PokemonImage } from "~/components/pokemons/pokemon-image/pokemon-image";
 import { HomeButtons } from "~/components/shared/home-buttons/home-buttons";
 // _______________________________________________
 
 export default component$(() => {
 	const pokemonID = useSignal<number>(1);
-	let isPokemonVisible = useSignal(false);
-	const navigateTo = useNavigate();
+	let isPokemonVisible = useSignal(true);
 	const isImageFlipped = useSignal(false);
+	// The useNavigate() function allows to programmatically
+	// navigate to the next page without involving a user
+	// click or causing a full-page reload.
+	const navigateTo = useNavigate();
 	
 	// _________________ functions ___________________
 	const changePokemonByID = $((value: number) => {
