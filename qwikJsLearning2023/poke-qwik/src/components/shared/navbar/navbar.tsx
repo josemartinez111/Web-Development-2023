@@ -1,4 +1,4 @@
-// FILE: $FILE_NAME$
+// FILE: navbar.tsx
 // _________________________________________
 // _________________________________________
 
@@ -15,21 +15,26 @@ export const NavBar = component$(() => {
 	return (
 		<header class={ styles.header }>
 			<nav>
-        {/* logo-image */ }
-	      <img src="/bulbasaur_transparent.png" alt="LOGO" />
-	      {/* site title in navbar */ }
-	      <h1>Poke-Qwik</h1>
-	      {/* list of links */ }
-	      <ul>
-        	<li>
+        {/* logo-image also `Home` link */ }
+				<Link href="/">
+					<img src="/bulbasaur_transparent.png" alt="LOGO" />
+				</Link>
+				{/* site title in navbar */ }
+				<h1>Poke-Qwik</h1>
+				{/* list of links ========================== */ }
+				<ul class="font-medium">
+					{/* Home */ }
+					<li>
             <Link href="/">Home</Link>
           </li>
-		      {/* <li> */ }
-		      {/*   <Link href="/about">About</Link> */ }
-		      {/* </li> */ }
-		      {/* <li> */ }
-		      {/*   <Link href="/contact">Contact</Link> */ }
-		      {/* </li> */ }
+					{/* SSR-List */ }
+					<li>
+			      <Link href="/pokemons/list-ssr">SSR-List</Link>
+		      </li>
+					{/* Client-List */ }
+					<li>
+						<Link href="/pokemons/list-client">Client-List</Link>
+					</li>
         </ul>
       </nav>
     </header>

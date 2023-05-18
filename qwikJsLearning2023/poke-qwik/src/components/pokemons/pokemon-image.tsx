@@ -1,14 +1,16 @@
-// FILE: pokemon-image.tsx
+// FILE: components/shared/pokemon-image.tsx
 // _________________________________________
 // _________________________________________
 
-import { $, component$, useSignal, useTask$ } from '@builder.io/qwik';
+import { component$, useSignal, useTask$ } from '@builder.io/qwik';
 // _________________________________________
 
 interface PokemonImageProps {
 	id: number;
 	size?: number;
 	changePokemon$: (value: number) => void;
+	isPokemonVisible: boolean;
+	isFlipped: boolean;
 }
 
 const BASE_URL = new URL("https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon");
@@ -16,22 +18,21 @@ const BASE_URL = new URL("https://raw.githubusercontent.com/PokeAPI/sprites/mast
 
 export const PokemonImage = component$(({
 	id,
-	changePokemon$,
 	size = 200,
+	isPokemonVisible = false,
+	isFlipped = false,
 }: PokemonImageProps) => {
-	const isImageFlipped = useSignal(false);
-	let isImageLoaded = useSignal(false);
-	let isPokemonVisible = useSignal(false);
+	const isImageLoaded = useSignal(false);
 	
-	const IMG_URL = isImageFlipped.value
+	const customImgInlineStyles = [{
+		"hidden": !isImageLoaded.value,
+		"brightness-0": !isPokemonVisible,
+	}, "transition-all"];
+	
+	const IMG_URL = isFlipped
 		? `${ BASE_URL }/back/${ id }.png`
 		: `${ BASE_URL }/${ id }.png`;
 	// _________________ [functions] ___________________
-	
-	const flipImage = $(() => (
-		isImageFlipped.value = !isImageFlipped.value
-	));
-	
 	// Reruns the taskFn when the observed inputs change
 	useTask$(({ track }) => {
 		track(() => id);
@@ -40,10 +41,8 @@ export const PokemonImage = component$(({
 	// _______________________________________________
 	return (
 		<>
-			<div
-				class="fllex items-center justify-center"
-				style={ { width: `${ size }px`, height: `${ size }px` } }
-			>
+			<div class="fllex items-center justify-center"
+			     style={ { width: `${ size }px`, height: `${ size }px` } }>
 				{/* conditionally-render the image component if loading is complete  */ }
 				{
 					!isImageLoaded.value &&
@@ -54,10 +53,7 @@ export const PokemonImage = component$(({
 				{/* Pokémon images */ }
 				<img
 					alt="Pokemon Sprite"
-					class={ [{
-						"hidden": !isImageLoaded.value,
-						"brightness-0": !isPokemonVisible.value,
-					}, "transition-all"] }
+					class={ customImgInlineStyles }
 					style={ { width: `${ size }px` } }
 					src={ IMG_URL }
 					onLoad$={ () => {
@@ -67,34 +63,6 @@ export const PokemonImage = component$(({
 						}, 2000);
 					} }
 				/>
-			</div>
-			
-			{/* (buttons) ======================== */ }
-			<div class="mt-2">
-				{/* previous button */ }
-				<button
-					onClick$={ () => changePokemon$(-1) }
-					class="btn btn-primary mr-2"
-				>Previous
-				</button>
-				{/* next-button */ }
-				<button
-					onClick$={ () => changePokemon$(+1) }
-					class="btn btn-primary mr-2"
-				>Next
-				</button>
-				{/* flip-image button */ }
-				<button
-					onClick$={ flipImage }
-					class="btn btn-primary mr-2"
-				>Flip
-				</button>
-				{/* flip-image button */ }
-				<button
-					onClick$={ () => isPokemonVisible.value = !isPokemonVisible.value }
-					class="btn btn-primary"
-				>Reveal
-				</button>
 			</div>
 		</>
 	);
