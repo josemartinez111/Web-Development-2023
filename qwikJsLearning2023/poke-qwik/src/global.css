@@ -45,6 +45,10 @@ button:hover {
     @apply bg-purple-700;
 }
 
+.list-of-pokemons {
+    @apply m-5 flex flex-col justify-center items-center
+}
+
 
 
 
