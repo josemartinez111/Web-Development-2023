@@ -3,10 +3,10 @@
 // _________________________________________
 
 import { $, component$, useSignal } from '@builder.io/qwik';
-import { useNavigate } from "@builder.io/qwik-city";
+import { useNavigate } from '@builder.io/qwik-city';
 import type { DocumentHead } from '@builder.io/qwik-city';
-import { PokemonImage } from "~/components/pokemons/pokemon-image/pokemon-image";
-import { HomeButtons } from "~/components/shared/home-buttons/home-buttons";
+import { PokemonImage } from '~/components/pokemons/pokemon-image/pokemon-image';
+import { HomeButtons } from '~/components/shared/home-buttons/home-buttons';
 // _______________________________________________
 
 export default component$(() => {
@@ -20,13 +20,11 @@ export default component$(() => {
 	
 	// _________________ functions ___________________
 	const changePokemonByID = $((value: number) => {
-		if ((pokemonID.value + value) <= 0) return;
+		if (pokemonID.value + value <= 0) return;
 		pokemonID.value += value;
 	});
 	
-	const flipImage = $(() => (
-		isImageFlipped.value = !isImageFlipped.value
-	));
+	const flipImage = $(() => (isImageFlipped.value = !isImageFlipped.value));
 	
 	const goToPokemon = $((id: number) => {
 		navigateTo(`/pokemon/${ id }/`).then(() => {
@@ -36,17 +34,12 @@ export default component$(() => {
 	// _______________________________________________
 	return (
 		<>
-      <span class="text-5xl text-white mt-14">
-        Search Pokemon
-      </span>
-			
-			<span class="text-7xl text-white mb-5">
-				{ pokemonID }
-			</span>
+			<span class="text-5xl text-white mt-14">Search Pokemon</span>
+
+			<span class="text-7xl text-white mb-5">{ pokemonID }</span>
 			
 			{/* pokemon-image-component ========================== */ }
-			<div class="cursor-pointer"
-				onClick$={ () => goToPokemon(pokemonID.value) }>
+			<div class="cursor-pointer" onClick$={ () => goToPokemon(pokemonID.value) }>
 				<PokemonImage
 					id={ pokemonID.value }
 					changePokemon$={ changePokemonByID }
@@ -60,9 +53,9 @@ export default component$(() => {
 				previousOnClick$={ () => changePokemonByID(-1) }
 				nextOnClick$={ () => changePokemonByID(+1) }
 				flipOnPokemon$={ flipImage }
-				showPokemon$={ () => isPokemonVisible.value = !isPokemonVisible.value }
+				showPokemon$={ () => (isPokemonVisible.value = !isPokemonVisible.value) }
 			/>
-    </>
+		</>
 	);
 });
 // _______________________________________________

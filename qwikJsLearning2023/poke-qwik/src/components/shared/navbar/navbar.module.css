@@ -18,22 +18,26 @@ nav img {
     width: 60px;
     height: 60px;
 }
+
 nav h1 {
     margin-left: 10px;
     margin-right: auto;
     font-weight: bold;
     font-size: 2em;
 }
+
 nav li {
     display: inline-block;
     margin-left: 10px;
 }
+
 nav a {
     color: white;
     text-decoration: none;
     padding: 4px 8px;
     border-radius: 4px;
 }
+
 nav a:hover {
     color: white;
     text-decoration: none;
