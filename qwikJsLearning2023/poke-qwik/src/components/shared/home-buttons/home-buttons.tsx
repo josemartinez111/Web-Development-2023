@@ -6,8 +6,8 @@ import { component$ } from '@builder.io/qwik';
 // _________________________________________
 
 interface ButtonsProps {
-	previousOnClick$: () => void;
-	nextOnClick$: () => void;
+	previousOnClick$: (value: number) => void;
+	nextOnClick$: (value: number) => void;
 	flipOnPokemon$: () => boolean;
 	showPokemon$: () => boolean;
 }
@@ -21,25 +21,25 @@ export const HomeButtons = component$(
 		showPokemon$,
 	}: ButtonsProps) => {
 		// ________________ [functions] __________________
-
+		
 		// _______________________________________________
 		return (
 			<>
 				<div class="mt-2">
-					{/* previous button */}
-					<button onClick$={previousOnClick$} class="btn btn-primary mr-2">
+					{/* previous button */ }
+					<button onClick$={ () => previousOnClick$(-1) } class="btn btn-primary mr-2">
 						Previous
 					</button>
-					{/* next-button */}
-					<button onClick$={nextOnClick$} class="btn btn-primary mr-2">
+					{/* next-button */ }
+					<button onClick$={ () => nextOnClick$(+1) } class="btn btn-primary mr-2">
 						Next
 					</button>
-					{/* flip-image button */}
-					<button onClick$={flipOnPokemon$} class="btn btn-primary mr-2">
+					{/* flip-image button */ }
+					<button onClick$={ flipOnPokemon$ } class="btn btn-primary mr-2">
 						Flip
 					</button>
-					{/* flip-image button */}
-					<button onClick$={showPokemon$} class="btn btn-primary">
+					{/* flip-image button */ }
+					<button onClick$={ showPokemon$ } class="btn btn-primary">
 						Reveal
 					</button>
 				</div>
