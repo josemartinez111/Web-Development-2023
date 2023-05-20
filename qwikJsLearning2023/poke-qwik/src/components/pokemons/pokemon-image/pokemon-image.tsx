@@ -8,7 +8,6 @@ import { $, component$, useSignal, useTask$ } from '@builder.io/qwik';
 interface PokemonImageProps {
 	id: number | string;
 	size?: number;
-	changePokemon$?: (value: number) => void;
 	isPokemonVisible?: boolean;
 	isFlipped?: boolean;
 }
@@ -26,7 +25,7 @@ export const PokemonImage = component$(
 		isFlipped = false,
 	}: PokemonImageProps) => {
 		const isImageLoaded = useSignal(false);
-
+		
 		const customImgInlineStyles = [
 			{
 				hidden: !isImageLoaded.value,
@@ -34,42 +33,42 @@ export const PokemonImage = component$(
 			},
 			'transition-all',
 		];
-
+		
 		const IMG_URL = isFlipped
-			? `${BASE_URL}/back/${id}.png`
-			: `${BASE_URL}/${id}.png`;
+			? `${ BASE_URL }/back/${ id }.png`
+			: `${ BASE_URL }/${ id }.png`;
 		// _________________ [functions] ___________________
 		// Reruns the taskFn when the observed inputs change
 		useTask$(({ track }) => {
 			track(() => id);
 			isImageLoaded.value = false;
 		});
-
+		
 		const simulateAPIFetch = $(() => {
 			// simulate it loading
 			setTimeout(() => {
 				return (isImageLoaded.value = true);
-			}, 1000);
+			}, 700);
 		});
-
+		
 		// _______________________________________________
 		return (
 			<>
 				<div
 					class="fllex items-center justify-center"
-					style={{ width: `${size}px`, height: `${size}px` }}
+					style={ { width: `${ size }px`, height: `${ size }px` } }
 				>
-					{/* conditionally-render the image component if loading is complete  */}
-					{!isImageLoaded.value && (
+					{/* conditionally-render the image component if loading is complete  */ }
+					{ !isImageLoaded.value && (
 						<span class="text-white font-mono text-1xl">Loading...</span>
-					)}
-					{/* Pokémon images */}
+					) }
+					{/* Pokémon images */ }
 					<img
 						alt="Pokemon Sprite"
-						class={customImgInlineStyles}
-						style={{ width: `${size}px` }}
-						src={IMG_URL}
-						onLoad$={() => simulateAPIFetch()}
+						class={ customImgInlineStyles }
+						style={ { width: `${ size }px` } }
+						src={ IMG_URL }
+						onLoad$={ () => simulateAPIFetch() }
 					/>
 				</div>
 			</>

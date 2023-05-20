@@ -19,6 +19,14 @@ export default component$(() => {
 	const navigateTo = useNavigate();
 	
 	// _________________ functions ___________________
+	
+	// the `value` argument is passed on from the component
+	// so when passing this to the `HomeButtons` component,
+	// it can be called like so `changePokemonByID` since
+	// inside the component the prop functions are passed like
+	// this:
+	// { () => previousOnClick$(-1) }
+	// { () => nextOnClick$(+1) }
 	const changePokemonByID = $((value: number) => {
 		if (pokemonID.value + value <= 0) return;
 		pokemonID.value += value;
@@ -42,7 +50,6 @@ export default component$(() => {
 			<div class="cursor-pointer" onClick$={ () => goToPokemon(pokemonID.value) }>
 				<PokemonImage
 					id={ pokemonID.value }
-					changePokemon$={ changePokemonByID }
 					size={ 300 }
 					isPokemonVisible={ isPokemonVisible.value }
 					isFlipped={ isImageFlipped.value }
@@ -50,8 +57,8 @@ export default component$(() => {
 			</div>
 			{/* (home-buttons component) ======================== */ }
 			<HomeButtons
-				previousOnClick$={ () => changePokemonByID(-1) }
-				nextOnClick$={ () => changePokemonByID(+1) }
+				previousOnClick$={ changePokemonByID }
+				nextOnClick$={ changePokemonByID }
 				flipOnPokemon$={ flipImage }
 				showPokemon$={ () => (isPokemonVisible.value = !isPokemonVisible.value) }
 			/>
