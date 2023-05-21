@@ -2,7 +2,7 @@
 // _________________________________________
 // _________________________________________
 
-import { $, component$, useSignal, useTask$ } from '@builder.io/qwik';
+import { $, component$, useComputed$, useSignal, useTask$ } from '@builder.io/qwik';
 // _________________________________________
 
 interface PokemonImageProps {
@@ -33,15 +33,30 @@ export const PokemonImage = component$(
 			},
 			'transition-all',
 		];
-		
-		const IMG_URL = isFlipped
-			? `${ BASE_URL }/back/${ id }.png`
-			: `${ BASE_URL }/${ id }.png`;
 		// _________________ [functions] ___________________
+		
 		// Reruns the taskFn when the observed inputs change
 		useTask$(({ track }) => {
 			track(() => id);
 			isImageLoaded.value = false;
+		});
+		
+		/**
+		 * https://qwik.builder.io/docs/components/state/#usecomputed
+		 * Use useComputed$ allows to memoize a value derived synchronously
+		 * from other state. It is similar to memo in other frameworks, since
+		 * it will only recompute the value when one of the input signals changes.
+		 * =======================================================================
+		 * `memoize`: Memoization in this context is used to optimize performance
+		 * by storing the results of expensive function calls and reusing those
+		 * results when the same inputs occur again. This means useComputed$ will
+		 * only recompute its returned value when its input signals change,
+		 * avoiding unnecessary computations.
+		 */
+		const computedImageURL = useComputed$(() => {
+			return (isFlipped)
+				? `${ BASE_URL }/back/${ id }.png`
+				: `${ BASE_URL }/${ id }.png`;
 		});
 		
 		const simulateAPIFetch = $(() => {
@@ -67,7 +82,7 @@ export const PokemonImage = component$(
 						alt="Pokemon Sprite"
 						class={ customImgInlineStyles }
 						style={ { width: `${ size }px` } }
-						src={ IMG_URL }
+						src={ computedImageURL.value }
 						onLoad$={ () => simulateAPIFetch() }
 					/>
 				</div>

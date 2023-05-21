@@ -1,4 +1,4 @@
-// FILE: helpers/get-specific-pokemons.ts
+// FILE: helpers/fetch-specific-pokemon.ts
 // _______________________________________________
 import {
 	BasicPokemonInfo,
@@ -10,7 +10,7 @@ import {
 const BASE_URL = new URL('https://pokeapi.co/api/v2/pokemon');
 // _______________________________________________
 
-export const getSpecificPokemons = async (
+export const fetchSpecificPokemon = async (
 	offset: number = 0,
 	limit: number = 10,
 ): Promise<Array<SpecificPokemon>> => {

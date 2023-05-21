@@ -6,7 +6,7 @@ import { component$, useComputed$ } from '@builder.io/qwik';
 import { Link, routeLoader$, useLocation } from '@builder.io/qwik-city';
 import type { DocumentHead } from '@builder.io/qwik-city';
 import { PokemonImage } from '~/components/pokemons/pokemon-image/pokemon-image';
-import { getSpecificPokemons } from '~/helpers';
+import { fetchSpecificPokemon } from '~/helpers';
 import { SpecificPokemon } from '~/interfaces';
 // _______________________________________________
 /**
@@ -24,7 +24,7 @@ export const useRouteLoaderPokemonList = routeLoader$<Array<SpecificPokemon>>(
 		if (isNaN(offset)) redirect(301, pathname);
 		if (offset < 0) redirect(301, pathname);
 
-		return await getSpecificPokemons(offset);
+		return await fetchSpecificPokemon(offset);
 	},
 );
 // _______________________________________________
