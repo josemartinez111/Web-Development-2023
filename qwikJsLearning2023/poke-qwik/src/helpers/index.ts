@@ -1,5 +1,5 @@
 // FILE: global `helpers` export file
 // _______________________________________________
 
-export * from "./get-specific-pokemons"
+export * from "./fetch-specific-pokemon"
 // _______________________________________________

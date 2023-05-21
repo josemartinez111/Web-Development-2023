@@ -2,22 +2,34 @@
 // _________________________________________
 // _________________________________________
 
-import { component$, useStore, useTask$ } from '@builder.io/qwik';
+import {
+	$,
+	component$,
+	useOnDocument,
+	useStore,
+	useStylesScoped$,
+	useTask$,
+} from '@builder.io/qwik';
 import type { DocumentHead } from '@builder.io/qwik-city';
 import { PokemonImage } from "~/components/pokemons/pokemon-image/pokemon-image";
-import { getSpecificPokemons } from "~/helpers";
+import { fetchSpecificPokemon } from "~/helpers";
 import { SpecificPokemon } from "~/interfaces";
+import ClientStyles from "./list-client.css?inline";
 // _______________________________________________
 
 type PokemonState = {
 	currentPage: number
+	isLoading: boolean
 	pokemons: Array<SpecificPokemon>
 }
 // _______________________________________________
 
 export default component$(() => {
+	useStylesScoped$(ClientStyles);
+	
 	const pokemonState = useStore<PokemonState>({
 		currentPage: 0,
+		isLoading: false,
 		pokemons: [],
 	});
 	
@@ -35,7 +47,7 @@ export default component$(() => {
 	// 	// the `state` of our `currentPage` changes
 	// 	track(() => pokemonState.currentPage);
 	//
-	// 	const pokemons = await getSpecificPokemons(pokemonState.currentPage * 10);
+	// 	const pokemons = await fetchSpecificPokemon(pokemonState.currentPage * 10);
 	// 	pokemonState.pokemons = pokemons;
 	// });
 	
@@ -48,18 +60,44 @@ export default component$(() => {
 	 * Notice that any subsequent re-execution of the task will always happen in
 	 * the browser, because reactivity is a browser-only thing.
 	 * */
-	useTask$(async ({ track }) => {
+	useTask$(async ({ track }): Promise<void> => {
+		// If we're already loading, don't start a new fetch.
+		const pokemonOffset = pokemonState.currentPage * 10;
+		pokemonState.isLoading = true;
+		
 		// tell `qwik` to `rerun` this task everytime
 		// the `state` of our `currentPage` changes
 		track(() => pokemonState.currentPage);
 		
-		const pokemons = await getSpecificPokemons(pokemonState.currentPage * 10);
+		const pokemons = await fetchSpecificPokemon(pokemonOffset, 30);
 		// Merges existing 'pokemons' array with new 'pokemons'.
 		// New 'pokemons' are appended to the end of the existing array.
-		pokemonState.pokemons = [...pokemonState.pokemons ,...pokemons];
+		pokemonState.pokemons = [...pokemonState.pokemons, ...pokemons];
+		pokemonState.isLoading = false;
 	});
 	
-	
+	/**
+	 * https://qwik.builder.io/docs/components/events/#useonwindowdocument-hook
+	 * useOn(): listen to events on the current component's root element.
+	 * useOnWindow(): listen to events on the window object.
+	 * useOnDocument(): listen to events on the document object.
+	 * useOn[|window|document]() hook will add a DOM-based event listener at
+	 * the component level programmatically. This is often useful when you want
+	 * to create your own use hooks or if you don't know the event name at the
+	 * time of compilation.
+	 * */
+	useOnDocument('scroll', $(() => {
+		// The Element.scrollHeight read-only property is a measurement
+		// of the height of an element's content, including content not
+		// visible on the screen due to overflow.
+		const maxPageScroll = document.body.scrollHeight;
+		const currentScrollPosition = window.scrollY + window.innerHeight;
+		
+		if ((currentScrollPosition + 200) >= maxPageScroll && !pokemonState.isLoading) {
+			pokemonState.isLoading = true;
+			pokemonState.currentPage++;
+		}
+	}));
 	// _______________________________________________
 	return (
 		<>
@@ -70,11 +108,11 @@ export default component$(() => {
 			</div>
 
 			<div class="mt-10">
-				{/* <button */}
-				{/* 	onClick$={ () => pokemonState.currentPage-- } */}
-				{/* 	class="btn btn-primary mr-2"> */}
-				{/* 	Previous */}
-				{/* </button> */}
+				{/* <button */ }
+				{/* 	onClick$={ () => pokemonState.currentPage-- } */ }
+				{/* 	class="btn btn-primary mr-2"> */ }
+				{/* 	Previous */ }
+				{/* </button> */ }
 				<button
 					onClick$={ () => pokemonState.currentPage++ }
 					class="btn btn-primary">
@@ -82,11 +120,13 @@ export default component$(() => {
 				</button>
 			</div>
 			{/* mapping through the list of pokemons */ }
-			<div class="grid grid-cols-6 mt-5">
+			<div class="responsive-list">
 			{ pokemonState.pokemons.map(({ name, id }: SpecificPokemon) => (
 				<div key={ id } class="list-of-pokemons">
-			{/* pokemon-image */ }
-					<PokemonImage id={ id } />
+					{/* pokemon-image */ }
+					<PokemonImage
+						id={ id }
+					/>
 					{/* pokemon-name */ }
 					<span class="capitalize font-medium">{ name }</span>
 			</div>

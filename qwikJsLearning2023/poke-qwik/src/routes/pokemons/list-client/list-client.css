@@ -1,0 +1,5 @@
+/* FILE: list-client/list-client.css */
+
+.responsive-list {
+    @apply grid sm:grid-cols-2 md:grid-cols-5 xl:grid-cols-7 mt-5;
+}
