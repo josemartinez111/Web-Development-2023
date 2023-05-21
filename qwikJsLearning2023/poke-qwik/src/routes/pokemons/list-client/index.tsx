@@ -62,7 +62,7 @@ export default component$(() => {
 	 * */
 	useTask$(async ({ track }): Promise<void> => {
 		// If we're already loading, don't start a new fetch.
-		const pokemonOffset = pokemonState.currentPage * 10;
+		const pokemonOffset = pokemonState.currentPage * 30;
 		pokemonState.isLoading = true;
 		
 		// tell `qwik` to `rerun` this task everytime
