@@ -16,9 +16,7 @@ export const fetchSpecificPokemon = async (
 ): Promise<Array<SpecificPokemon>> => {
 	const queryURL = `${BASE_URL}?limit=${limit}&offset=${offset}`;
 	const response = await fetch(queryURL);
-
 	const data = (await response.json()) as PokemonListResponse;
-	console.log('data:', data);
 
 	return data.results.map(({ url, name }: BasicPokemonInfo) => {
 		const segments = url.split('/');
