@@ -29,6 +29,7 @@ h1, h2, h3, h4 {
     margin: 0;
     font-size: 1.8em;
 }
+
 /* tailwind global classes */
 .btn {
     @apply font-bold py-2 px-4 rounded min-w-[10rem] h-12;
@@ -41,12 +42,17 @@ h1, h2, h3, h4 {
 button:disabled {
     @apply bg-gray-800;
 }
+
 button:hover {
     @apply bg-purple-700;
 }
 
 .list-of-pokemons {
     @apply m-5 flex flex-col justify-center items-center
+}
+
+.layout-main {
+    @apply flex flex-col items-center justify-center;
 }
 
 
