@@ -3,7 +3,7 @@
 // _________________________________________
 
 import { component$, useContext } from '@builder.io/qwik';
-import { routeLoader$ } from '@builder.io/qwik-city';
+import { Link, routeLoader$ } from '@builder.io/qwik-city';
 import type { DocumentHead } from '@builder.io/qwik-city';
 import { PokemonImage } from '~/components/pokemons/pokemon-image/pokemon-image';
 import { PokemonGameContext } from "~/context";
@@ -42,6 +42,10 @@ export default component$(() => {
 				isPokemonVisible={ pokemonContext.isPokemonVisible }
 				isFlipped={ pokemonContext.isImageFlipped }
 			/>
+			{/* button to go back home */ }
+			<Link href="/">
+				<button class="btn btn-primary">Home</button>
+			</Link>
 		</>
 	);
 });
