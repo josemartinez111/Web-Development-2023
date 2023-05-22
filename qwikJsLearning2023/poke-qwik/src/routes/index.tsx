@@ -19,13 +19,6 @@ export default component$(() => {
 	
 	// _________________ functions ___________________
 	
-	// the `value` argument is passed on from the component
-	// so when passing this to the `HomeButtons` component,
-	// it can be called like so `changePokemonByID` since
-	// inside the component the prop functions are passed like
-	// this:
-	// { () => previousOnClick$(-1) }
-	// { () => nextOnClick$(+1) }
 	const changePokemonByID = $((value: number) => {
 		if (pokemonContext.pokemonID + value <= 0) return;
 		pokemonContext.pokemonID += value;
@@ -62,7 +55,9 @@ export default component$(() => {
 				previousOnClick$={ changePokemonByID }
 				nextOnClick$={ changePokemonByID }
 				flipOnPokemon$={ flipImage }
-				showPokemon$={ () => (pokemonContext.isPokemonVisible = !pokemonContext.isPokemonVisible) }
+				showPokemon$={ () => (
+					pokemonContext.isPokemonVisible = !pokemonContext.isPokemonVisible
+				) }
 			/>
 		</>
 	);

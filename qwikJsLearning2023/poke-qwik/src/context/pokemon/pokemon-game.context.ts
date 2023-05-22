@@ -1,9 +1,8 @@
 // FILE: context/pokemon/pokemon-game.context.ts
 // _______________________________________________
 
-// _______________________________________________
-
 import { createContextId } from "@builder.io/qwik";
+// _______________________________________________
 
 export interface PokemonGameState {
 	pokemonID: number;
@@ -12,8 +11,7 @@ export interface PokemonGameState {
 }
 // _______________________________________________
 
-export const PokemonGameContext = createContextId<PokemonGameState>('pokemon.game-context');
-// _______________________________________________
-
-
+export const PokemonGameContext = createContextId<PokemonGameState>(
+	'pokemon.game-context',
+);
 // _______________________________________________
