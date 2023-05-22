@@ -2,31 +2,27 @@
 // ______
 // _________________________________________
 
-import { $, component$, useContext } from '@builder.io/qwik';
+import { $, component$ } from '@builder.io/qwik';
 import { useNavigate } from '@builder.io/qwik-city';
 import type { DocumentHead } from '@builder.io/qwik-city';
 import { PokemonImage } from '~/components/pokemons/pokemon-image/pokemon-image';
 import { HomeButtons } from '~/components/shared/home-buttons/home-buttons';
-import { PokemonGameContext } from "~/context";
+import { usePokemonGame } from "~/hooks/use-pokemon-game";
 // _______________________________________________
 
 export default component$(() => {
-	const pokemonContext = useContext(PokemonGameContext);
-	// The useNavigate() function allows to programmatically
-	// navigate to the next page without involving a user
-	// click or causing a full-page reload.
+	const {
+		pokemonID,
+		isPokemonVisible,
+		isImageFlipped,
+		previousPokemon,
+		nextPokemon,
+		spinPokemon,
+		toggleVisibility,
+	} = usePokemonGame();
 	const navigateTo = useNavigate();
 	
 	// _________________ functions ___________________
-	
-	const changePokemonByID = $((value: number) => {
-		if (pokemonContext.pokemonID + value <= 0) return;
-		pokemonContext.pokemonID += value;
-	});
-	
-	const flipImage = $(() => (
-		pokemonContext.isImageFlipped = !pokemonContext.isImageFlipped
-	));
 	
 	const goToPokemon = $((id: number) => {
 		navigateTo(`/pokemon/${ id }/`).then(() => {
@@ -36,28 +32,26 @@ export default component$(() => {
 	// _______________________________________________
 	return (
 		<>
-			<span class="text-5xl text-white mt-14">Search Pokemon</span>
+			<span class="text-5xl mt-14">Search Pokemon</span>
 
-			<span class="text-7xl text-white mb-5">{ pokemonContext.pokemonID }</span>
+			<span class="text-7xl mb-5">{ pokemonID.value }</span>
 			
 			{/* pokemon-image-component ========================== */ }
 			<div class="cursor-pointer"
-			     onClick$={ () => goToPokemon(pokemonContext.pokemonID) }>
+			     onClick$={ () => goToPokemon(pokemonID.value) }>
 				<PokemonImage
-					id={ pokemonContext.pokemonID }
+					id={ pokemonID.value }
 					size={ 300 }
-					isPokemonVisible={ pokemonContext.isPokemonVisible }
-					isFlipped={ pokemonContext.isImageFlipped }
+					isPokemonVisible={ isPokemonVisible.value }
+					isFlipped={ isImageFlipped.value }
 				/>
 			</div>
 			{/* (home-buttons component) ======================== */ }
 			<HomeButtons
-				previousOnClick$={ changePokemonByID }
-				nextOnClick$={ changePokemonByID }
-				flipOnPokemon$={ flipImage }
-				showPokemon$={ () => (
-					pokemonContext.isPokemonVisible = !pokemonContext.isPokemonVisible
-				) }
+				previousOnClick$={ previousPokemon }
+				nextOnClick$={ nextPokemon }
+				flipOnPokemon$={ spinPokemon }
+				showPokemon$={ toggleVisibility }
 			/>
 		</>
 	);

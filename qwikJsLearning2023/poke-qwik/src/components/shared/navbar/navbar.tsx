@@ -24,7 +24,7 @@ export const NavBar = component$(() => {
 				<ul class="font-medium">
 					{/* Home */}
 					<li>
-						<Link href="/">Home</Link>
+						<Link href="/counter">Counter-Hooks</Link>
 					</li>
 					{/* SSR-List */}
 					<li>

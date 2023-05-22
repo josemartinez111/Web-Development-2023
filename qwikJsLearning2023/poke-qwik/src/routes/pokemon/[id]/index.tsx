@@ -2,11 +2,11 @@
 // _________________________________________
 // _________________________________________
 
-import { component$, useContext } from '@builder.io/qwik';
+import { component$ } from '@builder.io/qwik';
 import { Link, routeLoader$ } from '@builder.io/qwik-city';
 import type { DocumentHead } from '@builder.io/qwik-city';
 import { PokemonImage } from '~/components/pokemons/pokemon-image/pokemon-image';
-import { PokemonGameContext } from "~/context";
+import { usePokemonGame } from "~/hooks/use-pokemon-game";
 // _______________________________________________
 /**
  * https://qwik.builder.io/docs/route-loader/
@@ -27,8 +27,13 @@ export const useRouteLoaderPokemonID = routeLoader$(({ params, redirect }) => {
 // _______________________________________________
 
 export default component$(() => {
-	const pokemonContext = useContext(PokemonGameContext);
 	const pokemonID = useRouteLoaderPokemonID();
+	const {
+		isPokemonVisible,
+		isImageFlipped,
+		toggleVisibility,
+		spinPokemon,
+	} = usePokemonGame();
 	// ________________ [functions] __________________
 	
 	// _______________________________________________
@@ -39,13 +44,26 @@ export default component$(() => {
 			<PokemonImage
 				id={ pokemonID.value }
 				size={ 450 }
-				isPokemonVisible={ pokemonContext.isPokemonVisible }
-				isFlipped={ pokemonContext.isImageFlipped }
+				isPokemonVisible={ isPokemonVisible.value }
+				isFlipped={ isImageFlipped.value }
 			/>
-			{/* button to go back home */ }
-			<Link href="/">
-				<button class="btn btn-primary">Home</button>
-			</Link>
+			{/* component-buttons ================================= */ }
+			<div class="mt-2">
+				<button
+					onClick$={ spinPokemon }
+					class="btn btn-primary mr-2"
+				>Flip
+				</button>
+				<button
+					onClick$={ toggleVisibility }
+					class="btn btn-primary mr-2"
+				>Reveal
+				</button>
+				{/* button to go back home */ }
+				<Link href="/">
+					<button class="btn btn-primary">Home</button>
+				</Link>
+			</div>
 		</>
 	);
 });
