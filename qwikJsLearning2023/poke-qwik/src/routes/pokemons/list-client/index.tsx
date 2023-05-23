@@ -11,7 +11,7 @@ import {
 import type { DocumentHead } from '@builder.io/qwik-city';
 import { PokemonImage } from "~/components/pokemons/pokemon-image/pokemon-image";
 import { PokemonListContext } from "~/context";
-import { fetchSpecificPokemon } from "~/helpers";
+import { fetchSpecificPokemon } from "../../../api";
 import { SpecificPokemon } from "~/interfaces";
 import ClientStyles from "./list-client.css?inline";
 // _______________________________________________
