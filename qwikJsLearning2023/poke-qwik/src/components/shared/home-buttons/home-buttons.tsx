@@ -10,6 +10,7 @@ interface ButtonsProps {
 	nextOnClick$: (value: number) => void;
 	flipOnPokemon$: () => boolean;
 	showPokemon$: () => boolean;
+	isPokemonShowing: boolean;
 }
 // _________________________________________
 
@@ -19,6 +20,7 @@ export const HomeButtons = component$(
 		nextOnClick$,
 		flipOnPokemon$,
 		showPokemon$,
+		isPokemonShowing,
 	}: ButtonsProps) => {
 		// ________________ [functions] __________________
 		
@@ -27,7 +29,8 @@ export const HomeButtons = component$(
 			<>
 				<div class="mt-2">
 					{/* previous button */ }
-					<button onClick$={ () => previousOnClick$(-1) } class="btn btn-primary mr-2">
+					<button onClick$={ () => previousOnClick$(-1) }
+					        class="btn btn-primary mr-2">
 						Previous
 					</button>
 					{/* next-button */ }
@@ -40,7 +43,7 @@ export const HomeButtons = component$(
 					</button>
 					{/* flip-image button */ }
 					<button onClick$={ showPokemon$ } class="btn btn-primary">
-						Reveal
+						{ !isPokemonShowing ? 'Hide' : 'Reveal' }
 					</button>
 				</div>
 			</>

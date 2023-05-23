@@ -48,7 +48,7 @@ button:hover {
 }
 
 .list-of-pokemons {
-    @apply m-5 flex flex-col justify-center items-center
+    @apply m-5 flex flex-col justify-center items-center cursor-pointer;
 }
 
 .layout-main {

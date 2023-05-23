@@ -3,7 +3,7 @@
 // _________________________________________
 
 import { component$, Slot } from '@builder.io/qwik';
-import { NavBar } from "~/components/shared/navbar/navbar";
+import { NavBar } from "~/components/shared";
 import { PokemonProvider } from "~/context";
 // _______________________________________________
 

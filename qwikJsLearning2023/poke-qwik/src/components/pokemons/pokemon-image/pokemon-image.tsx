@@ -54,6 +54,9 @@ export const PokemonImage = component$(
 		 * avoiding unnecessary computations.
 		 */
 		const computedImageURL = useComputed$(() => {
+			// Return null if there's no id
+			if (!id) return null;
+			
 			return (isFlipped)
 				? `${ BASE_URL }/back/${ id }.png`
 				: `${ BASE_URL }/${ id }.png`;
@@ -74,17 +77,19 @@ export const PokemonImage = component$(
 					style={ { width: `${ size }px`, height: `${ size }px` } }
 				>
 					{/* conditionally-render the image component if loading is complete  */ }
-					{ !isImageLoaded.value && (
+					{ computedImageURL.value && !isImageLoaded.value && (
 						<span class="text-white font-mono text-1xl">Loading...</span>
 					) }
 					{/* Pokémon images */ }
-					<img
-						alt="Pokemon Sprite"
-						class={ customImgInlineStyles }
-						style={ { width: `${ size }px` } }
-						src={ computedImageURL.value }
-						onLoad$={ () => simulateAPIFetch() }
-					/>
+					{ computedImageURL.value && (
+						<img
+							alt="Pokemon Sprite"
+							class={ customImgInlineStyles }
+							style={ { width: `${ size }px` } }
+							src={ computedImageURL.value }
+							onLoad$={ () => simulateAPIFetch() }
+						/>
+					) }
 				</div>
 			</>
 		);

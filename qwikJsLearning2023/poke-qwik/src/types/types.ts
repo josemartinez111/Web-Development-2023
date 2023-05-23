@@ -1,11 +1,8 @@
 // FILE: types/types.ts
 // _______________________________________________
 
-import { RequestEventBase } from "@builder.io/qwik-city";
+import { QwikMouseEvent } from "@builder.io/qwik";
 // _______________________________________________
 
-export type RouteLoaderParams = Pick<RequestEventBase, 'params'> & {
-	redirect: (statusCode: number, url: string) => unknown
-};
-
+export type ButtonClickEvent = QwikMouseEvent<HTMLButtonElement, MouseEvent>;
 // _______________________________________________
