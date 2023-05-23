@@ -1,4 +1,4 @@
-// FILE: helpers/fetch-specific-pokemon.ts
+// FILE: api/fetch-specific-pokemon.ts
 // _______________________________________________
 import {
 	BasicPokemonInfo,

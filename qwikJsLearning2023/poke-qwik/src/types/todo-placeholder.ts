@@ -1,4 +1,4 @@
-// FILE: helpers/todo-placeholder.ts
+// FILE: api/todo-placeholder.ts
 // _______________________________________________
 // The never type represents the type of values that never occur.
 // This is useful in a situation like this, where you want a function

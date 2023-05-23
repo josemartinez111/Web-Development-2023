@@ -5,15 +5,15 @@
 import {
 	$,
 	component$,
-	useComputed$, useContext,
-	useStylesScoped$,
+	useComputed$, useContext, useSignal,
+	useStylesScoped$, useVisibleTask$,
 } from '@builder.io/qwik';
 import { Link, routeLoader$, useLocation } from '@builder.io/qwik-city';
 import type { DocumentHead } from '@builder.io/qwik-city';
+import { fetchFunFactAboutPokemons, fetchSpecificPokemon } from "~/api";
 import { PokemonImage } from '~/components/pokemons/pokemon-image/pokemon-image';
 import { Modal } from '~/components/shared';
 import { PokemonModalContext } from "~/context";
-import { fetchSpecificPokemon } from '~/helpers';
 import { SpecificPokemon } from '~/interfaces';
 import ListSSRStyles from "./list-ssr.css?inline";
 // _______________________________________________
@@ -41,6 +41,7 @@ export default component$(() => {
 	useStylesScoped$(ListSSRStyles);
 	
 	const pokemonModalState = useContext(PokemonModalContext);
+	const chatGPTPokemonFact = useSignal('');
 	const pokemons = useRouteLoaderPokemonList();
 	const pokemonLocation = useLocation();
 	
@@ -49,6 +50,18 @@ export default component$(() => {
 		return Number(offsetString.get('offset') || 0);
 	});
 	// ________________ [functions] __________________
+	
+	useVisibleTask$(({ track }) => {
+		// track the state of the name everytime it changes
+		track(() => pokemonModalState.name);
+		
+		chatGPTPokemonFact.value = '';
+		
+		if (pokemonModalState.name.length > 0) {
+			fetchFunFactAboutPokemons(pokemonModalState.name)
+				.then((res) => chatGPTPokemonFact.value = res);
+		}
+	});
 	
 	
 	const openModalOnClick = $((id: string, name: string) => {
@@ -107,7 +120,13 @@ export default component$(() => {
 				<div class="style-image" q:slot="content">
 					<PokemonImage id={ pokemonModalState.id } />
 
-					<span>Asking ChatGPT</span>
+					<span>
+						{
+							chatGPTPokemonFact.value === ''
+							? 'Asking chatGPT...'
+							: chatGPTPokemonFact.value
+						}
+					</span>
 				</div>
 			</Modal>
 		</>
