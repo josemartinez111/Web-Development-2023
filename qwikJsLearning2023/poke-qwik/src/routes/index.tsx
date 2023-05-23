@@ -6,7 +6,7 @@ import { $, component$ } from '@builder.io/qwik';
 import { useNavigate } from '@builder.io/qwik-city';
 import type { DocumentHead } from '@builder.io/qwik-city';
 import { PokemonImage } from '~/components/pokemons/pokemon-image/pokemon-image';
-import { HomeButtons } from '~/components/shared/home-buttons/home-buttons';
+import { HomeButtons } from "~/components/shared";
 import { usePokemonGame } from "~/hooks/use-pokemon-game";
 // _______________________________________________
 
@@ -19,6 +19,7 @@ export default component$(() => {
 		nextPokemon,
 		spinPokemon,
 		toggleVisibility,
+		isShowing,
 	} = usePokemonGame();
 	const navigateTo = useNavigate();
 	
@@ -52,6 +53,7 @@ export default component$(() => {
 				nextOnClick$={ nextPokemon }
 				flipOnPokemon$={ spinPokemon }
 				showPokemon$={ toggleVisibility }
+				isPokemonShowing={ isShowing.value }
 			/>
 		</>
 	);

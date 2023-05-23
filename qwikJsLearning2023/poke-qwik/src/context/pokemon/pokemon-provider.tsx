@@ -13,8 +13,8 @@ import {
 	PokemonGameContext,
 	PokemonGameState,
 	PokemonListContext,
-	PokemonListState,
-} from "~/context";
+	PokemonListState, PokemonModalContext, PokemonModalState,
+} from '~/context';
 // _________________________________________
 
 export const PokemonProvider = component$(() => {
@@ -30,8 +30,15 @@ export const PokemonProvider = component$(() => {
 		pokemons: [],
 	});
 	
+	const pokemonModalState = useStore<PokemonModalState>({
+		isModalVisible: false,
+		id: '',
+		name: '',
+	});
+	
 	useContextProvider(PokemonGameContext, pokemonGameState);
 	useContextProvider(PokemonListContext, pokemonListState);
+	useContextProvider(PokemonModalContext, pokemonModalState);
 	// ________________ [functions] __________________
 	
 	/**
@@ -51,13 +58,14 @@ export const PokemonProvider = component$(() => {
 				pokemonID = 10,
 				isPokemonVisible = true,
 				isImageFlipped = false,
-			} = JSON.parse(localStorage.getItem('pokemon-game') ?? "") as PokemonGameState;
+			} = JSON.parse(
+				localStorage.getItem('pokemon-game') ?? '',
+			) as PokemonGameState;
 			
 			pokemonGameState.pokemonID = pokemonID;
 			pokemonGameState.isPokemonVisible = isPokemonVisible;
 			pokemonGameState.isImageFlipped = isImageFlipped;
 		}
-		
 	});
 	
 	useVisibleTask$(({ track }) => {
@@ -68,12 +76,8 @@ export const PokemonProvider = component$(() => {
 		]);
 		
 		// save to localstorage
-		localStorage.setItem(
-			'pokemon-game',
-			JSON.stringify(pokemonGameState),
-		);
+		localStorage.setItem('pokemon-game', JSON.stringify(pokemonGameState));
 	});
-	
 	
 	// _______________________________________________
 	/**

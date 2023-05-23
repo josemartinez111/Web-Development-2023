@@ -1,0 +1,5 @@
+/** FILE: list-ssr/list-ssr.css */
+
+.style-image {
+    @apply flex flex-col justify-center items-center;
+}

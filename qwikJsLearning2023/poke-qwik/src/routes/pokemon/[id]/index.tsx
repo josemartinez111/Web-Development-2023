@@ -33,6 +33,7 @@ export default component$(() => {
 		isImageFlipped,
 		toggleVisibility,
 		spinPokemon,
+		isShowing,
 	} = usePokemonGame();
 	// ________________ [functions] __________________
 	
@@ -57,7 +58,7 @@ export default component$(() => {
 				<button
 					onClick$={ toggleVisibility }
 					class="btn btn-primary mr-2"
-				>Reveal
+				>{ !isShowing.value ? 'Hide' : 'Reveal' }
 				</button>
 				{/* button to go back home */ }
 				<Link href="/">
