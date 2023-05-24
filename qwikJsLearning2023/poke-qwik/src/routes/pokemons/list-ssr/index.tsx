@@ -3,17 +3,15 @@
 // _________________________________________
 
 import {
-	$,
 	component$,
-	useComputed$, useContext, useSignal,
 	useStylesScoped$, useVisibleTask$,
 } from '@builder.io/qwik';
-import { Link, routeLoader$, useLocation } from '@builder.io/qwik-city';
+import { Link, routeLoader$ } from '@builder.io/qwik-city';
 import type { DocumentHead } from '@builder.io/qwik-city';
 import { fetchFunFactAboutPokemons, fetchSpecificPokemon } from "~/api";
 import { PokemonImage } from '~/components/pokemons/pokemon-image/pokemon-image';
 import { Modal } from '~/components/shared';
-import { PokemonModalContext } from "~/context";
+import { useListSSR } from "~/hooks";
 import { SpecificPokemon } from '~/interfaces';
 import ListSSRStyles from "./list-ssr.css?inline";
 // _______________________________________________
@@ -40,19 +38,21 @@ export const useRouteLoaderPokemonList = routeLoader$<Array<SpecificPokemon>>(
 export default component$(() => {
 	useStylesScoped$(ListSSRStyles);
 	
-	const pokemonModalState = useContext(PokemonModalContext);
-	const chatGPTPokemonFact = useSignal('');
-	const pokemons = useRouteLoaderPokemonList();
-	const pokemonLocation = useLocation();
-	
-	const currentOffset = useComputed$<number>(() => {
-		const offsetString = new URLSearchParams(pokemonLocation.url.search);
-		return Number(offsetString.get('offset') || 0);
-	});
+	const {
+		pokemonModalState,
+		chatGPTPokemonFact,
+		pokemons,
+		pokemonLocation,
+		currentOffset,
+		openModalOnClick,
+		closeModalOnClick,
+	} = useListSSR();
 	// ________________ [functions] __________________
 	
+	// runs on the client only
 	useVisibleTask$(({ track }) => {
-		// track the state of the name everytime it changes
+		// track the state of the name
+		// everytime it changes & then rerun
 		track(() => pokemonModalState.name);
 		
 		chatGPTPokemonFact.value = '';
@@ -61,23 +61,6 @@ export default component$(() => {
 			fetchFunFactAboutPokemons(pokemonModalState.name)
 				.then((res) => chatGPTPokemonFact.value = res);
 		}
-	});
-	
-	
-	const openModalOnClick = $((id: string, name: string) => {
-		if (!id.trim() || !name.trim()) {
-			console.error("Empty ID or Name provided");
-			return;
-		}
-		pokemonModalState.id = id;
-		pokemonModalState.name = name;
-		pokemonModalState.isModalVisible = true;
-	});
-	
-	const closeModalOnClick = $(() => {
-		pokemonModalState.id = '';
-		pokemonModalState.name = '';
-		pokemonModalState.isModalVisible = false;
 	});
 	// _______________________________________________
 	return (
@@ -123,8 +106,8 @@ export default component$(() => {
 					<span>
 						{
 							chatGPTPokemonFact.value === ''
-							? 'Asking chatGPT...'
-							: chatGPTPokemonFact.value
+								? 'Asking chatGPT...'
+								: chatGPTPokemonFact.value
 						}
 					</span>
 				</div>

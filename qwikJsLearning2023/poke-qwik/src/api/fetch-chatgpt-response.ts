@@ -25,7 +25,7 @@ export const fetchFunFactAboutPokemons = async (pokemonName: string): Promise<st
 	});
 	
 	// console.log("ChatGPT's response:", response);
-	const result = response.data.choices[0].text ||
+	const result = response.data.choices[ 0 ].text ||
 		`No information about pokemon (${ pokemonName })`;
 	
 	return result;
