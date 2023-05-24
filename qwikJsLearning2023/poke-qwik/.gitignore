@@ -5,7 +5,7 @@
 /server
 
 # ENVIRONMENT VARIABLES
-.env
+./.env
 
 # Development
 node_modules
