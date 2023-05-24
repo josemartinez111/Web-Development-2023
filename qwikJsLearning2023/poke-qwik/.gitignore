@@ -6,6 +6,9 @@
 
 # ENVIRONMENT VARIABLES
 ./.env
+qwikJsLearning2023/poke-qwik/.env
+*.env
+
 
 # Development
 node_modules
