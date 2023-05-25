@@ -4,7 +4,7 @@
 import { $, useComputed$, useContext, useSignal } from "@builder.io/qwik";
 import { useLocation } from "@builder.io/qwik-city";
 import { PokemonModalContext } from "~/context";
-import { useRouteLoaderPokemonList } from "~/routes/pokemons/list-ssr";
+import { useRouteLoaderPokemonList } from "~/routes/(pokemons)/pokemons/list-ssr";
 // _______________________________________________
 
 export const useListSSR = () => {

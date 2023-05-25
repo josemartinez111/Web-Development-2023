@@ -9,9 +9,9 @@ import {
 	useTask$,
 } from '@builder.io/qwik';
 import type { DocumentHead } from '@builder.io/qwik-city';
+import { fetchSpecificPokemon } from "~/api";
 import { PokemonImage } from "~/components/pokemons/pokemon-image/pokemon-image";
 import { PokemonListContext } from "~/context";
-import { fetchSpecificPokemon } from "../../../api";
 import { SpecificPokemon } from "~/interfaces";
 import ClientStyles from "./list-client.css?inline";
 // _______________________________________________

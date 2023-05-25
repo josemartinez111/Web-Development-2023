@@ -2,7 +2,14 @@
 // _________________________________________
 // _________________________________________
 
-import { $, component$, useComputed$, useSignal, useTask$ } from '@builder.io/qwik';
+import {
+	$,
+	component$,
+	useComputed$,
+	useSignal,
+	useTask$,
+} from '@builder.io/qwik';
+import { Loading } from '~/components/shared/loading/loading';
 // _________________________________________
 
 interface PokemonImageProps {
@@ -25,7 +32,7 @@ export const PokemonImage = component$(
 		isFlipped = false,
 	}: PokemonImageProps) => {
 		const isImageLoaded = useSignal(false);
-		
+
 		const customImgInlineStyles = [
 			{
 				hidden: !isImageLoaded.value,
@@ -34,13 +41,13 @@ export const PokemonImage = component$(
 			'transition-all',
 		];
 		// _________________ [functions] ___________________
-		
+
 		// Reruns the taskFn when the observed inputs change
 		useTask$(({ track }) => {
 			track(() => id);
 			isImageLoaded.value = false;
 		});
-		
+
 		/**
 		 * https://qwik.builder.io/docs/components/state/#usecomputed
 		 * Use useComputed$ allows to memoize a value derived synchronously
@@ -56,40 +63,36 @@ export const PokemonImage = component$(
 		const computedImageURL = useComputed$(() => {
 			// Return null if there's no id
 			if (!id) return null;
-			
-			return (isFlipped)
-				? `${ BASE_URL }/back/${ id }.png`
-				: `${ BASE_URL }/${ id }.png`;
+
+			return isFlipped ? `${BASE_URL}/back/${id}.png` : `${BASE_URL}/${id}.png`;
 		});
-		
+
 		const simulateAPIFetch = $(() => {
 			// simulate it loading
 			setTimeout(() => {
 				return (isImageLoaded.value = true);
 			}, 700);
 		});
-		
+
 		// _______________________________________________
 		return (
 			<>
 				<div
 					class="fllex items-center justify-center"
-					style={ { width: `${ size }px`, height: `${ size }px` } }
+					style={{ width: `${size}px`, height: `${size}px` }}
 				>
-					{/* conditionally-render the image component if loading is complete  */ }
-					{ computedImageURL.value && !isImageLoaded.value && (
-						<span class="text-white font-mono text-1xl">Loading...</span>
-					) }
-					{/* Pokémon images */ }
-					{ computedImageURL.value && (
+					{/* conditionally-render the image component if loading is complete  */}
+					{computedImageURL.value && !isImageLoaded.value && <Loading />}
+					{/* Pokémon images */}
+					{computedImageURL.value && (
 						<img
 							alt="Pokemon Sprite"
-							class={ customImgInlineStyles }
-							style={ { width: `${ size }px` } }
-							src={ computedImageURL.value }
-							onLoad$={ () => simulateAPIFetch() }
+							class={customImgInlineStyles}
+							style={{ width: `${size}px` }}
+							src={computedImageURL.value}
+							onLoad$={() => simulateAPIFetch()}
 						/>
-					) }
+					)}
 				</div>
 			</>
 		);

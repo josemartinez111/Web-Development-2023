@@ -55,6 +55,14 @@ button:hover {
     @apply flex flex-col items-center justify-center;
 }
 
+/*
+ * a container for all of the layouts,
+ * except the routes `main` layout.tsx
+ */
+.shared-layout-container {
+    @apply mt-44 flex flex-col items-center;
+}
+
 
 
 
