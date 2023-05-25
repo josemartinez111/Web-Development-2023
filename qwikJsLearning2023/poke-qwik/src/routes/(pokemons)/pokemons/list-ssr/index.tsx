@@ -126,12 +126,11 @@ export default component$(() => {
 
 					<span>
 						{chatGPTPokemonFact.value === '' ? (
-							<span class="mb-10">
-								<Loading
-									textSize={'text-sm'}
-									loadingText={'Asking ChatGPT'}
-								/>
-							</span>
+							<Loading
+								textSize={'text-sm'}
+								loadingText={'Asking ChatGPT'}
+								textColor={'blue-500'}
+							/>
 						) : (
 							chatGPTPokemonFact.value
 						)}

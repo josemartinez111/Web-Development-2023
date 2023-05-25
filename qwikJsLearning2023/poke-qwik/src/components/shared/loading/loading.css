@@ -9,7 +9,7 @@
 }
 
 .loader-text {
-  @apply relative text-white tracking-wide mt-20;
+  @apply relative tracking-wide mt-20;
   animation: text 4s linear infinite; /* adjust the timing as needed */
 }
 
