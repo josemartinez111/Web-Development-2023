@@ -1,31 +1,83 @@
 /* FILE: loading.css */
 
-/* Tailwind classes */
-.loading-text {
-  @apply font-medium text-white text-2xl tracking-wide absolute top-0 p-0 m-0;
+.loader {
+  @apply relative w-full h-12 flex flex-col-reverse justify-center items-center;
 }
 
-.loading-indicator {
-  @apply bg-purple-600 rounded-full h-4 w-24 transform translate-x-16 absolute left-1/2 mt-16;
+.loader {
+  @apply relative w-full h-12 flex flex-col-reverse items-center;
+}
+
+.loader-text {
+  @apply relative text-white tracking-wide mt-20;
+  animation: text 4s linear infinite; /* adjust the timing as needed */
+}
+
+.load {
+  @apply bg-purple-600 rounded-full h-4 w-4 block absolute bottom-0;
+  animation: load 4s linear infinite; /* adjust the timing as needed */
+}
+
+.load::before {
+  @apply absolute w-full h-full bg-purple-200 rounded-full;
+  content:   "";
+  animation: load2 4s linear infinite; /* adjust the timing as needed */
 }
 
 /* Keyframes for animation */
-@keyframes pulse {
-  0% { opacity: 1; }
-  50% { opacity: 0.5; }
-  100% { opacity: 1; }
+@keyframes text {
+  0%, 20% {
+    @apply tracking-normal;
+    transform: translateX(0px);
+  }
+  60% {
+    @apply tracking-wider;
+    transform: translateX(50%);
+  }
+  100% {
+    @apply tracking-normal;
+    transform: translateX(0px);
+  }
 }
 
-.loading-text {
-  animation: pulse 4s infinite;
+@keyframes load {
+  0% {
+    width:     10%;
+    transform: translateX(0px);
+  }
+  40% {
+    width:     100%;
+    transform: translateX(0px);
+  }
+  80% {
+    width:     10%;
+    transform: translateX(90%);
+  }
+  90%, 100% {
+    width:     100%;
+    transform: translateX(0px);
+  }
 }
 
-@keyframes bounce {
-  0% { left: 0; }
-  50% { left: 50%; }
-  100% { left: 0; }
-}
-
-.loading-indicator {
-  animation: bounce 3s infinite;
+@keyframes load2 {
+  0% {
+    transform: translateX(0px);
+    width:     10%;
+  }
+  40% {
+    transform: translateX(0%);
+    width:     80%;
+  }
+  80% {
+    width:     100%;
+    transform: translateX(0px);
+  }
+  90% {
+    width:     80%;
+    transform: translateX(20%);
+  }
+  100% {
+    transform: translateX(0px);
+    width:     10%;
+  }
 }

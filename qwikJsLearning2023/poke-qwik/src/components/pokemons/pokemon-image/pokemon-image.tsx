@@ -17,6 +17,7 @@ interface PokemonImageProps {
 	size?: number;
 	isPokemonVisible?: boolean;
 	isFlipped?: boolean;
+	loadingText?: string;
 }
 
 const BASE_URL = new URL(
@@ -30,6 +31,7 @@ export const PokemonImage = component$(
 		size = 200,
 		isPokemonVisible = false,
 		isFlipped = false,
+		loadingText,
 	}: PokemonImageProps) => {
 		const isImageLoaded = useSignal(false);
 
@@ -64,7 +66,9 @@ export const PokemonImage = component$(
 			// Return null if there's no id
 			if (!id) return null;
 
-			return isFlipped ? `${BASE_URL}/back/${id}.png` : `${BASE_URL}/${id}.png`;
+			return isFlipped
+				? `${BASE_URL}/back/${id}.png`
+				: `${BASE_URL}/${id}.png`;
 		});
 
 		const simulateAPIFetch = $(() => {
@@ -82,7 +86,9 @@ export const PokemonImage = component$(
 					style={{ width: `${size}px`, height: `${size}px` }}
 				>
 					{/* conditionally-render the image component if loading is complete  */}
-					{computedImageURL.value && !isImageLoaded.value && <Loading />}
+					{computedImageURL.value && !isImageLoaded.value && (
+						<Loading loadingText={loadingText} />
+					)}
 					{/* Pokémon images */}
 					{computedImageURL.value && (
 						<img

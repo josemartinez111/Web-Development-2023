@@ -6,16 +6,27 @@ import { component$, useStylesScoped$ } from '@builder.io/qwik';
 import LoadingStyles from './loading.css?inline';
 // _________________________________________
 
-export const Loading = component$(() => {
-	useStylesScoped$(LoadingStyles);
-	// ________________ [functions] __________________
+interface LoadingProps {
+	loadingText?: string;
+	textSize?: string;
+}
+// _________________________________________
 
-	// _______________________________________________
-	return (
-		<div class="w-20 h-12 relative">
-			<span class="loading-text">Loading</span>
-			<span class="loading-indicator"></span>
-		</div>
-	);
-});
+export const Loading = component$(
+	({
+		loadingText = 'Loading',
+		textSize = 'text-2xl',
+	}: LoadingProps) => {
+		useStylesScoped$(LoadingStyles);
+		// _______________________________________________
+		return (
+			<div class="loader">
+				<span class={`loader-text ${textSize}`}>
+					{loadingText}
+				</span>
+				<span class="load"></span>
+			</div>
+		);
+	},
+);
 // _______________________________________________
