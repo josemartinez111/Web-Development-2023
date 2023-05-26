@@ -4,8 +4,6 @@
 import express, { Express, Request, Response } from 'express';
 // _______________________________________________
 
-// _______________________________________________
-
 export class Server {
   private app: Express;
   private readonly port: string | undefined;
