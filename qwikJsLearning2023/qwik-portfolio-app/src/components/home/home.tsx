@@ -4,7 +4,7 @@
 
 import { $, component$, useOnDocument } from '@builder.io/qwik';
 import { InNavArrowRight } from '@qwikest/icons/iconoir';
-import styles from './/home.module.css';
+import styles from './home.module.css';
 // _________________________________________
 
 export const Home = component$(() => {
@@ -34,7 +34,7 @@ export const Home = component$(() => {
 			<div class={styles.centerContent}>
 				<div class="flex flex-col justify-center h-full">
 					<h2 class={styles.headerTxt}>
-						I am a Full-Stack Developer
+						I am a Full Stack Developer
 					</h2>
 					<p class="text-gray-500 py-4 max-w-md">
 						Lorem ipsum dolor sit amet, consectetur adipisicing
@@ -46,10 +46,10 @@ export const Home = component$(() => {
 
 					{/*|====== button ======|*/}
 					<div>
-						<button class={styles.btn}>
+						<button class={`group ${styles.btn}`}>
 							Portfolio
-							<span>
-								<InNavArrowRight />
+							<span class="group-hover:rotate-90 duration-300">
+								<InNavArrowRight class="font-bold text-2xl ml-1" />
 							</span>
 						</button>
 					</div>
@@ -60,8 +60,8 @@ export const Home = component$(() => {
 						class="rounded-2xl mx-auto w-2/3 md:w-full"
 						src="/hero-image.png"
 						alt="HERO"
-						width={2000}
-						height={2000}
+						width={572}
+						height={572}
 					/>
 				</div>
 			</div>
