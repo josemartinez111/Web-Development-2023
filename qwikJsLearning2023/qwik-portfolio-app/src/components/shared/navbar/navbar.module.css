@@ -9,7 +9,7 @@
 }
 
 .menu {
-  @apply cursor-pointer pr-4 z-10 font-bold text-4xl text-gray-500;
+  @apply cursor-pointer pr-4 z-10 font-bold text-4xl text-gray-500 md:hidden;
 }
 
 .dropDownNav {

@@ -2,24 +2,20 @@
 // _______________________________________________
 
 import { component$, Slot } from '@builder.io/qwik';
-import { Navbar } from "~/components/shared";
+import { Navbar } from '~/components/shared';
 // _______________________________________________
 
 export default component$(() => {
-  
-  // ________________ [functions] __________________
-  
-  // _______________________________________________
-  return (
-    <>
-      <Navbar />
-      <main>
-        <Slot />
-      </main>
-      <footer>
-        <div>footer</div>
-      </footer>
-    </>
-  );
+	// ________________ [functions] __________________
+
+	// _______________________________________________
+	return (
+		<>
+			<Navbar />
+			<main>
+				<Slot />
+			</main>
+		</>
+	);
 });
 // _______________________________________________
