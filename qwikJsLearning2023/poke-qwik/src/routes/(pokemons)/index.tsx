@@ -38,8 +38,9 @@ export default component$(() => {
 			<span class="text-7xl mb-5">{ pokemonID.value }</span>
 			
 			{/* pokemon-image-component ========================== */ }
-			<div class="cursor-pointer"
-			     onClick$={ () => goToPokemon(pokemonID.value) }>
+			<div
+				class="cursor-pointer"
+				onClick$={ () => goToPokemon(pokemonID.value) }>
 				<PokemonImage
 					id={ pokemonID.value }
 					size={ 300 }

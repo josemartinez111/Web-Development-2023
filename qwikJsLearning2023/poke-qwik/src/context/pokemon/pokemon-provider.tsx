@@ -9,11 +9,12 @@ import {
 	useStore,
 	useVisibleTask$,
 } from '@builder.io/qwik';
+import type {
+	PokemonGameState,
+	PokemonListState, PokemonModalState} from '~/context';
 import {
 	PokemonGameContext,
-	PokemonGameState,
-	PokemonListContext,
-	PokemonListState, PokemonModalContext, PokemonModalState,
+	PokemonListContext, PokemonModalContext
 } from '~/context';
 // _________________________________________
 

@@ -2,14 +2,15 @@
 // _________________________________________
 // _________________________________________
 
+import type { PropFunction } from '@builder.io/qwik';
 import { component$ } from '@builder.io/qwik';
 // _________________________________________
 
 interface ButtonsProps {
-	previousOnClick$: (value: number) => void;
-	nextOnClick$: (value: number) => void;
-	flipOnPokemon$: () => boolean;
-	showPokemon$: () => boolean;
+	previousOnClick$: PropFunction<(value: number) => void>;
+	nextOnClick$: PropFunction<(value: number) => void>;
+	flipOnPokemon$: PropFunction<() => boolean>;
+	showPokemon$: PropFunction<() => boolean>;
 	isPokemonShowing: boolean;
 }
 // _________________________________________
@@ -29,8 +30,9 @@ export const HomeButtons = component$(
 			<>
 				<div class="mt-2">
 					{/* previous button */ }
-					<button onClick$={ () => previousOnClick$(-1) }
-					        class="btn btn-primary mr-2">
+					<button
+						onClick$={ () => previousOnClick$(-1) }
+						class="btn btn-primary mr-2">
 						Previous
 					</button>
 					{/* next-button */ }

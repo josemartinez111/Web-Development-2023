@@ -3,9 +3,11 @@
 // _________________________________________
 
 import { component$, Slot } from '@builder.io/qwik';
+import type {
+	RequestEventLoader,/*, RequestEventAction */
+} from '@builder.io/qwik-city';
 import {
-	Link,
-	RequestEventLoader/*, RequestEventAction */,
+	Link/*, RequestEventAction */,
 	routeLoader$,
 } from '@builder.io/qwik-city';
 import { NavBar } from '~/components/shared';
@@ -30,12 +32,12 @@ export default component$(() => {
 			{/* navigation-bar */ }
 			<NavBar />
 			{/* main layout for dashboard ======================== */ }
-			<div class='shared-layout-container'>
-			<span class='text-5xl'>Dashboard Layout</span>
+			<div class="shared-layout-container">
+			<span class="text-5xl">Dashboard Layout</span>
 			<Slot />
 				{/* button to go back home */ }
-				<Link href='/'>
-				<button class='btn btn-primary mt-10'>
+				<Link href="/">
+				<button class="btn btn-primary mt-10">
 					Home
 				</button>
 			</Link>
