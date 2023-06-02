@@ -17,7 +17,7 @@ import { PokemonImage } from '~/components/pokemons/pokemon-image/pokemon-image'
 import { Modal } from '~/components/shared';
 import { Loading } from '~/components/shared/loading/loading';
 import { useListSSR } from '~/hooks';
-import { SpecificPokemon } from '~/interfaces';
+import type { SpecificPokemon } from '~/interfaces';
 import ListSSRStyles from './list-ssr.css?inline';
 // _______________________________________________
 /**

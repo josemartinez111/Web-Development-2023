@@ -5,11 +5,13 @@
 import { component$, useStylesScoped$ } from '@builder.io/qwik';
 import {
 	Form,
-	JSONObject,
-	RequestEventAction,
 	routeAction$, zod$, z,
 } from '@builder.io/qwik-city';
-import type { DocumentHead } from '@builder.io/qwik-city';
+import type {
+	DocumentHead,
+	JSONObject,
+	RequestEventAction,
+} from '@builder.io/qwik-city';
 import LoginStyles from './login.css?inline';
 // _______________________________________________
 
@@ -78,22 +80,23 @@ export default component$(() => {
 	
 	// _______________________________________________
 	return (
-		<Form action={ userAction } class='login-form mt-5'>
+		<Form action={ userAction } class="login-form mt-5">
 			{/** email-input ------------------------- */ }
-			<div class='relative mb-5 mt-5'>
+			<div class="relative mb-5 mt-5">
 				<input
-					name='email' type='text' placeholder='Email address' />
-				<label for='email'>Email Address</label>
+					name="email" type="text" placeholder="Email address" />
+				<label for="email">Email Address</label>
 			</div>
 			{/** password-input ------------------------- */ }
-			<div class='relative mb-5'>
-				<input id='password' name='password' type='password'
-				       placeholder='Password' />
-				<label for='password'>Password</label>
+			<div class="relative mb-5">
+				<input
+					id="password" name="password" type="password"
+					placeholder="Password" />
+				<label for="password">Password</label>
 			</div>
 			{/** register-button ------------------------- */ }
-			<div class='relative mt-5'>
-				<button type='submit'>Register</button>
+			<div class="relative mt-5">
+				<button type="submit">Register</button>
 			</div>
 			
 			<p>
