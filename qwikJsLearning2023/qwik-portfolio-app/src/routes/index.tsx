@@ -4,7 +4,9 @@
 
 import { component$ } from '@builder.io/qwik';
 import type { DocumentHead } from '@builder.io/qwik-city';
+import { About } from "~/components/about/about";
 import { Home } from "~/components/home/home";
+import { Portfolio } from "~/components/portfolio/portfolio";
 import { SocialLinks } from "~/components/social-links/social-links";
 // _______________________________________________
 
@@ -15,6 +17,8 @@ export default component$(() => {
 	return (
 		<>
 			<Home />
+			<About />
+			<Portfolio />
 			<SocialLinks />
 		</>
 	);
