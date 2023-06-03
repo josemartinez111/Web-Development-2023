@@ -2,6 +2,7 @@
 // _________________________________________
 // _________________________________________
 
+import type { JSXChildren } from '@builder.io/qwik';
 import { component$, useStore } from '@builder.io/qwik';
 import { Link } from '@builder.io/qwik-city';
 import {
@@ -13,8 +14,17 @@ import {
 import styles from './social-links.module.css';
 // _________________________________________
 
+type LinkType = {
+	id: number;
+	child: JSXChildren;
+	url: string;
+	style?: string;
+	download?: boolean;
+};
+// _________________________________________
+
 export const SocialLinks = component$(() => {
-	const links = useStore([
+	const links: Array<LinkType> = useStore([
 		{
 			id: 1,
 			child: (
@@ -22,7 +32,7 @@ export const SocialLinks = component$(() => {
 					LinkedIn <IoLogoLinkedin class="text-3xl" />
 				</>
 			),
-			href: 'https://www.linkedin.com/in/jose-martinez-b91753a6/',
+			url: 'https://linkedin.com/in/jose-martinez-b91753a6/',
 			style: 'rounded-tr-md',
 		},
 		{
@@ -32,7 +42,7 @@ export const SocialLinks = component$(() => {
 					Github <IoLogoGithub class="text-3xl" />
 				</>
 			),
-			href: 'https://github.com/josemartinez111',
+			url: 'https://github.com/josemartinez111',
 		},
 		{
 			id: 3,
@@ -41,7 +51,7 @@ export const SocialLinks = component$(() => {
 					Mail <IoMailOutline class="text-3xl" />
 				</>
 			),
-			href: 'mailto:dummy_email@gmail.com',
+			url: 'mailto:dummy_email@gmail.com',
 		},
 		{
 			id: 4,
@@ -50,31 +60,32 @@ export const SocialLinks = component$(() => {
 					Resume <IoPersonAddOutline class="text-3xl" />
 				</>
 			),
-			href: '/resume.pdf',
+			url: '/resume.pdf',
 			style: 'rounded-br-md',
 			download: true,
 		},
 	]);
-
+	
 	// ________________ [functions] __________________
-
+	
 	// _______________________________________________
 	return (
-		<div class={styles.container}>
+		<div class={ styles.container }>
 			<ul>
-				{links.map(({ id, child, href, style, download }) => (
-					<li key={id} class={`${styles.linkedin} ${style}`}>
-						<Link
-							href={href}
-							class={styles.linkedin}
-							download={download}
+				{ links.map(({ id, child, url, style, download }) => (
+					<li key={ id } class={ `${ styles.linkedin } ${ style }` }>
+						{/* no need for the `Link` tag, since we are opening another browser window */}
+						<a
+							href={ url }
+							class={ styles.linkedin }
+							download={ download }
 							target="_blank"
-							rel='noreferrer'
+							rel="noopener noreferrer"
 						>
-							{child}
-						</Link>
+							{ child }
+						</a>
 					</li>
-				))}
+				)) }
 			</ul>
 		</div>
 	);

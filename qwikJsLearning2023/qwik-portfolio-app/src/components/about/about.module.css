@@ -1,0 +1,13 @@
+/* FILE: about.module.css */
+
+.container {
+  @apply w-full min-h-screen bg-gradient-to-b from-gray-800 to-black text-white sm:pb-20;
+}
+
+.subContainer {
+  @apply max-w-screen-lg p-4 mx-auto flex flex-col justify-center w-full h-full;
+}
+
+.about {
+  @apply text-4xl font-bold inline border-b-4 border-gray-500;
+}
