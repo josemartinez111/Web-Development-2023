@@ -5,6 +5,7 @@
 import { $, component$, useSignal, useStore } from '@builder.io/qwik';
 import { Link } from '@builder.io/qwik-city';
 import { InCancel, InMenu } from '@qwikest/icons/iconoir';
+import { scrollToElement } from "~/utils/smooth-scroll";
 import styles from './navbar.module.css';
 // _________________________________________
 
@@ -23,6 +24,8 @@ export const Navbar = component$(() => {
 	const toggleNavMenu = $(() => {
 		isNavShowing.value = !isNavShowing.value;
 	});
+	
+	const handleScrollTo = $((link: string) => scrollToElement(link));
 	// _______________________________________________
 	return (
 		<nav class={ styles.container }>
@@ -34,7 +37,13 @@ export const Navbar = component$(() => {
 				{/* mapping through our row of links & adding them dynamically */ }
 				{ links.map(({ id, link }) => (
 					<li key={ id } class={ styles.homeLinks }>
-						<Link href="/">{ link }</Link>
+						<Link
+							preventdefault:click
+							onClick$={ () => handleScrollTo(link) }
+							href="#"
+						>
+							{ link }
+						</Link>
 					</li>
 				)) }
 			</ul>
@@ -46,7 +55,7 @@ export const Navbar = component$(() => {
 			</div>
 			{ /*|====== render-dropdown conditionally ======|*/ }
 			{ isNavShowing.value && (
-				<ul class={styles.dropDownNav}>
+				<ul class={ styles.dropDownNav }>
 				{ links.map(({ id, link }) => (
 					<li key={ id } class={ styles.dropDownHomeLinks }>
 						<Link href="/">{ link }</Link>

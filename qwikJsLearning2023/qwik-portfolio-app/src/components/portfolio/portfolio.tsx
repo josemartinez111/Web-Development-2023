@@ -10,7 +10,7 @@ export const Portfolio = component$(() => {
 	const portfolios = useStore([
 		{
 			id: 1,
-			src: '/agile-developer.jpeg',
+			src: 'agile-developer.jpeg',
 		},
 		{
 			id: 2,

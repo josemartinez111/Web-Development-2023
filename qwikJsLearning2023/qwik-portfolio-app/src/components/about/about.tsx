@@ -17,7 +17,7 @@ export const About = component$(() => {
 				<div class='p-8'>
 					<p class={styles.about}>About</p>
 				</div>
-				<p class="text-xl mt-20">
+				<p class="text-xl mt-5">
 					Lorem ipsum dolor sit amet, consectetur adipisicing elit.
 					Aliquam, consequuntur eaque est harum ipsam natus suscipit vero.
 					Eaque ipsam iure laborum vel. Animi architecto aspernatur earum
