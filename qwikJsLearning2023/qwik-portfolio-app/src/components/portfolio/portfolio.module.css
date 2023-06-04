@@ -1,7 +1,7 @@
 /* FILE: portfolio.module.css */
 
 .container {
-  @apply bg-gradient-to-b from-black to-gray-800 w-full text-white md:h-screen;
+  @apply bg-gradient-to-b from-black to-gray-800 w-full text-white md:h-screen sm:pb-48;
 }
 
 .subContainer {

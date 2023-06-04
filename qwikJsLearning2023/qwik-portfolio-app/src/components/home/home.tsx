@@ -9,7 +9,7 @@ import styles from './home.module.css';
 
 export const Home = component$(() => {
 	// ________________ [functions] __________________
-
+	
 	useOnDocument(
 		'click',
 		$((event: Event) => {
@@ -30,10 +30,13 @@ export const Home = component$(() => {
 	);
 	// _______________________________________________
 	return (
-		<div class={styles.container}>
-			<div class={styles.centerContent}>
+		<div
+			id="home"
+			class={ styles.container }
+		>
+			<div class={ styles.centerContent }>
 				<div class="flex flex-col justify-center h-full">
-					<h2 class={styles.headerTxt}>
+					<h2 class={ styles.headerTxt }>
 						I am a Full Stack Developer
 					</h2>
 					<p class="text-gray-500 py-4 max-w-md">
@@ -43,25 +46,27 @@ export const Home = component$(() => {
 						iste maiores molestias nostrum repellat, sapiente
 						totam ullam unde voluptas? Velit?
 					</p>
-
-					{/*|====== button ======|*/}
+					
+					{/*|====== button ======|*/ }
 					<div>
-						<button class={`group ${styles.btn}`}>
-							Portfolio
+						<button
+							id="portfolio-button"
+							class={ `group ${ styles.btn }` }
+						>Portfolio
 							<span class="group-hover:rotate-90 duration-300">
 								<InNavArrowRight class="font-bold text-2xl ml-1" />
 							</span>
 						</button>
 					</div>
 				</div>
-				{/*|====== image ======|*/}
+				{/*|====== image ======|*/ }
 				<div>
 					<img
 						class="rounded-2xl mx-auto w-2/3 md:w-full"
 						src="/hero-image.png"
 						alt="HERO"
-						width={572}
-						height={572}
+						width={ 572 }
+						height={ 572 }
 					/>
 				</div>
 			</div>

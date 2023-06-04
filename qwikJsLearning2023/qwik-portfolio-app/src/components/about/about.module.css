@@ -1,7 +1,7 @@
 /* FILE: about.module.css */
 
 .container {
-  @apply w-full min-h-screen bg-gradient-to-b from-gray-800 to-black text-white sm:pb-20;
+  @apply w-full min-h-screen bg-gradient-to-b from-gray-800 to-black text-white sm:pb-48;
 }
 
 .subContainer {

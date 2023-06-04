@@ -20,7 +20,7 @@ import {
 
 export const PokemonProvider = component$(() => {
 	const pokemonGameState = useStore<PokemonGameState>({
-		pokemonID: 4,
+		pokemonID: 0,
 		isPokemonVisible: false,
 		isImageFlipped: false,
 	});

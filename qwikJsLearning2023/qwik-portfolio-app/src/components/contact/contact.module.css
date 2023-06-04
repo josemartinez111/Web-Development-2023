@@ -1,0 +1,29 @@
+/* FILE: contact.module.css */
+
+.container {
+  @apply w-full h-screen bg-gradient-to-b from-black to-gray-500 p-4 text-white;
+}
+
+.subContainer {
+  @apply flex flex-col p-4 justify-center max-w-screen-lg mx-auto h-full;
+}
+
+.contact {
+  @apply text-4xl font-bold inline border-b-4 border-gray-500;
+}
+
+.form {
+  @apply flex flex-col w-full md:w-1/2;
+}
+
+.inputs {
+  @apply p-2 bg-transparent border-2 rounded-md text-white focus:outline-none;
+}
+
+.tArea {
+  @apply p-2 bg-transparent border-2 rounded-md text-white focus:outline-none;
+}
+
+.btn {
+  @apply text-white bg-gradient-to-b from-cyan-500 to-blue-500 px-6 py-3 my-8 mx-auto flex items-center rounded-md hover:scale-110 duration-300;
+}
