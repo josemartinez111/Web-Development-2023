@@ -10,23 +10,25 @@ import styles from './home.module.css';
 export const Home = component$(() => {
 	// ________________ [functions] __________________
 	
+	const handleNavToPortfolio = $((event: Event) => {
+		if (
+			event.target &&
+			(event.target as HTMLElement).id === 'portfolio-button'
+		) {
+			// The 'Portfolio' section would need to have an id of 'portfolio'
+			const portfolioElement =
+				document.getElementById('portfolio');
+			if (portfolioElement) {
+				portfolioElement.scrollIntoView({
+					behavior: 'smooth',
+				});
+			}
+		}
+	});
+	
 	useOnDocument(
 		'click',
-		$((event: Event) => {
-			if (
-				event.target &&
-				(event.target as HTMLElement).id === 'portfolio-button'
-			) {
-				// The 'Portfolio' section would need to have an id of 'portfolio'
-				const portfolioElement =
-					document.getElementById('portfolio');
-				if (portfolioElement) {
-					portfolioElement.scrollIntoView({
-						behavior: 'smooth',
-					});
-				}
-			}
-		}),
+		handleNavToPortfolio,
 	);
 	// _______________________________________________
 	return (
