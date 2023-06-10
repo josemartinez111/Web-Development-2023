@@ -1,7 +1,7 @@
 // FILE: ./api/auth/[...nextauth].ts
 // _______________________________________________
 
-import NextAuth from "next-auth";
+import NextAuth, { NextAuthOptions } from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
 import { PrismaAdapter } from "@next-auth/prisma-adapter"; // Updated this line
 import { PrismaClient } from "@prisma/client";
@@ -18,7 +18,7 @@ if (!clientId || !clientSecret) {
 }
 // _______________________________________________
 
-export default NextAuth({
+export const authOptions: NextAuthOptions = {
 	adapter: PrismaAdapter(prisma),
 	providers: [
 		GoogleProvider({
@@ -51,5 +51,8 @@ export default NextAuth({
 			});
 		},
 	},
-});
+};
+// _______________________________________________
+
+export default NextAuth(authOptions);
 // _______________________________________________
