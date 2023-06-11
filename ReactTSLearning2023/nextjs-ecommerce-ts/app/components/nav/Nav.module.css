@@ -1,9 +1,9 @@
 /* FILE: Nav.module.css */
 
 .container {
-  @apply flex justify-between items-center py-12;
+  @apply bg-gray-100 shadow-lg flex justify-between items-center py-4 w-full;
 }
 
-li.btn {
-  @apply bg-teal-600 text-white py-2 px-4 rounded-md;
+.btn {
+  @apply bg-teal-600 text-white py-2 px-4 rounded-md mx-4;
 }
