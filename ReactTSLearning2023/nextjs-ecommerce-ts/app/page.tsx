@@ -18,14 +18,20 @@ const fetchProducts = async () => {
 	const productWithPrices = await Promise.all(
 		products.data.map(async (product: Stripe.Product) => {
 			const prices = await stripe.prices.list({ product: product.id });
+			let features = 'No features for this product';
+			
+			if ('features' in product.metadata) {
+				features = product.metadata.features;
+			}
 			
 			return {
 				id: product.id,
 				name: product.name,
-				price: prices.data[ 0 ].unit_amount,
+				unit_amount: prices.data[ 0 ].unit_amount,
 				image: product.images[ 0 ],
 				currency: prices.data[ 0 ].currency,
-				// metadata: product.metadata.features,
+				description: product.description,
+				features,
 			} as ProductDataType;
 		}),
 	);
@@ -42,7 +48,7 @@ const HomePage: NextPage = async () => {
 	
 	// _________________________________________________
 	return (
-		<main className="grid grid-cols-fluid gap-4">
+		<main className="grid grid-cols-fluid gap-4 p-4">
 			{ products.map((product: ProductDataType) => (
 				<Product
 					key={ product.id }

@@ -24,7 +24,7 @@ export default async function RootLayout({ children }: WithChildren) {
 	// _________________________________________________
 	return (
 		<html lang="en">
-			<body className="mx-24">
+			<body className="mx-0">
 			<Nav
 				user={ fetchUserSession?.user }
 				expires={ fetchUserSession?.expires as string }
