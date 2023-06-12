@@ -1,0 +1,9 @@
+/* FILE: library.module.css */
+
+.wrapper {
+  @apply flex items-center justify-between px-5 pt-4;
+}
+
+.plus {
+  @apply text-neutral-400 cursor-pointer hover:text-white transition;
+}

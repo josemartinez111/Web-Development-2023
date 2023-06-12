@@ -8,6 +8,7 @@ import Image from "next/image";
 import styles from './Nav.module.css';
 import { Great_Vibes } from 'next/font/google';
 // _______________________________________________
+
 // Define the Great Vibes font
 const greatVibes = Great_Vibes({
 	weight: '400',
