@@ -1,5 +1,5 @@
 'use client';
-// FILE: components/Box.tsx
+// FILE: components/shared/Box.tsx
 // _______________________________________________
 
 import { WithChildren } from "@/types/types.shared";

@@ -3,3 +3,8 @@
 .homeContainer {
   @apply bg-neutral-900 rounded-lg h-full w-full overflow-hidden overflow-y-auto;
 }
+
+.listItem {
+  @apply grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3
+  2xl:grid-cols-4 gap-3 mt-4;
+}

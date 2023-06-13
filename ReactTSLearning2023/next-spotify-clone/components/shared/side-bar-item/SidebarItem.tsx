@@ -1,11 +1,11 @@
 'use client';
-// FILE: components/SidebarItem.tsx
+// FILE: components/shared/SidebarItem.tsx
 // _______________________________________________
 
 import Link from "next/link";
 import { IconType } from "react-icons";
 import { twMerge } from "tailwind-merge";
-import styles from './side-bar-item.module.css';
+import styles from 'components/shared/side-bar-item/side-bar-item.module.css';
 // _______________________________________________
 
 type SidebarItemProps = {
