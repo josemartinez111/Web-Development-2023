@@ -1,10 +1,10 @@
 'use client';
-// FILE: components/Library.tsx
+// FILE: components/shared/Library.tsx
 // _______________________________________________
 
 import { AiOutlinePlus } from "react-icons/ai";
 import { TbPlaylist } from "react-icons/tb";
-import styles from './library.module.css';
+import styles from 'components/shared/library/library.module.css';
 // _______________________________________________
 
 type LibraryProps = {

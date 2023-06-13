@@ -2,9 +2,9 @@
 // FILE: components/Navbar.tsx
 // _______________________________________________
 
-import Box from "@/components/box/Box";
-import Library from "@/components/library/Library";
-import SidebarItem from "@/components/side-bar-item/SidebarItem";
+import Box from "@/components/shared/box/Box";
+import Library from "@/components/shared/library/Library";
+import SidebarItem from "@/components/shared/side-bar-item/SidebarItem";
 import { WithChildren } from "@/types/types.shared";
 import { usePathname } from "next/navigation";
 import { useMemo } from "react";
@@ -15,7 +15,14 @@ import styles from './side-bar.module.css';
 
 const Navbar = ({ children }: WithChildren) => {
 	const pathnameNav = usePathname();
-	
+	/** Here, useMemo is used to create an array of routes and
+	 * associate them with certain icons and labels.useMemo caches
+	 * the result of the provided function, in this case the array
+	 * of routes, until its dependencies change.The dependencies
+	 * array is [pathnameNav]. So, the array of routes will be
+	 * recalculated whenever pathnameNav changes.This is beneficial
+	 * as it avoids unnecessary recalculations of the routes array
+	 * on each render, potentially improving performance. */
 	const routesMemo = useMemo(() => [
 		{
 			icon: HiHome,
