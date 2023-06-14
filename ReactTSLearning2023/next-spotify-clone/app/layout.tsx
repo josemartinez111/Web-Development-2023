@@ -3,6 +3,8 @@
 
 import './globals.css';
 import Sidebar from "@/components/side-bar/Sidebar";
+import SupabaseProvider from "@/providers/SupabaseProvider";
+import UserProvider from "@/providers/UserProvider";
 import { WithChildren } from "@/types/types.shared";
 import { Figtree } from 'next/font/google';
 // _______________________________________________
@@ -24,9 +26,13 @@ export default function RootLayout({ children }: WithChildren) {
 	return (
 		<html lang="en">
 			<body className={ font.className }>
-			<Sidebar>
-				{ children }
-			</Sidebar>
+			<SupabaseProvider>
+				<UserProvider>
+					<Sidebar>
+						{ children }
+					</Sidebar>
+				</UserProvider>
+			</SupabaseProvider>
 			</body>
 		</html>
 	);

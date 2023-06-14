@@ -35,7 +35,7 @@ const ListItem = ({ image, name, href }: ListItemProps) => {
         items-center
         rounded-md
         overflow-hidden
-        gap-x-4
+        gap-x-1
         bg-neutral-100/10
         cursor-pointer
         hover:bg-neutral-100/20
@@ -55,7 +55,8 @@ const ListItem = ({ image, name, href }: ListItemProps) => {
 				{ name }
 			</p>
 			{ /*|====== play-icon ======|*/ }
-			<div className="absolute
+			<div
+				className="absolute
           transition
           opacity-0
           rounded-full
