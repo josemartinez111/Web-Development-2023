@@ -1,35 +1,18 @@
 // FILE: hooks/useUser.tsx
 // _______________________________________________
 
+import { UserContext } from "@/context/UserContext";
 import { SubscriptionType, UserDetailsType } from "@/types/types.supabase";
 import {
 	useSessionContext,
 	useUser as useSupaUser,
 } from "@supabase/auth-helpers-react";
-import { User } from "@supabase/gotrue-js";
-import { createContext, useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
 // _______________________________________________
 
-type UserContextType = {
-	accessToken: string | null
-	user: User | null
-	userDetails: UserDetailsType | null
-	isLoading: boolean
-	subscription: SubscriptionType | null
-}
-// _______________________________________________
-
-export const UserContext = createContext<UserContextType | undefined>(
-	undefined,
-);
-// _______________________________________________
-
-export type PropsType = {
-	[ propName: string ]: any;
-}
-// _______________________________________________
-
-export const MyUserContextProvider = (props: PropsType) => {
+export const useUser = () => {
+	const context = useContext(UserContext);
+	
 	const {
 		session,
 		isLoading: isLoadingUser,
@@ -38,10 +21,11 @@ export const MyUserContextProvider = (props: PropsType) => {
 	
 	const user = useSupaUser();
 	const accessToken = session?.access_token ?? null;
-	
 	const [isLoadingData, setIsLoadingData] = useState(false);
+	
 	const [userDetails, setUserDetails] = useState<UserDetailsType | null>(null);
 	const [subscription, setSubscription] = useState<SubscriptionType | null>(null);
+	
 	
 	const fetchUserDetails = () => (
 		supabase.from('users').select('*').single()
@@ -89,6 +73,10 @@ export const MyUserContextProvider = (props: PropsType) => {
 				// If there's an error while fetching data
 				// or updating states, log the error message
 				if (error instanceof Error) console.error(error.message);
+				
+				if (context === undefined) {
+					throw new Error('useUser must be used within a MyUserProvider');
+				}
 			} finally {
 				// Indicate that data loading has finished,
 				// regardless of whether it was successful or not
@@ -96,22 +84,6 @@ export const MyUserContextProvider = (props: PropsType) => {
 			}
 		}
 	};
-	
-	
-	useEffect(() => {
-		// If the user is logged in, and we're not currently loading,
-		// and the userDetails and subscription haven't been fetched,
-		// then fetch the data
-		if (user && !isLoadingData && !userDetails && !subscription) {
-			// Execute the fetchData function
-			fetchData().then();
-			// If the user is not logged in, and we're not currently loading
-			// the user or other data, clear the userDetails and subscription
-		} else if (!user && !isLoadingUser && !isLoadingData) {
-			setUserDetails(null);
-			setSubscription(null);
-		}
-	}, [fetchData, user, isLoadingUser]);
 	
 	const value = {
 		accessToken,
@@ -121,20 +93,17 @@ export const MyUserContextProvider = (props: PropsType) => {
 		subscription,
 	};
 	
-	return (
-		<UserContext.Provider value={ value } { ...props } />
-	);
-};
-// _______________________________________________
-
-export const useUser = () => {
-	const context = useContext(UserContext);
-	
-	if (context === undefined) {
-		throw new Error('useUser must be used within a MyUserContextProvider');
-	}
-	
-	return context;
+	return {
+		fetchData,
+		value,
+		isLoadingData,
+		setIsLoadingData,
+		userDetails,
+		setUserDetails,
+		subscription,
+		setSubscription,
+		context,
+	};
 };
 // _______________________________________________
 

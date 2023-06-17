@@ -3,16 +3,17 @@
 // _______________________________________________
 
 import Modal from "@/components/shared/modal/Modal";
+import { WithChildren } from "@/types/types.shared";
 import { useEffect, useState } from "react";
 // _______________________________________________
 
 
-type ModalProviderProps = {
-	mockProp?: string;
-};
+// type ModalProviderProps = {
+// 	mockProp?: string;
+// };
 // _______________________________________________
 
-const ModalProvider = () => {
+const ModalProvider = ({ children }: WithChildren) => {
 	const [isMounted, setIsMounted] = useState(false);
 	
 	// will handle the change of isMounted
@@ -29,7 +30,14 @@ const ModalProvider = () => {
 	// _________________________________________________
 	return (
 		<>
-			<Modal />
+			<Modal
+				title="Test Modal"
+				description="Test description"
+				isOpen
+				onChange={ () => {
+				} }
+			>Test children
+			</Modal>
 		</>
 	);
 };

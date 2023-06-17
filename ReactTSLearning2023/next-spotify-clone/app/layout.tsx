@@ -3,9 +3,9 @@
 
 import './globals.css';
 import Sidebar from "@/components/side-bar/Sidebar";
-import ModalProvider from "@/providers/ModalProvider";
-import SupabaseProvider from "@/providers/SupabaseProvider";
-import UserProvider from "@/providers/UserProvider";
+import ModalProvider from "@/context/providers/ModalProvider";
+import SupabaseProvider from "@/context/providers/SupabaseProvider";
+import UserProvider from "@/context/providers/UserProvider";
 import { WithChildren } from "@/types/types.shared";
 import { Figtree } from 'next/font/google';
 // _______________________________________________

@@ -2,7 +2,7 @@
 // FILE: providers/UserProvider.tsx
 // _______________________________________________
 
-import { MyUserContextProvider } from "@/hooks/useUser";
+import MyUserProvider from "@/context/providers/MyUserProvider";
 import { WithChildren } from "@/types/types.shared";
 // _______________________________________________
 
@@ -13,9 +13,9 @@ const UserProvider = ({ children }: WithChildren) => {
 	
 	// _________________________________________________
 	return (
-		<MyUserContextProvider>
+		<MyUserProvider>
 			{ children }
-		</MyUserContextProvider>
+		</MyUserProvider>
 	);
 };
 // _______________________________________________
