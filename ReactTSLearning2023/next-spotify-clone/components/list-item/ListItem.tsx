@@ -40,7 +40,9 @@ const ListItem = ({ image, name, href }: ListItemProps) => {
         cursor-pointer
         hover:bg-neutral-100/20
         transition
-        pr-4">
+        pr-4
+        min-w-max
+        w-full">
 			{ /*|====== like-image ======|*/ }
 			<div className={ styles.likeImageWrapper }>
 				<Image
@@ -51,7 +53,7 @@ const ListItem = ({ image, name, href }: ListItemProps) => {
 				/>
 			</div>
 			{ /*|====== name ======|*/ }
-			<p className="font-medium truncate py-5">
+			<p className="font-medium truncate py-5 ml-2">
 				{ name }
 			</p>
 			{ /*|====== play-icon ======|*/ }

@@ -3,6 +3,7 @@
 
 import './globals.css';
 import Sidebar from "@/components/side-bar/Sidebar";
+import ModalProvider from "@/providers/ModalProvider";
 import SupabaseProvider from "@/providers/SupabaseProvider";
 import UserProvider from "@/providers/UserProvider";
 import { WithChildren } from "@/types/types.shared";
@@ -28,6 +29,7 @@ export default function RootLayout({ children }: WithChildren) {
 			<body className={ font.className }>
 			<SupabaseProvider>
 				<UserProvider>
+					<ModalProvider />
 					<Sidebar>
 						{ children }
 					</Sidebar>

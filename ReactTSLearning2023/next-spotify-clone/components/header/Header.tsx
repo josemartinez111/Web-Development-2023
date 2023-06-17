@@ -60,29 +60,23 @@ const Header = ({ children, className }: WithChildren) => {
 				</div>
 				{/* custom-button (signup) component, with updated styling =========== */ }
 				<div className="flex justify-center items-center gap-x-4">
-					<>
-						<div>
-							<Button
-								onClick={ () => {
-								} }
-								className={ styles.signup }
-							>Sign up
-							</Button>
-						</div>
-					</>
-				</div>
-				{/* custom-button (login) component, with updated styling =========== */ }
-				<div className="flex justify-center items-center gap-x-4">
-					<>
-						<div>
-							<Button
-								onClick={ () => {
-								} }
-								className={ styles.signin }
-							>Log in
-							</Button>
-						</div>
-					</>
+					<div>
+						<Button
+							onClick={ () => {
+							} }
+							className={ styles.signup }
+						>Sign up
+						</Button>
+					</div>
+					{/* custom-button (login) component, with updated styling =========== */ }
+					<div>
+						<Button
+							onClick={ () => {
+							} }
+							className={ styles.login }
+						>Log in
+						</Button>
+					</div>
 				</div>
 			</div>
 			{ /*|====== children of the header component ======|*/ }
