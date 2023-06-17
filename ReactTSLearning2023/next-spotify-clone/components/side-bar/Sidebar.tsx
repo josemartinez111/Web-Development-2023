@@ -1,10 +1,9 @@
 'use client';
-// FILE: components/Navbar.tsx
-// _______________________________________________
-
 import Box from "@/components/shared/box/Box";
 import Library from "@/components/shared/library/Library";
 import SidebarItem from "@/components/shared/side-bar-item/SidebarItem";
+// FILE: components/Navbar.tsx
+// _______________________________________________
 import { WithChildren } from "@/types/types.shared";
 import { usePathname } from "next/navigation";
 import { useMemo } from "react";
