@@ -3,7 +3,7 @@
 // _______________________________________________
 
 import { WithChildren } from "@/types/types.shared";
-// import styles from './modal.module.css'
+import styles from './modal.module.css';
 import * as Dialog from '@radix-ui/react-dialog';
 import { IoMdClose } from "react-icons/io";
 // _______________________________________________
@@ -23,8 +23,34 @@ const Modal = ({ isOpen, onChange, title, description, children }: ModalProps) =
 	
 	// _________________________________________________
 	return (
-		<Dialog.Root>
-		
+		<Dialog.Root
+			open={ isOpen }
+			defaultOpen={ isOpen }
+			onOpenChange={ onChange }
+		>
+			<Dialog.Portal>
+				{ /*|====== overlay-component ======|*/ }
+				<Dialog.Overlay className={ styles.overlay } />
+				{ /*|====== content-component ======|*/ }
+				<Dialog.Content className={ styles.content }>
+					{ /*|====== title ======|*/ }
+					<Dialog.Title className="text-xl text-center font-bold mb-4">
+						{ title }
+					</Dialog.Title>
+					{ /*|====== description ======|*/ }
+					<Dialog.Description className="mb-5 text-sm leading-normal text-center">
+						{ description }
+					</Dialog.Description>
+					{ /*|====== display-children ======|*/ }
+					<div>{ children }</div>
+					{ /*|====== close-dialog component ======|*/ }
+					<Dialog.Close asChild>
+						<button className={styles.closeDialog}>
+							<IoMdClose />
+						</button>
+					</Dialog.Close>
+				</Dialog.Content>
+			</Dialog.Portal>
 		</Dialog.Root>
 	);
 };
@@ -32,3 +58,14 @@ const Modal = ({ isOpen, onChange, title, description, children }: ModalProps) =
 
 export default Modal;
 // _______________________________________________
+
+
+
+
+
+
+
+
+
+
+
