@@ -3,9 +3,14 @@
 // _______________________________________________
 
 import Button from "@/components/shared/button/Button";
+import { useUser } from "@/context/providers/MyUserProvider";
+import { useAuthModal } from "@/hooks/useAuthModal";
 import { WithChildren } from "@/types/types.shared";
+import { useSupabaseClient } from "@supabase/auth-helpers-react";
 import { useRouter } from "next/navigation";
+import toast from "react-hot-toast";
 import { BiSearch } from "react-icons/bi";
+import { FaUserAlt } from "react-icons/fa";
 import { HiHome } from "react-icons/hi";
 import { RxCaretLeft, RxCaretRight } from "react-icons/rx";
 import { twMerge } from "tailwind-merge";
@@ -13,12 +18,21 @@ import styles from './header.module.css';
 // _______________________________________________
 
 const Header = ({ children, className }: WithChildren) => {
+	const authModal = useAuthModal();
 	const router = useRouter();
 	
+	const supabaseClient = useSupabaseClient();
+	const { user } = useUser();
 	// _________________ [functions] ___________________
 	
-	const handleLogout = () => {
-	
+	const handleLogout = async () => {
+		const { error } = await supabaseClient.auth.signOut();
+		// reset any playing songs
+		router.refresh();
+		
+		error
+			? toast.error(error.message)
+			: toast.success('Logged out!');
 	};
 	
 	const handleBack = () => () => (
@@ -59,25 +73,42 @@ const Header = ({ children, className }: WithChildren) => {
 					</button>
 				</div>
 				{/* custom-button (signup) component, with updated styling =========== */ }
-				<div className="flex justify-center items-center gap-x-4">
-					<div>
-						<Button
-							onClick={ () => {
-							} }
-							className={ styles.signup }
-						>Sign up
-						</Button>
-					</div>
-					{/* custom-button (login) component, with updated styling =========== */ }
-					<div>
-						<Button
-							onClick={ () => {
-							} }
-							className={ styles.login }
-						>Log in
-						</Button>
-					</div>
-				</div>
+				<div className="flex justify-between items-center gap-x-4">
+          { user ? (
+	          <div className="flex gap-x-4 items-center">
+              <Button
+	              onClick={ handleLogout }
+	              className="bg-white px-6 py-2"
+              >
+                Logout
+              </Button>
+              <Button
+	              onClick={ () => router.push('/account') }
+	              className="bg-white"
+              >
+                <FaUserAlt />
+              </Button>
+            </div>
+          ) : (
+	          <>
+              <div>
+                <Button
+	                onClick={ authModal.onOpen }
+	                className="bg-transparent text-neutral-300 font-medium">
+                  Sign up
+                </Button>
+              </div>
+              <div>
+                <Button
+	                onClick={ authModal.onOpen }
+	                className="bg-white px-6 py-2"
+                >Log in
+                </Button>
+              </div>
+            </>
+          ) }
+        </div>
+				
 			</div>
 			{ /*|====== children of the header component ======|*/ }
 			{ children }

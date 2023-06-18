@@ -49,7 +49,8 @@ const ListItem = ({ image, name, href }: ListItemProps) => {
 					className="object-cover"
 					src={ image }
 					alt="Image"
-					fill
+					width="80"
+					height="80"
 				/>
 			</div>
 			{ /*|====== name ======|*/ }

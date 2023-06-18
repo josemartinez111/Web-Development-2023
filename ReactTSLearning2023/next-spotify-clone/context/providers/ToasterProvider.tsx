@@ -1,24 +1,29 @@
 'use client';
-// FILE: providers/UserProvider.tsx
+// FILE: providers/ToasterProvider.tsx
 // _______________________________________________
 
-import { MyUserProvider } from "@/context/providers/MyUserProvider";
-import { WithChildren } from "@/types/types.shared";
+import { Toaster } from "react-hot-toast";
 // _______________________________________________
 
-const UserProvider = ({ children }: WithChildren) => {
+
+const ToasterProvider = () => {
 	
 	// _________________ [functions] ___________________
 	
 	
 	// _________________________________________________
 	return (
-		<MyUserProvider>
-			{ children }
-		</MyUserProvider>
+		<Toaster
+			toastOptions={ {
+				style: {
+					background: '#333',
+					color: '#fff'
+				}
+			} }
+		/>
 	);
 };
 // _______________________________________________
 
-export default UserProvider;
+export default ToasterProvider;
 // _______________________________________________
