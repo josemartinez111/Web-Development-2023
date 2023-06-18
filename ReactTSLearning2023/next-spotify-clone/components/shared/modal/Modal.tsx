@@ -45,7 +45,7 @@ const Modal = ({ isOpen, onChange, title, description, children }: ModalProps) =
 					<div>{ children }</div>
 					{ /*|====== close-dialog component ======|*/ }
 					<Dialog.Close asChild>
-						<button className={styles.closeDialog}>
+						<button className={ styles.closeDialog }>
 							<IoMdClose />
 						</button>
 					</Dialog.Close>

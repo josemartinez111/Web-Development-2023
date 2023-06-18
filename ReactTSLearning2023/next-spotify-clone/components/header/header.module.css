@@ -32,14 +32,6 @@
   justify-center hover:opacity-75 transition cursor-pointer;
 }
 
-.signup {
-  @apply bg-transparent text-neutral-300 font-medium mr-0;
-}
-
-.login {
-  @apply bg-white px-6 py-2;
-}
-
 
 
 

@@ -2,6 +2,7 @@
 // FILE: providers/ModalProvider.tsx
 // _______________________________________________
 
+import AuthModal from "@/components/auth/AuthModal";
 import Modal from "@/components/shared/modal/Modal";
 import { WithChildren } from "@/types/types.shared";
 import { useEffect, useState } from "react";
@@ -30,14 +31,7 @@ const ModalProvider = ({ children }: WithChildren) => {
 	// _________________________________________________
 	return (
 		<>
-			<Modal
-				title="Test Modal"
-				description="Test description"
-				isOpen
-				onChange={ () => {
-				} }
-			>Test children
-			</Modal>
+			<AuthModal />
 		</>
 	);
 };

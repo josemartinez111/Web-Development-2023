@@ -4,12 +4,11 @@
 
 import { ButtonHTMLAttributes, forwardRef } from "react";
 import { twMerge } from "tailwind-merge";
-import styles from './button.module.css';
 // _______________________________________________
 
 // Here we define the type for our Button component,
 // merging it with the standard ButtonHTMLAttributes.
-type ButtonType = ButtonHTMLAttributes<HTMLButtonElement> & {};
+export type ButtonType = ButtonHTMLAttributes<HTMLButtonElement> & {};
 // _______________________________________________
 
 // Here we use forwardRef to create our Button component.
@@ -27,9 +26,16 @@ const Button = forwardRef<HTMLButtonElement, ButtonType>(({
 	// Now, when this Button component is used elsewhere, a ref
 	// can be passed in, and it will be attached directly to this
 	// <button> element.
+	const mergedStyles = `w-full rounded-full
+	 bg-green-500 border
+	 border-transparent
+   px-3 py-3 disabled:cursor-not-allowed
+	 disabled:opacity-50 text-black font-bold
+   hover:opacity-75 transition`;
+	
 	return (
 		<button
-			className={ twMerge(styles.btn, className) }
+			className={ twMerge(mergedStyles, className) }
 			type={ type }
 			disabled={ disabled }
 			ref={ ref }
