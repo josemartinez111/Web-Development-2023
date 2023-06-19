@@ -2,22 +2,34 @@
 // FILE: components/shared/Library.tsx
 // _______________________________________________
 
+import { useUser } from "@/context/providers/MyUserProvider";
+import { useAuthModal } from "@/hooks/useAuthModal";
+import { useUploadModal } from "@/hooks/useUploadModal";
 import { AiOutlinePlus } from "react-icons/ai";
 import { TbPlaylist } from "react-icons/tb";
 import styles from 'components/shared/library/library.module.css';
 // _______________________________________________
 
-type LibraryProps = {
-	mockProp?: string;
-};
+// type LibraryProps = {
+// 	mockProp?: string;
+// };
 // _______________________________________________
 
-const Library = ({ mockProp = 'Library-Component' }: LibraryProps) => {
+const Library = () => {
+	const authModal = useAuthModal();
+	const uploadModal = useUploadModal();
+	const { user } = useUser();
 	
 	// _________________ [functions] ___________________
 	
 	const handleUpload = () => {
-	
+		// will re-route to the login screen
+		// if the user is not login
+		if (!user) return authModal.onOpen();
+		// TODO: check for subscription
+		
+		// if the user is logged in
+		return uploadModal.onOpen();
 	};
 	// _________________________________________________
 	return (
