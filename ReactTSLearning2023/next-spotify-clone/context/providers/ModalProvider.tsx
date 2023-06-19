@@ -3,8 +3,7 @@
 // _______________________________________________
 
 import AuthModal from "@/components/auth/AuthModal";
-import Modal from "@/components/shared/modal/Modal";
-import { WithChildren } from "@/types/types.shared";
+import UploadModal from "@/components/upload-modal/UploadModal";
 import { useEffect, useState } from "react";
 // _______________________________________________
 
@@ -14,7 +13,7 @@ import { useEffect, useState } from "react";
 // };
 // _______________________________________________
 
-const ModalProvider = ({ children }: WithChildren) => {
+const ModalProvider = () => {
 	const [isMounted, setIsMounted] = useState(false);
 	
 	// will handle the change of isMounted
@@ -32,6 +31,7 @@ const ModalProvider = ({ children }: WithChildren) => {
 	return (
 		<>
 			<AuthModal />
+			<UploadModal />
 		</>
 	);
 };

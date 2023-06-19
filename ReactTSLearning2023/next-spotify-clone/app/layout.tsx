@@ -30,8 +30,11 @@ export default function RootLayout({ children }: WithChildren) {
 			<body className={ font.className }>
 			<ToasterProvider />
 			<SupabaseProvider>
+				{ /*|====== user-provider ======|*/ }
 				<UserProvider>
+					{ /*|====== modal-provider ======|*/ }
 					<ModalProvider />
+					{ /*|====== sidebar ======|*/ }
 					<Sidebar>
 						{ children }
 					</Sidebar>
