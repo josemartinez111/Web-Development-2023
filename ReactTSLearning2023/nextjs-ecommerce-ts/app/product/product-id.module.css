@@ -1,9 +1,0 @@
-/* FILE: product-id.module.css */
-
-.container {
-  @apply flex justify-between gap-24 p-8 text-gray-700;
-}
-
-.btn {
-  @apply my-3 text-white py-2 px-6 font-medium rounded-md bg-teal-700;
-}
