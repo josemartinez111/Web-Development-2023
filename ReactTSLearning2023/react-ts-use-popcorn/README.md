@@ -1,4 +1,4 @@
 # README
 
 #### component-categories
-![component-categories](public/component-categories.png)
+<img src="public/component-categories.png" alt="component-categories" width="700" height="450">
