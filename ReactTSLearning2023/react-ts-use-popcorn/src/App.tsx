@@ -65,95 +65,63 @@ const tempWatchedData: Array<WatchedDataType> = [
 	},
 ];
 
-const average = (arr: Array<number>): number =>
-	arr.reduce((acc: number, cur: number) => acc + cur, 0) / arr.length;
-// _______________________________________________
-
-const App = () => (
-	<>
-    <Navbar />
-    <Main />
-  </>
+const average = (arr: Array<number>): number => (
+	arr.reduce((acc: number, cur: number) => acc + cur, 0) / arr.length
 );
-
-export default App;
 // _______________________________________________
-
-export const Navbar = () => {
-	return (
-		<nav className="nav-bar">
-      <Logo />
-      <Search />
-      <NumResults />
-    </nav>
-	);
-};
-// _______________________________________________
-
-export const NumResults = () => {
-	return (
-		<p className="num-results">
-      Found <strong>Movies go here</strong> results
-    </p>
-	);
-};
-// _______________________________________________
-
-export const Logo = () => {
-	return (
-		<div className="logo">
-      <span role="img">🍿</span>
-      <h1>usePopcorn</h1>
-    </div>
-	);
-};
-// _______________________________________________
-
-export const Search = () => {
-	const [query, setQuery] = useState("");
-	
-	return (
-		<input
-			className="search"
-			type="text"
-			placeholder="Search movies..."
-			value={ query }
-			onChange={ (event: InputEvent) => setQuery(event.target.value) }
-		/>
-	);
-};
-// _______________________________________________
-
-export const ListBox = () => {
-	const [isOpen1, setIsOpen1] = useState(true);
-	
-	return (
-		<div className="box">
-      <button
-	      className="btn-toggle"
-	      onClick={ () => setIsOpen1((open) => !open) }
-      >
-        { isOpen1 ? "–" : "+" }
-      </button>
-			{ isOpen1 && <MovieList /> }
-    </div>
-	);
-};
-// _______________________________________________
-
-export const MovieList = () => {
+/** @structural-component */
+const App = () => {
 	const [movies, setMovies] = useState<Array<MovieDataType>>(tempMovieData);
 	
 	return (
-		<ul className="list">
-      { movies?.map((movie) => (
-	      <Movie key={ movie.imdbID } { ...movie } />
-      )) }
-    </ul>
+		<>
+	    <Navbar movies={ movies } />
+	    <Main movies={ movies } />
+	  </>
+	);
+};
+
+export default App;
+// _______________________________________________
+/** @structural-component */
+export const Navbar = ({ movies }: { movies: Array<MovieDataType> }) => {
+	
+	return (
+		<nav className="nav-bar">
+	      <Logo />
+	      <Search />
+	      <NumResults movies={ movies } />
+	    </nav>
 	);
 };
 // _______________________________________________
-
+/** @structural-component */
+export const Main = ({ movies }: { movies: Array<MovieDataType> }) => (
+	<main className="main">
+		<ListBox movies={ movies } />
+		<WatchedBox />
+	</main>
+);
+// _______________________________________________
+/** @stateless-presentational-component */
+export const Logo = () => (
+	<div className="logo">
+		<span role="img">🍿</span>
+		<h1>usePopcorn</h1>
+	</div>
+);
+// _______________________________________________
+/** @stateless-presentational-component */
+export const NumResults = ({ movies }: { movies: Array<MovieDataType> }) => {
+	
+	return (
+		<p className="num-results">
+			Found <strong>{ movies.length }</strong> results
+		</p>
+	);
+};
+// _______________________________________________
+/** @stateless-presentational-component */
 export const Movie = ({ imdbID, poster, title, year }: MovieDataType) => {
 	return (
 		<li key={ imdbID }>
@@ -169,45 +137,7 @@ export const Movie = ({ imdbID, poster, title, year }: MovieDataType) => {
 	);
 };
 // _______________________________________________
-
-export const WatchedBox = () => {
-	const [isOpen2, setIsOpen2] = useState(true);
-	const [watched, setWatched] =
-		useState<Array<WatchedDataType>>(tempWatchedData);
-	return (
-		<div className="box">
-      <button
-	      className="btn-toggle"
-	      onClick={ () => setIsOpen2((open) => !open) }
-      >
-        { isOpen2 ? "–" : "+" }
-      </button>
-			{ isOpen2 && (
-				<>
-          <WatchSummary watched={ watched } />
-          <WatchedMovieList watched={ watched } />
-        </>
-			) }
-    </div>
-	);
-};
-// _______________________________________________
-
-export const WatchedMovieList = ({
-	watched,
-}: {
-	watched: Array<WatchedDataType>;
-}) => {
-	return (
-		<ul className="list">
-      { watched.map((movie: WatchedDataType) => (
-	      <WatchedMovie key={ movie.imdbID } { ...movie } />
-      )) }
-    </ul>
-	);
-};
-// _______________________________________________
-
+/** @stateless-presentational-component */
 export const WatchedMovie = ({
 	Poster,
 	Title,
@@ -218,27 +148,40 @@ export const WatchedMovie = ({
 }: WatchedDataType) => {
 	return (
 		<li key={ imdbID }>
-          <img src={ Poster } alt={ `${ Title } poster` } />
-          <h3>{ Title }</h3>
-          <div>
-            <p>
-              <span>⭐️</span>
-              <span>{ imdbRating }</span>
-            </p>
-            <p>
-              <span>🌟</span>
-              <span>{ userRating }</span>
-            </p>
-            <p>
-              <span>⏳</span>
-              <span>{ runtime } min</span>
-            </p>
-          </div>
-        </li>
+			<img src={ Poster } alt={ `${ Title } poster` } />
+			<h3>{ Title }</h3>
+			<div>
+				<p>
+					<span>⭐️</span>
+					<span>{ imdbRating }</span>
+				</p>
+				<p>
+					<span>🌟</span>
+					<span>{ userRating }</span>
+				</p>
+				<p>
+					<span>⏳</span>
+					<span>{ runtime } min</span>
+				</p>
+			</div>
+		</li>
 	);
 };
 // _______________________________________________
-
+/** @stateless-presentational-component */
+export const WatchedMovieList = ({ watched }: {
+	watched: Array<WatchedDataType>
+}) => {
+	return (
+		<ul className="list">
+      { watched.map((movie: WatchedDataType) => (
+	      <WatchedMovie key={ movie.imdbID } { ...movie } />
+      )) }
+    </ul>
+	);
+};
+// _______________________________________________
+/** @stateless-presentational-component */
 export const WatchSummary = ({
 	watched,
 }: {
@@ -273,13 +216,70 @@ export const WatchSummary = ({
 	);
 };
 // _______________________________________________
-
-export const Main = () => {
+/** @stateful-component */
+export const Search = () => {
+	const [query, setQuery] = useState("");
+	
 	return (
-		<main className="main">
-      <ListBox />
-      <WatchedBox />
-    </main>
+		<input
+			className="search"
+			type="text"
+			placeholder="Search movies..."
+			value={ query }
+			onChange={ (event: InputEvent) => setQuery(event.target.value) }
+		/>
+	);
+};
+// _______________________________________________
+/** @stateful-component */
+export const ListBox = ({ movies }: { movies: Array<MovieDataType> }) => {
+	const [isOpen1, setIsOpen1] = useState(true);
+	
+	return (
+		<div className="box">
+      <button
+	      className="btn-toggle"
+	      onClick={ () => setIsOpen1((open) => !open) }
+      >
+        { isOpen1 ? "–" : "+" }
+      </button>
+			{ isOpen1 && <MovieList movies={ movies } /> }
+    </div>
+	);
+};
+// _______________________________________________
+/** @stateful-component */
+export const MovieList = ({ movies }: { movies: Array<MovieDataType> }) => {
+	
+	return (
+		<ul className="list">
+      { movies?.map((movie) => (
+	      <Movie key={ movie.imdbID } { ...movie } />
+      )) }
+    </ul>
+	);
+};
+// _______________________________________________
+/** @stateful-component */
+export const WatchedBox = () => {
+	const [isOpen2, setIsOpen2] = useState(true);
+	const [watched, setWatched] =
+		useState<Array<WatchedDataType>>(tempWatchedData);
+	return (
+		<div className="box">
+      <button
+	      className="btn-toggle"
+	      onClick={ () => setIsOpen2((open) => !open) }
+      >
+        { isOpen2 ? "–" : "+" }
+      </button>
+			{ isOpen2 && (
+				<>
+          <WatchSummary watched={ watched } />
+          <WatchedMovieList watched={ watched } />
+        </>
+			) }
+    </div>
 	);
 };
 // _______________________________________________
