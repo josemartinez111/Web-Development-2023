@@ -1,0 +1,57 @@
+/* FILE: header.module.css */
+
+.container {
+  @apply h-fit bg-gradient-to-b from-emerald-800 p-6;
+}
+
+.wrapper {
+  @apply w-full mb-4 flex items-center justify-between;
+}
+
+.btnWrapper {
+  @apply hidden md:flex gap-x-2 items-center;
+}
+
+.leftBtn {
+  @apply rounded-full bg-black flex items-center
+  justify-center hover:opacity-75 transition cursor-pointer;
+}
+
+.rightBtn {
+  @apply rounded-full bg-black flex items-center
+  justify-center hover:opacity-75 transition cursor-pointer;
+}
+
+.homeIcon {
+  @apply rounded-full p-2 bg-white flex items-center
+  justify-center hover:opacity-75 transition cursor-pointer;
+}
+
+.searchIcon {
+  @apply rounded-full p-2 bg-white flex items-center
+  justify-center hover:opacity-75 transition cursor-pointer;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
