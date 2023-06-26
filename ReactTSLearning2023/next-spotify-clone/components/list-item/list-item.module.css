@@ -1,0 +1,5 @@
+/* FILE: list-item.module.css */
+
+.likeImageWrapper {
+  @apply relative min-h-[80px] min-w-[80px];
+}
