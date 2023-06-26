@@ -7,6 +7,9 @@
 
 # My ignored items
 *.env
+*.env.local
+.env*
+.env*.local
 
 # testing
 /coverage

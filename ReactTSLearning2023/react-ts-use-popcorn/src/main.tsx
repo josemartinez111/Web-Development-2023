@@ -1,10 +1,11 @@
 // FILE: main.tsx
 // _______________________________________________
 
-import App from "./App";
+import StarRating from './StarRating.tsx';
 import React from 'react';
 import { createRoot } from 'react-dom/client';
-import './index.css';
+// import './index.css';
+// import App from './App';
 // _______________________________________________
 
 const app = createRoot(document.getElementById('root') as HTMLElement);
@@ -12,7 +13,8 @@ const app = createRoot(document.getElementById('root') as HTMLElement);
 
 app.render(
 	<React.StrictMode>
-    <App />
-  </React.StrictMode>,
+		{/* <App /> */}
+		<StarRating />
+	</React.StrictMode>,
 );
 // _______________________________________________
