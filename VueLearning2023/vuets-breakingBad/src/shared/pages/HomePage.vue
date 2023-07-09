@@ -14,9 +14,9 @@
 
 <template>
   <div class="HomePageContainer">
-    <span>-------------------------------------</span>
+    <div class="line" />
     <h1>@Home</h1>
-	  <span>-------------------------------------</span>
+    <div class="line" />
   </div>
 </template>
 <!-- ------------------------------------------ -->
@@ -25,7 +25,6 @@
 .HomePageContainer {
 	background-color: #2f323a;
 	margin-top: 5rem;
-	margin-left: 210px;
 	padding: 0;
 	width: 100%;
 	border-radius: 15px;
@@ -39,9 +38,8 @@
 		place-items: center;
 	}
 	
-	span {
-		color: mediumpurple;
-		font-size: 2.2rem;
+	.line {
+		border-top: 4px solid mediumpurple;
 	}
 }
 </style>
