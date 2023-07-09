@@ -17,18 +17,21 @@ const decrement = () => {
 <!-- ------------------------------------------ -->
 
 <template>
-  <div class="AppContainer">
-    <h1>Counter: {{ counter }}</h1>
-	  <button @click="counter++">Increase +1</button>
-	  <button @click="decrement"
-	  >Increase -1
-	  </button>
+  <div class="wrapper">
+    <header>
+	    <!--	 Navbar   -->
+	    
+    </header>
+	  
+	  <main>
+		  <RouterView />
+	  </main>
   </div>
 </template>
 <!-- ------------------------------------------ -->
 
 <style lang="scss">
-.AppContainer {
+.wrapper {
 	display: flex;
 	flex-direction: column;
 }
