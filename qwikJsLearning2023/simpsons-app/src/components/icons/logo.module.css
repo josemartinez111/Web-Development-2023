@@ -1,0 +1,9 @@
+/* FILE: components/icons/logo.module.css */
+/*_______________________________________________*/
+
+.container {
+  @apply flex flex-col items-center
+  justify-center text-center p-4
+}
+
+/*_______________________________________________*/

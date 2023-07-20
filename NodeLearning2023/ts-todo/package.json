@@ -1,0 +1,14 @@
+{
+  "name": "ts-todo",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon --exec ts-node ./app/index.ts",
+    "build": "tsc",
+    "app": "node dist/index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
