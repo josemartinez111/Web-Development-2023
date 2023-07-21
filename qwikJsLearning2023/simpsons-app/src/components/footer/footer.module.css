@@ -1,0 +1,9 @@
+/* FILE: footer.module.css */
+/* _____________________________________ */
+
+.footer {
+  @apply flex flex-col justify-center
+  items-center text-center py-8 px-5 gap-2
+  border-black;
+}
+/* _____________________________________ */
