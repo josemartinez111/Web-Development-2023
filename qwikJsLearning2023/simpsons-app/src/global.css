@@ -55,28 +55,57 @@ h1, p {
   margin-bottom: 1rem;
 }
 
+.grid-page {
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  min-height: 100vh;
+}
+
 /* tailwind custom stuff */
 @layer components {
+  .landingPage {
+    @apply flex flex-col min-h-screen items-center
+    justify-center text-center bg-brand p-4;
+  }
+  
+  .about-container {
+    @apply my-8 flex flex-col lg:flex-row
+    lg:justify-between lg:items-center gap-8;
+  }
+  
   .bg-brand {
     /* background-color: var(--color-brand); */
     @apply bg-[var(--color-brand)];
   }
   
   .btn {
-    @apply bg-white py-0.5 px-5 border border-black text-base
-    hover:bg-[var(--color-contrast)] hover:text-white focus:bg-[var(--color-contrast)]
-    cursor-pointer w-fit rounded transition-colors duration-500;
+    @apply py-0.5 px-5 border border-black text-base
+    cursor-pointer w-fit rounded transition-colors duration-500 my-4;
+  }
+  
+  .btn-white {
+    @apply btn bg-white hover:bg-[var(--color-contrast)] focus:bg-[var(--color-contrast)] hover:text-white;
   }
   
   .btn-contrast {
-    @apply bg-[var(--color-contrast)] hover:bg-[var(--color-brand)]
-    focus:bg-[var(--color-brand)] hover:text-black;
+    @apply btn bg-[var(--color-contrast)] hover:bg-[var(--color-brand)] focus:bg-[var(--color-brand)] hover:text-black;
   }
   
   .btn-red {
-    @apply my-4 text-white;
+    @apply btn text-white;
+  }
+  
+  .btn-brand {
+    @apply btn bg-brand;
+  }
+  
+  .btn-brand-red {
+    @apply btn-brand btn-red hover:bg-[var(--color-contrast)] focus:bg-[var(--color-contrast)] hover:text-black;
   }
 }
+
+
+
 
 
 

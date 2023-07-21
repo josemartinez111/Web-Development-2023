@@ -1,0 +1,9 @@
+/* FILE: header.module.css */
+/* ________________________________________ */
+
+.container {
+  @apply flex flex-col md:flex-row gap-6 w-full
+  justify-between items-center p-5 md:px-20
+  mx-auto max-w-[1400px];
+}
+/* ________________________________________ */

@@ -1,0 +1,8 @@
+/* FILE: container.module.css */
+/* ________________________________________ */
+
+.wrapper {
+  @apply flex w-full max-w-[1400px] px-5
+  md:mx-auto;
+}
+/* ________________________________________ */
