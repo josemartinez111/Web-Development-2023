@@ -1,15 +1,10 @@
 // FILE: routes/layout.tsx
 // _________________________________________
 
-import { component$, Slot } from '@builder.io/qwik';
+import { component$, Slot } from "@builder.io/qwik";
 // _______________________________________________
 
 export default component$(() => {
-	
-	// ________________ [functions] __________________
-	
-	// _______________________________________________
-	
-	return <Slot />;
+  return <Slot />;
 });
 // _________________________________________
