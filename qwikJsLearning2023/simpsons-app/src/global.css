@@ -56,9 +56,18 @@ h1, p {
 }
 
 .grid-page {
-  display: grid;
+  display:            grid;
   grid-template-rows: auto 1fr auto;
-  min-height: 100vh;
+  min-height:         100vh;
+}
+
+.grid-container {
+  width:                 100%;
+  display:               grid;
+  list-style:            none;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  place-items:           center;
+  grid-gap:              20px;
 }
 
 /* tailwind custom stuff */
@@ -66,6 +75,23 @@ h1, p {
   .landingPage {
     @apply flex flex-col min-h-screen items-center
     justify-center text-center bg-brand p-4;
+  }
+  
+  .home-container {
+    @apply my-8 flex flex-col items-center justify-center gap-8;
+  }
+  
+  .home-image {
+    @apply max-w-full object-cover object-top translate-x-4;
+  }
+  
+  .home-picture-tag {
+    @apply border border-black flex bg-brand overflow-hidden;
+  }
+  
+  .home-icon {
+    @apply border border-black bg-white absolute
+    right-0 bottom-[20px] cursor-pointer hover:bg-gray-50;
   }
   
   .about-container {
@@ -84,11 +110,13 @@ h1, p {
   }
   
   .btn-white {
-    @apply btn bg-white hover:bg-[var(--color-contrast)] focus:bg-[var(--color-contrast)] hover:text-white;
+    @apply btn bg-white hover:bg-[var(--color-contrast)]
+    focus:bg-[var(--color-contrast)] hover:text-white;
   }
   
   .btn-contrast {
-    @apply btn bg-[var(--color-contrast)] hover:bg-[var(--color-brand)] focus:bg-[var(--color-brand)] hover:text-black;
+    @apply btn bg-[var(--color-contrast)] hover:bg-[var(--color-brand)]
+    focus:bg-[var(--color-brand)] hover:text-black;
   }
   
   .btn-red {
@@ -100,7 +128,18 @@ h1, p {
   }
   
   .btn-brand-red {
-    @apply btn-brand btn-red hover:bg-[var(--color-contrast)] focus:bg-[var(--color-contrast)] hover:text-black;
+    @apply btn-brand btn-red hover:bg-[var(--color-contrast)]
+    focus:bg-[var(--color-contrast)] hover:text-black;
+  }
+  
+  .yellow-btn {
+    @apply btn btn-brand btn-brand-red active:opacity-10
+    transition-opacity duration-200 ease-in-out;
+  }
+  
+  .home-enter-btn {
+    @apply btn-white hover-text-shadow active:opacity-10
+    transition-opacity duration-200;
   }
 }
 
