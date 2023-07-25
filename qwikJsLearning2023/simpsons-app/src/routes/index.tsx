@@ -1,6 +1,4 @@
-import ImgMoe from "~/media/img/moe.png?jsx";
-import ImgHomer from "~/media/img/homer.png?jsx";
-import ImgBart from "~/media/img/bart.png?jsx"; // FILE: routes/page-wrapper.tsx
+// FILE: routes/page-wrapper.tsx
 // _________________________________________
 
 import { component$ } from "@builder.io/qwik";

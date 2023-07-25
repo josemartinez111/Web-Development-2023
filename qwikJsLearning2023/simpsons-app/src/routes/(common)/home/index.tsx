@@ -1,13 +1,16 @@
 // FILE: (common)/home.tsx
 // _________________________________________
 
-import { $, component$, useSignal } from "@builder.io/qwik";
-import { Link, routeLoader$, useNavigate } from "@builder.io/qwik-city";
-import type { DocumentHead } from "@builder.io/qwik-city";
-import { fetchSimpsons } from "~/api/fetchSimpsons";
-import { Container } from "~/components/container/container";
-import { Quote } from "~/components/icons/quote";
-import { CharacterListResponse, CharacterType } from "~/types/type";
+import { component$ } from '@builder.io/qwik';
+import { Link, routeLoader$, useNavigate } from '@builder.io/qwik-city';
+import type { DocumentHead } from '@builder.io/qwik-city';
+import { fetchSimpsons } from '~/api/fetchSimpsons';
+import { Container } from '~/components/container/container';
+import { HomeImage } from '~/components/home-image/home-image';
+import { QuoteModal } from '~/components/quote-modal/quote-modal';
+import { useHomeHooks } from '~/hooks/useHomeHooks';
+import { CharacterListResponse, CharacterType } from '~/types/type';
+import { useFormattedOutput } from '~/utils/utilities';
 // _________________________________________
 
 /** https://qwik.builder.io/docs/route-loader/
@@ -17,103 +20,103 @@ import { CharacterListResponse, CharacterType } from "~/types/type";
  * !can only be declared inside the src/routes folder, in a layout.tsx or
  * !index.tsx file, and they MUST be exported. */
 export const useCharacters = routeLoader$<CharacterListResponse>(async () => {
-  try {
-    return fetchSimpsons(12);
-  } catch (error: unknown) {
-    if (error instanceof Error) console.error(error.message);
-    throw error;
-  }
+	// Record the time before fetching data
+	const start = Date.now();
+
+	try {
+		const result = await fetchSimpsons(12);
+		// Record the time after fetching data
+		const end = Date.now();
+
+		// Time taken in milliseconds
+		const duration = end - start;
+		// Convert to seconds and round to two decimal places
+		const seconds = (duration / 1000).toFixed(2);
+		useFormattedOutput({
+			strArg: `Data fetch took ${seconds} seconds.`,
+		});
+
+		return result;
+	} catch (error: unknown) {
+		if (error instanceof Error) console.error(error.message);
+		throw error;
+	}
+});
+
+export const useServerTime = routeLoader$(() => {
+	// This will re-execute in the server when the page refreshes.
+	const unixTimestamp = Date.now();
+	const time = new Date(unixTimestamp);
+
+	// Convert to string in the format: Monday, 03:21:33 PM
+	const options: Intl.DateTimeFormatOptions = {
+		weekday: 'long',
+		hour: '2-digit',
+		minute: '2-digit',
+		second: '2-digit',
+		hour12: true,
+	};
+	const dateTimeString = time.toLocaleTimeString('en-US', options);
+
+	return dateTimeString;
 });
 // _______________________________________________
 
 export default component$(() => {
-  const selectedCharacter = useSignal({} as CharacterType);
-  const refresh = useNavigate();
-  const characters = useCharacters();
-  const filteredCharacters = uniqueFilteredCharacters(characters.value);
-  
-  // ________________ [functions] __________________
-  
-  function uniqueFilteredCharacters(
-    characters: CharacterListResponse
-  ): Array<CharacterType> {
-    const uniqueCharactersSet = new Set();
-    
-    return characters.filter((character: CharacterType) => {
-      if (
-        character.characterDirection === "Right" &&
-        !uniqueCharactersSet.has(character.character)
-      ) {
-        // const setResult = uniqueCharactersSet.add(character.character);
-        // console.log({ setResult });
-        uniqueCharactersSet.add(character.character);
-        
-        return true;
-      }
-    });
-  }
-  
-  const characterSelected = (user: CharacterType) => $(() => (
-    selectedCharacter.value = user
-  ));
-  
-  // _______________________________________________
-  return (
-    <Container customClass="home-container">
-      <div class="text-center">
-        {/*|====== header-text ======|*/ }
-        <h1 class="font-bold text-xl lg:text-5xl">The Simpsons Quote App</h1>
-        {/*|====== paragraph-text ======|*/ }
-        <p>Click on the quote of your favorite character</p>
-      </div>
-      
-      {/*|====== list-of-images ======|*/ }
-      <ul class="grid-container">
-        { filteredCharacters.map((user: CharacterType) => (
-          <li key={ user.character }>
-            <figure class="overflow-hidden relative">
-              <picture class="max-w-[150px] max-h-[150px] home-picture-tag">
-                <img
-                  class="home-image"
-                  src={ user.image }
-                  alt={ user.character }
-                  width="300"
-                  height="488"
-                />
-              </picture>
-              {/*|====== icon-button component ======|*/ }
-              <button
-                onClick$={ characterSelected(user) }
-                class="home-icon"
-              >
-                <Quote customClass="max-w-[40px] max-h-[40px]" />
-              </button>
-              <figcaption class="text-sm">{ user.character }</figcaption>
-            </figure>
-            
-            { /*|====== conditionally-select the user when clicked ======|*/ }
-            { selectedCharacter.value == user ? (
-              <p>test</p>
-            ) : null }
-          </li>
-        )) }
-      </ul>
-      {/*|====== new-quotes button ======|*/ }
-      <Link class="yellow-btn" onClick$={ () => refresh() }>
-        New quotes
-      </Link>
-    </Container>
-  );
+	const {
+		handleModalClick,
+		uniqueFilteredCharacters,
+		characterSelected,
+		selectedCharacter,
+	} = useHomeHooks();
+
+	const refresh = useNavigate();
+
+	const characters = useCharacters();
+	const filteredCharacters = uniqueFilteredCharacters(characters.value);
+	// console.log({ filteredCharacters });
+	const serverTime = useServerTime();
+	// _______________________________________________
+	return (
+		<Container customClass="home-container">
+			<div class="text-center">
+				{/*|====== header-text ======|*/}
+				<h1 class="font-bold text-xl lg:text-5xl">The Simpsons Quote App</h1>
+				{/*|====== paragraph-text ======|*/}
+				<p>Click on the quote of your favorite character</p>
+			</div>
+
+			{/*|====== list-of-images ======|*/}
+			<ul class="grid-container">
+				{filteredCharacters.map((user: CharacterType) => (
+					<HomeImage
+						key={user.character}
+						user={user}
+						selectCharacter$={characterSelected(user)}
+						selectedCharacter={selectedCharacter}
+					>
+						<QuoteModal closeModal$={handleModalClick()} user={user} />
+					</HomeImage>
+				))}
+			</ul>
+			{/*|====== new-quotes button ======|*/}
+			<Link class="yellow-btn" onClick$={() => refresh()}>
+				New quotes
+			</Link>
+			{/*|====== for-testing ======|*/}
+			<p>Server time: {serverTime.value}</p>
+		</Container>
+	);
 });
 // _________________________________________
 
 export const head: DocumentHead = {
-  title: "Home Page",
-  meta: [
-    {
-      name: "description",
-      content: "Qwik site fetching pokemon data"
-    }
-  ]
+	title: 'Home Page',
+	meta: [
+		{
+			name: 'description',
+			content: 'Qwik site fetching pokemon data',
+		},
+	],
 };
 // _________________________________________
