@@ -1,0 +1,9 @@
+/* FILE: sidebar.module.css */
+/* ________________________________________ */
+
+.hoverEffect {
+  @apply items-center justify-center
+  hover:opacity-100 hover:translate-x-5 hover:py-2;
+}
+
+/* ________________________________________ */

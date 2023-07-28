@@ -1,0 +1,16 @@
+/* FILE: input.module.css */
+/* ________________________________________ */
+
+.inputListContainer {
+  @apply bg-gray-100 rounded-b-xl z-10 absolute w-[370px] mt-[-10px];
+}
+
+.inputListWrapper {
+  @apply px-2 pt-4 pb-3 flex flex-col gap-3;
+}
+
+.inputListStyles {
+  @apply flex gap-3 ease-in duration-75 hover:translate-x-4 cursor-pointer;
+}
+
+/* ________________________________________ */

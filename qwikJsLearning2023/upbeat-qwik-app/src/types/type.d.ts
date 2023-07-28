@@ -1,6 +1,10 @@
 // FILE: types/type.d.ts
 // _______________________________________________
 
+
+// _______________________________________________
+
+
 export type SideBarItemType = {
   name: string
   route: string
