@@ -4,6 +4,11 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
+dependencies:
+  wavesurfer.js:
+    specifier: ^7.0.6
+    version: 7.0.6
+
 devDependencies:
   '@builder.io/qwik':
     specifier: ^1.2.6
@@ -3462,6 +3467,10 @@ packages:
     optionalDependencies:
       fsevents: 2.3.2
     dev: true
+
+  /wavesurfer.js@7.0.6:
+    resolution: {integrity: sha512-Pkg0iBnIsgl9k4F938S9/RBEqklt9jPeeo59mmKimbUoxcKr11l7rsu9qHkGJvkl1hhx33lcSz0cA9F/qwFngQ==}
+    dev: false
 
   /which-boxed-primitive@1.0.2:
     resolution: {integrity: sha512-bwZdv0AKLpplFY2KZRX6TvyuN7ojjr7lwkg6ml0roIy9YeuSr7JS372qlNW18UQYzgYK9ziGcerWqZOmEn9VNg==}

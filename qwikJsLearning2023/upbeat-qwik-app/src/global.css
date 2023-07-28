@@ -6,5 +6,41 @@
 @tailwind components;
 @tailwind utilities;
 
+html, body {
+  font-family: "Poppins", sans-serif;
+}
 
+*:focus {
+  outline: none;
+}
+
+@layer components {
+  .qwik-sidebar-item-component {
+    @apply opacity-70 font-medium ease-in duration-75
+    cursor-pointer flex gap-5 flex-wrap align-middle;
+  }
+  
+  .qwik-button-primary {
+    @apply p-2 px-3 bg-pink-600 hover:bg-pink-800 text-white rounded-3xl
+    text-sm h-[40px] w-[150px] flex gap-1 content-center
+    items-center justify-center active:opacity-10 transition-opacity duration-200;
+  }
+  
+  .qwik-button-default {
+    @apply p-2 px-3 bg-gray-200 hover:bg-gray-800 text-gray-900 hover:text-white
+    rounded-3xl text-sm h-[40px] w-[150px] flex gap-1 content-center
+    items-center justify-center active:opacity-10 transition-opacity duration-200;
+  }
+  
+  
+  .qwik-input-src {
+    @apply flex justify-between gap-2 px-3 bg-gray-100
+    text-xs text-slate-900  rounded-xl relative  h-[44px] w-[370px];
+  }
+  
+  .qwik-avatar {
+    @apply rounded-full cursor-pointer bg-slate-700
+    hover:contrast-50 object-cover border-gray-300 border-2 block;
+  }
+}
 

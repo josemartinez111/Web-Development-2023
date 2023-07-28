@@ -2,31 +2,41 @@
 // _______________________________________________
 
 import { component$, Slot } from '@builder.io/qwik';
+import { FooterPlayer } from '~/components/footer-player/footer-player';
 import { Header } from '~/components/header/header';
+import { Logo } from '~/components/logo/logo';
 import { SideBar } from '~/components/sidebar/sidebar';
+import { PlayerProvider } from '~/context/providers/player-provider';
 // _______________________________________________
 
 export default component$(() => {
   // _______________________________________________
   
   return (
-    <div class='h-[100vh] flex'>
-    <div class='w-[256px] fixed '>
-      <div class='bg-gray-50 h-[100vh]'>
-        <div class='p-6 border-gray-200 border-b'>
-          {/* <Logo /> */}
+    <PlayerProvider>
+      <div class='h-[100vh] flex'>
+        <div class='w-[256px] fixed '>
+          <div class='bg-gray-50 h-[100vh]'>
+            { /*|====== logo-component ======|*/ }
+            <div class='p-6 border-gray-200 border-b'>
+              <Logo />
+            </div>
+            { /*|====== sidebar-component ======|*/ }
+            <div class={ ' ' }>
+              <SideBar />
+            </div>
+          </div>
         </div>
-        <div class={ '' }>
-          <SideBar />
+        { /*|====== header/children components ======|*/ }
+        <div class='pl-[256px] w-full'>
+          <Header />
+          <main>
+            <Slot />
+          </main>
         </div>
+        <FooterPlayer />
       </div>
-    </div>
-    <div class='pl-[256px] w-full'>
-      <Header />
-      <Slot />
-    </div>
-      {/* <FooterPlayer /> */}
-  </div>
+    </PlayerProvider>
   );
 });
 // _______________________________________________

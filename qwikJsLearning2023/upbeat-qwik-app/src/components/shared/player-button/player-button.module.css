@@ -1,0 +1,9 @@
+/* FILE: player-button.module.css */
+/* ________________________________________ */
+
+.btn {
+  @apply bg-pink-600 transition active:scale-75
+  text-white flex items-center justify-center
+  content-center rounded-full w-[35px] h-[35px];
+}
+/* ________________________________________ */
