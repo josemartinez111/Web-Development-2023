@@ -23,7 +23,7 @@ export const PlayerControl = component$(() => {
         (
           <button
             class={ styles.btn2 }
-            onClick$={ () => playerControlState.wave?.playPause() }
+            onClick$={ () => playerControlState.wave?.pause() }
           >
             <i class='uil uil-pause' />
           </button>

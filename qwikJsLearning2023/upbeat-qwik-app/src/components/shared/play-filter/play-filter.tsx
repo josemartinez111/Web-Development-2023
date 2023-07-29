@@ -29,7 +29,7 @@ export const PlayFilter = component$<PlayFilterProps>(({ label, values }) => {
         { label }
       </span>
       <span>
-        <i class='uil uil-angle-down'></i>
+        <i class='uil uil-angle-down' />
       </span>
     </div>
   );

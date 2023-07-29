@@ -1,26 +1,29 @@
 // FILE: components/play-list/play-list.tsx
 // _________________________________________
 
-import { component$ /* Resource */, useContext } from '@builder.io/qwik';
 import {
-  PlayFilterOptions,
-} from '~/components/shared/play-filter-options/play-filter-options';
-import { PlayFilter } from '~/components/shared/play-filter/play-filter';
+  component$, Resource /* Resource */,
+  useContext,
+  useResource$,
+} from '@builder.io/qwik';
+import { fetchSongs } from '~/api/fetch-songs';
+import { PlayFilter, PlayFilterOptions, PlayListItem } from '~/components';
 import { PlayerListWaveContext } from '~/context/player-list-wave.context';
+import { Song, SongsListResponse } from '~/types/type';
 // _________________________________________
 
 // _________________________________________
 
 export const PlayList = component$(() => {
   const playListWaveState = useContext(PlayerListWaveContext);
-  // ________________ [functions] __________________
   
+  const resourceData = useResource$(async () => {
+    return fetchSongs();
+  });
   // _______________________________________________
   return (
-    <div
-      class={ 'pl-14  min-h-[calc(100vh_-_206px_-_76px)] flex flex-col gap-2' }
-    >
-      <div class={ 'flex gap-5' }>
+    <div class='pl-14  min-h-[calc(100vh_-_206px_-_76px)] flex flex-col gap-2'>
+      <div class='flex gap-5'>
         <PlayFilter
           values={ [
             { label: 'Moderate', value: 'Moderate' },
@@ -35,19 +38,26 @@ export const PlayList = component$(() => {
         <PlayFilter values={ [] } label='Duration' />
       </div>
       { playListWaveState.openFilter ? (
-        <div class={ 'flex pb-3' }>
+        <div class='flex pb-3'>
           <PlayFilterOptions />
         </div>
       ) : null }
-      <div class={ ' bg-gray-100 rounded-t-2xl ' }>
-        <div class={ 'p-6 py-4  border-gray-200' }></div>
-        {/* <div class={"p-6 flex flex-col gap-2"}> */ }
-        {/*   <Resource value={resourceData} */ }
-        {/*             onPending={() => <>Cargando...</>} */ }
-        {/*             onRejected={() => <>Error!</>} */ }
-        {/*             onResolved={(data) => data.map((i:any) => <PlayListItem {...i} />)} */ }
-        {/*   /> */ }
-        {/* </div> */ }
+      <div class=' bg-gray-100 rounded-t-2xl'>
+        <div class='p-6 py-4  border-gray-200'></div>
+        <div class='p-6 flex flex-col gap-2'>
+        <Resource
+          value={ resourceData }
+          onPending={ () => <>Cargando...</> }
+          onRejected={ () => <>Error!</> }
+          onResolved={ (data: SongsListResponse) => (
+            <>
+              { data.map((song: Song, index) => (
+                <PlayListItem key={ index } { ...song } />
+              )) }
+            </>
+          ) }
+        />
+        </div>
       </div>
     </div>
   );

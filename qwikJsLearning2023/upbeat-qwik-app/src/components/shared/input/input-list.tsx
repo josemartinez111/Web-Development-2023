@@ -9,8 +9,6 @@ import styles from '~/components/shared/input/input.module.css';
 
 export const InputList = component$(() => {
   const MUSIC_URL = 'https://uppbeat.imgix.net/images/UppBeat_Playlists_Beats_Lofi-Beats.jpg?auto=compress&w=80&h=80';
-  // ________________ [functions] __________________
-  
   // _______________________________________________
   return (
     <div class={ styles.inputListContainer }>

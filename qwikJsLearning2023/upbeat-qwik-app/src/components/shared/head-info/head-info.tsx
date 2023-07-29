@@ -6,10 +6,7 @@ import { component$ } from '@builder.io/qwik';
 
 // _________________________________________
 
-export const HeadInfo = component$(({ title }: { title: string }) => {
-  
-  // ________________ [functions] __________________
-  
+export const HeadInfo = component$<{ title: string }>(({ title }) => {
   // _______________________________________________
   return (
     <div class=' flex gap-3 py-10 h-[206px] px-10'>
@@ -17,7 +14,7 @@ export const HeadInfo = component$(({ title }: { title: string }) => {
         <h1 class='text-5xl font-black'>{ title }</h1>
         <div class='flex flex-col gap-2 py-3'>
           <div class=' font-black text-lg'>
-            Music for creators. No © copyright issues.
+            Music for creators. No copyright issues.
           </div>
           <div class=' font-black text-lg'>
             Upgrade for only $6.99 p/month to unlock everything.

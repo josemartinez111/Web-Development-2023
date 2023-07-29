@@ -7,7 +7,7 @@ import {
   useOnWindow,
   useSignal,
 } from '@builder.io/qwik';
-import { InputList } from '~/components/shared/input/input-list';
+import { InputList } from '~/components';
 
 // _________________________________________
 
