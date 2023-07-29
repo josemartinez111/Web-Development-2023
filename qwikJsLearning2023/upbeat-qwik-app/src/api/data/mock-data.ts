@@ -12,8 +12,7 @@ export const MOCK_DATA: Array<PlayListWaveState> = [
       'https://mp3musica.s3.amazonaws.com/SnapSave.io+-+SHAKIRA+__+BZRP+Music+Sessions+%2353+(64+kbps)-compressed.mp3',
     name: 'SHAKIRA BZRP #53',
     artist: 'Shakira',
-    cover:
-      'https://e.snmc.io/i/1200/s/d4213f07464af11db57e9a3c99338c2a/5173107',
+    cover: 'https://e.snmc.io/i/1200/s/d4213f07464af11db57e9a3c99338c2a/5173107',
     tags: ['beef'],
   },
   {

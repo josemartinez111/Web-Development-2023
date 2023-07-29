@@ -16,7 +16,7 @@ export const PlayFilterOptions = component$(() => {
   
   // _______________________________________________
   return (
-    <div class={ 'flex gap-2' }>
+    <div class='flex gap-2'>
       { playListWaveState.options?.map((option, index) => (
         <span
           key={ index }

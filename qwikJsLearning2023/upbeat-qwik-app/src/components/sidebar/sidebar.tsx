@@ -2,7 +2,7 @@
 // _________________________________________
 
 import { component$ } from '@builder.io/qwik';
-import { SidebarItem } from '~/components/shared/sidebar-item/sidebar-item';
+import { SidebarItem } from '~/components';
 import { SideBarItemsListType, SideBarItemType } from '~/types/type';
 import styles from '~/components/shared/sidebar-item/sidebar-item.module.css';
 // _________________________________________

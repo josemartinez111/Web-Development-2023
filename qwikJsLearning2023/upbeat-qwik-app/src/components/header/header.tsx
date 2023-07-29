@@ -3,9 +3,7 @@
 
 import { component$ } from '@builder.io/qwik';
 import { Link } from '@builder.io/qwik-city';
-import { Avatar } from '~/components/shared/avatar/avatar';
-import { CustomButton } from '~/components/shared/custom-button/custom-button';
-import { InputSearchBar } from '~/components/shared/input/input-search-bar';
+import { Avatar, CustomButton, InputSearchBar } from '~/components';
 // _________________________________________
 
 // _________________________________________
