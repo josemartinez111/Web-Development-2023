@@ -1,0 +1,93 @@
+/* FILE: index.css */
+/* ________________________________________ */
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: 'Gotham SSm';
+  src: url("/assets/fonts/Gotham-ssm-medium.otf") format("opentype");
+  font-weight: auto;
+  font-style: auto;
+}
+
+h1, button {
+  all: unset;
+}
+
+body {
+  font-family: Gotham SSm, sans-serif;
+}
+
+.movie-container {
+  @apply mt-12;
+}
+
+/* input */
+.label-input {
+  @apply block mt-12 text-lg font-semibold mb-2;
+}
+
+.input-field {
+  @apply w-1/2
+  border rounded
+  py-2
+  px-4
+  mb-4
+  text-gray-700
+  leading-tight
+  focus:border-blue-500;
+}
+
+/* button */
+button.add {
+  @apply block
+  w-3/12
+  text-lg
+  mt-6
+  ml-10
+  rounded-md
+  tracking-[2px]
+  uppercase
+  text-center
+  font-[bold]
+  cursor-pointer
+  relative
+  shadow-2xl
+  text-[#FF0072]
+  no-underline
+  transition-[0.3s]
+  duration-[ease]
+  ease-[all]
+  z-[1]
+  px-[2em]
+  py-[0.7em]
+  border-[3px]
+  border-solid border-[#FF0072]
+  before:transition-[0.5s]
+  before:duration-[all]
+  before:ease-[ease]
+  before:absolute
+  before:opacity-0
+  before:content-[""]
+  before:bg-[#FF0072]
+  before:z-[-1]
+  before:inset-x-2/4
+  before:inset-y-0
+  active:scale-90
+  active:opacity-10;
+  font-family: Gotham SSm, serif;
+}
+
+button:hover,
+button:focus {
+  @apply text-white;
+}
+
+button:hover:before,
+button:focus:before {
+  @apply transition-[0.5s] duration-[all] ease-[ease] opacity-100 inset-x-0;
+}
+
+/* ________________________________________ */

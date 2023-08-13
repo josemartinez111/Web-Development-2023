@@ -1,0 +1,88 @@
+:root,
+:host {
+  --fa-style-family-classic: "Font Awesome 6 Free";
+  --fa-font-solid:           normal 900 1em/1 "Font Awesome 6 Free";
+}
+
+@font-face {
+  font-family:  "Font Awesome 6 Free";
+  font-style:   normal;
+  font-weight:  900;
+  font-display: block;
+  src:          url("/fonts/fa-solid-900.woff2") format("woff2"),
+                url("/fonts/fa-solid-900.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: poppins;
+  src:         url("/fonts/poppins-400.woff2");
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: poppins;
+  src:         url("/fonts/poppins-500.woff2");
+  font-weight: 500;
+}
+
+@font-face {
+  font-family: poppins;
+  src:         url("/fonts/poppins-700.woff2");
+  font-weight: 700;
+}
+
+.fas,
+.fa-solid {
+  font-weight: 900;
+}
+
+:root {
+  --accent-color:     #e65f78;
+  --foreground-color: #bbb;
+  --light:            #fff;
+  --dark:             #000;
+}
+
+body {
+  font-family:      "Mulish", sans-serif;
+  background-color: var(--dark);
+  margin:           0;
+  font-size:        16px;
+  line-height:      2;
+  letter-spacing:   1px;
+  word-wrap:        break-word;
+  font-weight:      400;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: 500;
+  line-height: 1.4;
+  font-family: poppins, serif;
+  color:       var(--light);
+  margin:      0;
+}
+
+p {
+  margin: 0;
+}
+
+ul {
+  padding: 0;
+}
+
+.container {
+  max-width:    1170px;
+  width:        100%;
+  margin-left:  auto;
+  margin-right: auto;
+  height:       auto;
+  padding:      0 40px;
+  position:     relative;
+  clear:        both;
+  box-sizing:   border-box;
+}
