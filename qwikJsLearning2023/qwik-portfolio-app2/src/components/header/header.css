@@ -1,0 +1,51 @@
+.topbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 10;
+  padding: 20px 0;
+  transition: all 0.3s ease;
+}
+.topbar .topbar_inner {
+  width: 100%;
+  height: auto;
+  clear: both;
+  display: flex;
+  justify-content: space-between;
+}
+.topbar .logo img {
+  max-width: 50px;
+}
+.topbar .menu ul {
+  margin: 0;
+  list-style-type: none;
+}
+.topbar .menu ul li {
+  margin: 0 20px 0 0;
+  display: inline-block;
+}
+.topbar .menu ul lilast-child {
+  margin-right: 0;
+}
+.topbar .menu ul li button {
+  color: var(--light);
+  font-family: poppins, serif;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  background: transparent;
+  outline: none;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+}
+.topbar .menu ul li.current button {
+  color: var(--accent-color);
+}
+
+.topbar.animate {
+  background-color: var(--dark);
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.09);
+}
+
+/*# sourceMappingURL=header.css.map */

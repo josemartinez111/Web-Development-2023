@@ -1,7 +1,0 @@
-/* FILE: play-filter-options.module.css */
-/* ________________________________________ */
-
-.containerWrapper {
-  @apply select-none bg-gray-100 hover:bg-gray-200 rounded-3xl text-xs cursor-pointer p-3;
-}
-/* ________________________________________ */
