@@ -41,7 +41,7 @@ body {
 }
 
 /* button */
-button.add {
+button {
   @apply block
   w-3/12
   text-lg

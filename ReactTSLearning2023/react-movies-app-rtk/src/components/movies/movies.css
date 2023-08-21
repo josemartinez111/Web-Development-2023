@@ -18,4 +18,22 @@
   @apply grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4;
   /* Adjust grid columns based on design */
 }
+
+button.update, button.delete {
+  @apply
+  flex mt-4
+  bg-white
+  text-center
+  justify-center
+  px-2
+  py-2
+  text-xs
+  rounded-md
+    text-blue-700
+  border-solid border-blue-700
+  before:bg-blue-700
+  whitespace-nowrap; /* Prevents the text from wrapping onto the next line */
+}
+
+
 /* ________________________________________ */

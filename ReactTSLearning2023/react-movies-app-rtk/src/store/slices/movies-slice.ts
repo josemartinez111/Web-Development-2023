@@ -28,6 +28,22 @@ const moviesSliceReducers = {
 		const newMovie = action.payload;
 		state.movieList.push(newMovie);
 	},
+	updateMovie: (state: MovieState, action: PayloadAction<MovieType>): void => {
+		const updatedMovie = action.payload;
+		
+		const movieIndex = state.movieList.findIndex((movie: MovieType) => (
+			movie.id === updatedMovie.id
+		));
+		
+		if (movieIndex !== -1) state.movieList[ movieIndex ] = updatedMovie;
+	},
+	deleteMovie: (state: MovieState, action: PayloadAction<string>): void => {
+		const id = action.payload;
+		
+		state.movieList = state.movieList.filter((movie: MovieType) => (
+			movie.id !== id
+		));
+	},
 };
 // _______________________________________________
 
@@ -38,7 +54,7 @@ export const moviesSlice = createSlice({
 });
 // _______________________________________________
 
-export const { addMovie } = moviesSlice.actions;
+export const { addMovie, updateMovie, deleteMovie } = moviesSlice.actions;
 export const moviesReducer = moviesSlice.reducer;
 
 // _______________________________________________

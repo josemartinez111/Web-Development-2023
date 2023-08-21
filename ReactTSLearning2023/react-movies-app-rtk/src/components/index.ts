@@ -3,7 +3,7 @@
 
 export * from './movies/movie-list';
 export * from './movies/movie';
-// export * from './car-list/car-list';
+export * from './movies/movie-editor';
 // export * from './car-search/car-search';
 // export * from './car-value/car-value';
 // _______________________________________________
