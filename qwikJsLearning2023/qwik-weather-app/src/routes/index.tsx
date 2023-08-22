@@ -3,7 +3,7 @@
 
 import { component$, useSignal } from '@builder.io/qwik';
 import type { DocumentHead } from '@builder.io/qwik-city';
-import { WiSwitcher } from "~/components/icons/wi-switcher";
+import { AppWrapper, CityInfo, Navbar, WeatherInfo } from "~/components";
 // _________________________________________
 
 // _______________________________________________
@@ -15,14 +15,18 @@ export default component$(() => {
 	
 	// _______________________________________________
 	return (
-		<>
-      <h1>
+		<AppWrapper>
+			{ /*|====== Navbar-Component ======|*/ }
+			<Navbar />
+			{ /*|====== header ======|*/ }
+			<h1>
         The weather in <span>{ city.value }</span>
       </h1>
-			{ /*|====== icon ======|*/ }
-			<WiSwitcher code="01d" />
-			<WiSwitcher code="04n" />
-    </>
+			{ /*|====== WeatherInfo-Component ======|*/ }
+			<WeatherInfo city={ city } />
+			{ /*|====== CityInfo-Component ======|*/ }
+			<CityInfo city={ city } />
+    </AppWrapper>
 	);
 });
 // _________________________________________

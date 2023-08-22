@@ -1,0 +1,32 @@
+/* FILE: navbar.css */
+/* ________________________________________ */
+
+nav {
+  display: flex;
+  width: 100%;
+  justify-content: flex-end;
+}
+
+nav a {
+  text-decoration: none;
+  color: var(--color-text-main);
+  border-radius: 4px; /* Slightly rounded corners */
+  padding: 10px 55px; /* Added padding */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Added shadow */
+  transition: background-color 0.3s ease-in-out, opacity 0.3s ease-in-out; /* Transition effect */
+}
+
+nav a:hover {
+  background-color: var(--color-brand); /* Background color on hover */
+}
+
+nav a:active {
+  opacity: 0.1; /* Opacity when active/pressed */
+}
+
+@media only screen and (min-width: 768px) {
+  nav {
+    justify-content: flex-start;
+  }
+}
+/* ________________________________________ */

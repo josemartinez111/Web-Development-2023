@@ -3,10 +3,10 @@ import {
 	WiCloud,
 	WiDayCloud,
 	WiDaySunny,
-	WiRain,
-	WiSnow,
+	WiRain, WiSnow,
 	WiThunderStorm,
-} from ".";
+} from "~/components";
+
 
 interface WiSwitcherProps {
 	code: "01d" | "01n" | "02d" | "02n" | "03d" | "03n" | "04d" | "04n"

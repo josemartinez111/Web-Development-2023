@@ -27,7 +27,7 @@
 body {
   background-color: var(--color-bg);
   font-family:      "Helvetica", sans-serif;
-  padding: 0 20px;
+  padding:          0 20px;
 }
 
 h1 {
@@ -40,3 +40,21 @@ h1 {
     color: var(--color-brand);
   }
 }
+
+@media only screen and(min-width: 768px) {
+  font-size: 65px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
