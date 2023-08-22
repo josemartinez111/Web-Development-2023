@@ -1,22 +1,24 @@
-// FILE: components/footer/footer.tsx
+// FILE: components/navbar
 // _________________________________________
 
-import { component$ } from '@builder.io/qwik';
+import { component$, useStylesScoped$ } from '@builder.io/qwik';
+import styles from './navbar.css?inline'
 // _________________________________________
 
 // _________________________________________
 
-export const Footer = component$(() => {
-	
+export const Navbar = component$(() => {
+	useStylesScoped$(styles)
+ 
 	// ________________ [functions] __________________
 	
 	// _______________________________________________
 	return (
-		<>
-			<h1>
-				Footer Component
-			</h1>
-		</>
+		<nav>
+			<a href="/">
+        QWIK <br /> WEATHER
+			</a>
+		</nav>
 	);
 });
 // _______________________________________________

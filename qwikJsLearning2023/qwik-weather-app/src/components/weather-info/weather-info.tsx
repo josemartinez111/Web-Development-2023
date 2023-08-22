@@ -1,22 +1,35 @@
-// FILE: components/header/header.tsx
+// FILE: components/weather-info
 // _________________________________________
 
-import { component$ } from '@builder.io/qwik';
+import { component$, Signal } from '@builder.io/qwik';
 // _________________________________________
 
+type WeatherInfoProps = {
+	city: Signal<string>
+}
 // _________________________________________
 
-export const Header = component$(() => {
+export const WeatherInfo = component$<WeatherInfoProps>(({ city }) => {
 	
 	// ________________ [functions] __________________
 	
 	// _______________________________________________
 	return (
-		<>
-			<h1>
-				Header Component
-			</h1>
-		</>
+		<div>
+			Weather info about { city.value }
+		</div>
 	);
 });
 // _______________________________________________
+
+
+
+
+
+
+
+
+
+
+
+
