@@ -15,11 +15,9 @@ export const CityInfo = component$<CityInfoProps>(({ city }) => {
 	
 	// _______________________________________________
 	return (
-		<>
-			<h1 style={ { fontSize: "2.3em", padding: "0.9em" } }>
-			{ city.value }
-			</h1>
-		</>
+		<div>
+			City info about { city.value }
+		</div>
 	);
 });
 // _______________________________________________
