@@ -2,5 +2,7 @@
 // _______________________________________________
 
 export * from './get-weather';
-export * from './weather-data.types';
+export * from './get-city-image';
+export * from './types/city-image-data.types';
+export * from './types/weather-data.types';
 // _______________________________________________
