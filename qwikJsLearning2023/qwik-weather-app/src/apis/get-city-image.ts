@@ -1,23 +1,23 @@
-// FILE: apis/get-weather.ts
+// FILE: apis/get-city-image.ts
 // _______________________________________________
 
-import { WeatherDataType } from "~/apis/types/weather-data.types";
+import { CityImageDataType } from "~/apis/types/city-image-data.types";
 // _______________________________________________
 
 
-export const getWeather = async (cityName: string): Promise<WeatherDataType> => {
-	const url = new URL("https://api.openweathermap.org/data/2.5/weather");
+export const getCityImage = async (cityName: string): Promise<CityImageDataType> => {
+	const url = new URL("https://api.unsplash.com/photos/random");
 	
 	const searchParams = new URLSearchParams({
-		q: cityName,
-		appid: import.meta.env.PUBLIC_VITE_WEATHER_APP_KEY,
-		units: 'metric',
+		query: cityName,
+		orientation: "landscape",
+		client_id: import.meta.env.PUBLIC_VITE_UNSPLASH_KEY,
 	}).toString();
 	
 	url.search = searchParams;
 	try {
 		const response = await fetch(url.toString());
-		const result = await (response.json()) as WeatherDataType;
+		const result = await (response.json()) as CityImageDataType;
 		
 		console.log({ result });
 		return result;
@@ -26,5 +26,26 @@ export const getWeather = async (cityName: string): Promise<WeatherDataType> => 
 		throw error;
 	}
 };
-
 // _______________________________________________
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
