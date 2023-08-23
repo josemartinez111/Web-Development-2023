@@ -1,19 +1,30 @@
 // FILE: apis/get-weather.ts
 // _______________________________________________
 
-export const getWeather = async (cityName: string) => {
+import { WeatherDataType } from "~/apis/weather-data.types";
+// _______________________________________________
+
+
+export const getWeather = async (cityName: string): Promise<WeatherDataType> => {
 	const url = new URL("https://api.openweathermap.org/data/2.5/weather");
 	
-	const params = new URLSearchParams({
+	const searchParams = new URLSearchParams({
 		q: cityName,
-		appid: import.meta.env.VITE_WEATHER_APP,
+		appid: import.meta.env.PUBLIC_VITE_WEATHER_APP_KEY,
 		units: 'metric',
-	});
+	}).toString();
 	
-	url.search = params.toString();
-	const response = await fetch(url);
-	const json = await response.json();
-	
-	return json;
+	url.search = searchParams;
+	try {
+		const response = await fetch(url.toString());
+		const result = await response.json() as WeatherDataType;
+		
+		console.log({ result });
+		return result;
+	} catch (error: unknown) {
+		if (error instanceof Error) console.error(error.message);
+		throw error;
+	}
 };
+
 // _______________________________________________

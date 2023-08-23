@@ -9,7 +9,7 @@ import { AppWrapper, CityInfo, Navbar, WeatherInfo } from "~/components";
 // _______________________________________________
 
 export default component$(() => {
-	const city = useSignal("Granada");
+	const city = useSignal("New York");
 	
 	// ________________ [functions] __________________
 	
