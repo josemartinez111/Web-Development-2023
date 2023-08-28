@@ -1,0 +1,29 @@
+/**
+ * Tailwind CSS imports
+ * View the full documentation at https://tailwindcss.com
+ */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/**
+ * Tailwind CSS imports
+ * View the full documentation at https://tailwindcss.com
+ */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  font-family: "Poppins", sans-serif;
+}
+
+/* global-custom tailwind-classes */
+
+@layer components {
+  .home-container {
+    @apply flex min-h-screen flex-col items-center justify-between p-24;
+  }
+}
+
+/* ================================================================= */
